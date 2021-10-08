@@ -4,6 +4,8 @@
 # nemsr
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/byu-transpolab/nemsr/workflows/R-CMD-check/badge.svg)](https://github.com/byu-transpolab/nemsr/actions)
 <!-- badges: end -->
 
 The goal of nemsr is to …
