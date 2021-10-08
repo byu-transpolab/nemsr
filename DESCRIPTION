@@ -2,12 +2,12 @@ Package: nemsr
 Type: Package
 Title: Process NEMS Datasets in R
 Version: 0.1.0
-Authors@R: c(
-  person("Greg", "Macfarlane", email = "gregmacfarlane.com", role = "cre")
-)
+Authors@R: c( 
+    person("Greg", "Macfarlane", email = "gregmacfarlane.com", role = "cre")
+    )
 Description: This package contains convenience functions for calculating 
-nutritional statistics on data collected using the Nutritional Environment
-Measures Surveys.
-License: What license is it under?
+    nutritional statistics on data collected using the Nutritional Environment
+    Measures Surveys.
+License: Apache License (>= 2)
 Encoding: UTF-8
 LazyData: true
