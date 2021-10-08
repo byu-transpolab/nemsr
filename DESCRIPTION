@@ -1,11 +1,13 @@
 Package: nemsr
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Process NEMS Datasets in R
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Authors@R: c(
+  person("Greg", "Macfarlane", email = "gregmacfarlane.com", role = "cre")
+)
+Description: This package contains convenience functions for calculating 
+nutritional statistics on data collected using the Nutritional Environment
+Measures Surveys.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
