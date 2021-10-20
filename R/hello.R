@@ -17,6 +17,7 @@ hello <- function() {
   print("Hello, world!")
 }
 
+#cost
 milk_cost <- function(){
 
 }
@@ -26,5 +27,21 @@ ground_beef_cost <- function(){
 }
 
 weiners_cost <- function(){
+
+}
+# Availability
+milk_avail <- function() {
+
+}
+
+fruit_avail <- function() {
+
+}
+
+vegetable_avail <- function() {
+
+}
+
+beef_avail <- function() {
 
 }
