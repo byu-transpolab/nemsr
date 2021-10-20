@@ -17,18 +17,6 @@ hello <- function() {
   print("Hello, world!")
 }
 
-#cost
-milk_cost <- function(){
-
-}
-
-ground_beef_cost <- function(){
-
-}
-
-weiners_cost <- function(){
-
-}
 # Availability
 milk_avail <- function() {
 
@@ -45,3 +33,33 @@ vegetable_avail <- function() {
 ground_beef_avail <- function() {
 
 }
+
+weiners_avail <- function() {
+
+}
+
+frozen_dinners_avail <- function() {
+
+}
+
+baked_goods_avail <- function() {
+
+}
+
+drinks_avail <- function() {
+
+}
+
+bread_avail <- function() {
+
+}
+
+chips_avail <- function() {
+
+}
+
+cereal_avail <- function() {
+
+}
+
+
