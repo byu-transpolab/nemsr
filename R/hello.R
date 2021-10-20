@@ -17,7 +17,11 @@ hello <- function() {
   print("Hello, world!")
 }
 
-# Availability
+convert_files <- function() {
+  #convert files given into csv
+}
+
+# Availability (30 points)
 milk_avail <- function() {
 
 }
@@ -62,7 +66,7 @@ cereal_avail <- function() {
 
 }
 
-#cost
+# Cost (18 points)
 milk_cost <- function(){
 
 }
@@ -98,4 +102,6 @@ chips_cost <- function(){
 cereal_cost <- function(){
 
 }
+
+# quality (6 points)
 
