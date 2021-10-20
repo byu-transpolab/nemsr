@@ -20,3 +20,7 @@ hello <- function() {
 milk_cost <- function(){
 
 }
+
+ground_beef_cost <- function(){
+
+}
