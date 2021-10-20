@@ -87,3 +87,15 @@ drinks_cost <- function(){
 
 }
 
+bread_cost <- function(){
+
+}
+
+chips_cost <- function(){
+
+}
+
+cereal_cost <- function(){
+
+}
+
