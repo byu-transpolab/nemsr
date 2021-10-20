@@ -42,6 +42,6 @@ vegetable_avail <- function() {
 
 }
 
-beef_avail <- function() {
+ground_beef_avail <- function() {
 
 }
