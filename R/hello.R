@@ -62,4 +62,16 @@ cereal_avail <- function() {
 
 }
 
+#cost
+milk_cost <- function(){
+
+}
+
+ground_beef_cost <- function(){
+
+}
+
+weiners_cost <- function(){
+
+}
 
