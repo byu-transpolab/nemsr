@@ -17,6 +17,11 @@ hello <- function() {
   print("Hello, world!")
 }
 
+#format data
+convert_data_to_csv <- function(){
+
+}
+
 #cost
 milk_cost <- function(){
 
@@ -29,6 +34,8 @@ ground_beef_cost <- function(){
 weiners_cost <- function(){
 
 }
+
+
 # Availability
 milk_avail <- function() {
 
