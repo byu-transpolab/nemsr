@@ -75,3 +75,15 @@ weiners_cost <- function(){
 
 }
 
+frozen_dinners_cost <- function(){
+
+}
+
+baked_goods_cost <- function(){
+
+}
+
+drinks_cost <- function(){
+
+}
+
