@@ -67,7 +67,26 @@ cereal_avail <- function() {
 }
 
 # Cost (18 points)
-milk_cost <- function(){
+
+#'compute milk cost points
+#' @param lowfat_milk_price the price of low fat milk
+#' @param whole_milk_price the price of whole milk
+#' @return the NEMS-S points associated with milk price
+#' @examples
+#' lowfat_milk_price <- rnorm(10,2.8,.5)
+#' whole_milk_price <- rnorm(10,3.1,.3)
+#' milk_cost(lowfat_milk_price, whole_milk_price)
+milk_cost <- function(lowfat_milk_price, whole_milk_price){
+  case_when(
+    # 2 points if low fat is less expensive than whole
+    lowfat_milk_price - whole_milk_price < 0 ~ 2,
+    # 1 point if low fat and whole are the same
+    lowfat_milk_price == whole_milk_price ~ 1,
+    # -1 if whole milk is less expensive
+    lowfat_milk_price - whole_milk_price > 0 ~ -1,
+    TRUE ~ as.numeric(NA)
+  )
+
 
 }
 
