@@ -7,7 +7,7 @@
 ground_beef_cost(lean_beef_price, regular_beef_price)
 }
 \arguments{
-\item{lean_beef_price}{the price of ground beef}
+\item{lean_beef_price}{the price of lean ground beef}
 
 \item{regular_beef_price}{the price of normal fat ground beef}
 }
