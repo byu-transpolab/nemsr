@@ -132,7 +132,7 @@ wieners_cost <- function(lean_wieners_price, regular_wieners_price){
 #' @examples
 #' healthier_frozen_dinners_price <- rnorm(10,4.5,.5)
 #' regular_frozen_dinners_price <- rnorm(10,5.1,.3)
-frozen_dinners_cost <- function(){
+frozen_dinners_cost <- function(healthier_frozen_dinners_price, regular_frozen_dinners_price){
   case_when(
     # -1 point if healthier option is more expensive
     healthier_frozen_dinners_price - regular_frozen_dinners_price > 0 ~ -1
@@ -143,7 +143,20 @@ frozen_dinners_cost <- function(){
 
 }
 
-baked_goods_cost <- function(){
+#'compute baked goods cost points
+#' @param healthier_baked_goods_price the price of lower fat baked goods
+#' @param regular_baked_goods_price the price of normal fat baked goods
+#' @return the NEMS-S points associated with baked goods price
+#' @examples
+#' healthier_baked_goods_price <- rnorm(10,3.2,.5)
+#' regular_baked_goods_price <- rnorm(10,3.0,.3)
+baked_goods_cost <- function(healthier_baked_goods_price, regular_baked_goods_price){
+  case_when(
+    # -1 point if healthier option more expensive
+    healthier_baked_goods_price - regular_baked_goods_price > 0 ~ -1
+    # 2 points if healthier option is less expensive
+    healthier_baked_goods_price - regular_baked_goods_price < 0 ~ 2
+  )
 
 }
 
