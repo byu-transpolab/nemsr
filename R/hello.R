@@ -50,7 +50,11 @@ baked_goods_avail <- function() {
 
 }
 
-drinks_avail <- function() {
+sodas_avail <- function(){
+
+}
+
+juice_drinks_avail <- function(){
 
 }
 
@@ -163,7 +167,11 @@ baked_goods_cost <- function(healthier_baked_goods_price, regular_baked_goods_pr
 #'compute drinks cost points
 #' @param healthier_drinks_price the price of 100% juice drinks
 #' @param regular_drinks_price the price of
-drinks_cost <- function(){
+sodas_cost <- function(){
+
+}
+
+juice_drinks_cost <- function(){
 
 }
 
