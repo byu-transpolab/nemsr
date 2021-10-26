@@ -89,7 +89,7 @@ milk_cost <- function(lowfat_milk_price, whole_milk_price){
 }
 
 #'compute ground beef cost points
-#' @param lean_beef_price the price of ground beef
+#' @param lean_beef_price the price of lean ground beef
 #' @param regular_beef_price the price of normal fat ground beef
 #' @return the NEMS-S points associated with beef price
 #' @examples
