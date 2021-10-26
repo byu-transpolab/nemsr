@@ -164,14 +164,18 @@ baked_goods_cost <- function(healthier_baked_goods_price, regular_baked_goods_pr
 }
 
 #'compute soda cost points
-#' @param healthier_sodas_price the price regular sodas
-#' @param regular_sodas_price the price of healthier sodas
-#' @return the NEMS_S points associated with sodas
+#' @param diet_soda_price the price regular soda
+#' @param regular_soda_price the price of healthier soda
+#' @return the NEMS_S points associated with soda
 #' @examples
-#' healthier_sodas_price <- rnorm(10,4.1,.5)
-#' regular_sodas_price <- rnorm(10,4.1,.3)
-sodas_cost <- function(healthier_sodas_price, regular_sodas_price){
-
+#' diet_soda_price <- rnorm(10,4.1,.5)
+#' regular_soda_price <- rnorm(10,4.1,.3)
+soda_cost <- function(diet_soda_price, regular_soda_price){
+  case_when(
+    # 2 points if diet soda is less expensive
+    diet_soda_price - regular_soda_price < 0 ~ 2,
+    TRUE ~ as.numeric(NA)
+  )
 }
 
 juice_drinks_cost <- function(){
