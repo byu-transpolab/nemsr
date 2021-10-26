@@ -107,7 +107,7 @@ ground_beef_cost <- function(lean_beef_price, regular_beef_price){
 }
 
 #'compute wieners cost points
-#'#' @param lean_wieners_price the price of hot dogs with less fat (specific fat content?)
+#' @param lean_wieners_price the price of hot dogs with less fat (specific fat content?)
 #' @param regular_wieners_price the price of normal hot dogs
 #' @return the NEMS-S points associated with wiener price
 #' @examples
@@ -125,6 +125,8 @@ wieners_cost <- function(lean_wieners_price, regular_wieners_price){
 
 }
 
+#'compute frozen dinners cost points
+#'
 frozen_dinners_cost <- function(){
 
 }
