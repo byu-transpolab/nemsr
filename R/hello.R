@@ -217,7 +217,13 @@ bread_cost <- function(whole_wheat_bread_cost, white_bread_cost){
 #' baked_chips_price <- rnorm(10,2.5,.5)
 #' regular_chips_price <- rnorm(10,2.8,.3)
 chips_cost <- function(baked_chips_price, regular_chips_price){
-
+  case_when(
+    # 2 points if baked chips are less expensive than regular chips
+    baked_chips_price - regular_chips_price < 0 ~ 2,
+    # -1 points if baked chips are more expensive than regular chips
+    baked_chips_price - regular_chips_price > 0 ~ -1,
+    TRUE ~ as.numeric(NA)
+  )
 }
 
 #'compute
