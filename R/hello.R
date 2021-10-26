@@ -104,7 +104,6 @@ ground_beef_cost <- function(lean_beef_price, regular_beef_price){
     lean_beef_price - regular_beef_price < 0 ~ 2,
     TRUE ~ as.numeric(NA)
   )
-
 }
 
 weiners_cost <- function(){
