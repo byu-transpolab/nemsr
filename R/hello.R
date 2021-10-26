@@ -86,10 +86,16 @@ milk_cost <- function(lowfat_milk_price, whole_milk_price){
     lowfat_milk_price - whole_milk_price > 0 ~ -1,
     TRUE ~ as.numeric(NA)
   )
-
-
 }
 
+#'compute ground beef cost points
+#' @param lean_beef_price the price of ground beef
+#' @param regular_beef_price the price of normal fat ground beef
+#' @return the NEMS-S points associated with beef price
+#' @examples
+#' lean_beef_price <- rnorm()
+#' regular_beef_price <- rnorm()
+#' ground_beef_cost(lean_beef_price, regular_beef_price)
 ground_beef_cost <- function(){
 
 }
@@ -119,6 +125,10 @@ chips_cost <- function(){
 }
 
 cereal_cost <- function(){
+
+}
+
+cost_score <- function(){
 
 }
 
