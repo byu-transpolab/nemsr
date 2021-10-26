@@ -106,7 +106,22 @@ ground_beef_cost <- function(lean_beef_price, regular_beef_price){
   )
 }
 
-weiners_cost <- function(){
+#'compute wieners cost points
+#'#' @param lean_wieners_price the price of hot dogs with less fat (specific fat content?)
+#' @param regular_wieners_price the price of normal hot dogs
+#' @return the NEMS-S points associated with wiener price
+#' @examples
+#' lean_wieners_price <- rnorm(10,2.5,.3)
+#' regular_wieners_price <- rnorm(10,1.5,.5)
+#' wieners_cost(lean_wieners_price,regular_wieners_price)
+wieners_cost <- function(lean_wieners_price, regular_wieners_price){
+  case_when(
+    # -1 point if healthier option is more expensive
+    lean_wieners_price - regular_wieners_price > 0 ~ -1
+    # 2 points if healthier option is less expensive
+    lean_wieners_price - regular_wieners_price < 0 ~ 2
+    TRUE ~ as.numeric(NA)
+  )
 
 }
 
