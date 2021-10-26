@@ -234,7 +234,13 @@ chips_cost <- function(baked_chips_price, regular_chips_price){
 #' healthier_cereal_price <- rnorm(10,4.1,.5)
 #' regular_cereal_price <- rnorm(10,3.5,.3)
 cereal_cost <- function(healthier_cereal_price, regular_cereal_price){
-
+  case_when(
+    # 2 points if healthier cereal is less expensive
+    healthier_cereal_price - regular_cereal_price < 0 ~ 2
+    # -1 points if healthier cereal is more expensive
+    healthier_cereal_price - regular_cereal_price > 0 ~ -1
+    TRUE ~ as.numeric(NA)
+  )
 }
 
 #'compute
