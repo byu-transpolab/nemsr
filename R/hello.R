@@ -226,14 +226,14 @@ chips_cost <- function(baked_chips_price, regular_chips_price){
   )
 }
 
-#'compute
-#' @param
-#' @param
-#' @return the NEMS-S points associated with
+#'compute cereal cost points
+#' @param healthier_cereal_price the price of healthier cereal (<7g of sugar per serving)
+#' @param regular_cereal_price the price of regular cereal (>7g of sugar per serving)
+#' @return the NEMS-S points associated with cereal cost
 #' @examples
-#'  <- rnorm()
-#'  <- rnorm()
-cereal_cost <- function(){
+#' healthier_cereal_price <- rnorm(10,4.1,.5)
+#' regular_cereal_price <- rnorm(10,3.5,.3)
+cereal_cost <- function(healthier_cereal_price, regular_cereal_price){
 
 }
 
