@@ -179,32 +179,32 @@ soda_cost <- function(diet_soda_price, regular_soda_price){
 }
 
 #'compute juice drinks cost points
-#' @param healthier_juice_drinks_cost the cost of 100% juice drinks
-#' @param regular_juice_drinks_cost the cost of non 100% juice drinks
+#' @param healthier_juice_drinks_price the cost of 100% juice drinks
+#' @param regular_juice_drinks_price the cost of non 100% juice drinks
 #' @return the NEMS_S points associated with juice drinks
 #' @examples
-#' healthier_juice_drinks_cost <- rnorm(10,4.1,.5)
-#' regular_juice_drinks_cost <- rnorm(10,4.1,.3)
-juice_drinks_cost <- function(healthier_juice_drinks_cost, regular_juice_drinks_cost){
+#' healthier_juice_drinks_price <- rnorm(10,4.1,.5)
+#' regular_juice_drinks_price <- rnorm(10,4.1,.3)
+juice_drinks_cost <- function(healthier_juice_drinks_price, regular_juice_drinks_price){
   case_when(
     # -1 if 100% juice drink is more expensive
-    healthier_juice_drinks_cost - regular_juice_drinks_cost > 0 ~ -1
+    healthier_juice_drinks_price - regular_juice_drinks_price > 0 ~ -1
   )
 }
 
 #'compute bread cost points
-#' @param whole_wheat_bread_cost the cost of whole wheat bread
-#' @param white_bread_cost the cost of white bread
+#' @param whole_wheat_bread_price the cost of whole wheat bread
+#' @param white_bread_price the cost of white bread
 #' @return the NEMS-S points associated with bread cost
 #' @examples
-#' whole_wheat_bread_cost <- rnorm(10,1.5,.5)
-#' white_bread_cost <- rnorm(10,1.5,.3)
-bread_cost <- function(whole_wheat_bread_cost, white_bread_cost){
+#' whole_wheat_bread_price <- rnorm(10,1.5,.5)
+#' white_bread_price <- rnorm(10,1.5,.3)
+bread_cost <- function(whole_wheat_bread_price, white_bread_price){
   case_when(
     # -1 point if wheat bread is more expensive than white bread
-    whole_wheat_bread_cost - white_bread_cost > 0 ~ -1,
+    whole_wheat_bread_price - white_bread_price > 0 ~ -1,
     # 2 points if wheat bread option is less expensive than white bread
-    whole_wheat_bread_cost - white_bread_cost < 0 ~ 2,
+    whole_wheat_bread_price - white_bread_price < 0 ~ 2,
     TRUE ~ as.numeric(NA)
   )
 }
