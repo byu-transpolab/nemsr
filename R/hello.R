@@ -38,7 +38,7 @@ ground_beef_avail <- function() {
 
 }
 
-weiners_avail <- function() {
+wieners_avail <- function() {
 
 }
 
