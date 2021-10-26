@@ -50,7 +50,7 @@ baked_goods_avail <- function() {
 
 }
 
-sodas_avail <- function(){
+soda_avail <- function(){
 
 }
 
@@ -178,8 +178,18 @@ soda_cost <- function(diet_soda_price, regular_soda_price){
   )
 }
 
-juice_drinks_cost <- function(){
-
+#'compute juice drinks cost points
+#' @param healthier_juice_drinks_cost the cost of 100% juice drinks
+#' @param regular_juice_drinks_cost the cost of non 100% juice drinks
+#' @return the NEMS_S points associated with juice drinks
+#' @examples
+#' healthier_juice_drinks_cost <- rnorm(10,4.1,.5)
+#' regular_juice_drinks_cost <- rnorm(10,4.1,.3)
+juice_drinks_cost <- function(healthier_juice_drinks_cost, regular_juice_drinks_cost){
+  case_when(
+    # -1 if 100% juice drink is more expensive
+    healthier_juice_drinks_cost - regular_juice_drinks_cost > 0 ~ -1
+  )
 }
 
 #'compute bread cost points
