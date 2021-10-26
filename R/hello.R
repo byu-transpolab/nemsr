@@ -207,17 +207,37 @@ bread_cost <- function(whole_wheat_bread_cost, white_bread_cost){
     whole_wheat_bread_cost - white_bread_cost < 0 ~ 2,
     TRUE ~ as.numeric(NA)
   )
+}
+
+#'compute chips cost points
+#' @param baked_chips_price the price of baked chips
+#' @param regular_chips_price the price of regular chips
+#' @return the NEMS-S points associated with chips
+#' @examples
+#' baked_chips_price <- rnorm(10,2.5,.5)
+#' regular_chips_price <- rnorm(10,2.8,.3)
+chips_cost <- function(baked_chips_price, regular_chips_price){
 
 }
 
-chips_cost <- function(){
-
-}
-
+#'compute
+#' @param
+#' @param
+#' @return the NEMS-S points associated with
+#' @examples
+#'  <- rnorm()
+#'  <- rnorm()
 cereal_cost <- function(){
 
 }
 
+#'compute
+#' @param
+#' @param
+#' @return the NEMS-S points associated with
+#' @examples
+#'  <- rnorm()
+#'  <- rnorm()
 cost_score <- function(){
 
 }
