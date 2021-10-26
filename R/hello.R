@@ -133,6 +133,13 @@ wieners_cost <- function(lean_wieners_price, regular_wieners_price){
 #' healthier_frozen_dinners_price <- rnorm(10,4.5,.5)
 #' regular_frozen_dinners_price <- rnorm(10,5.1,.3)
 frozen_dinners_cost <- function(){
+  case_when(
+    # -1 point if healthier option is more expensive
+    healthier_frozen_dinners_price - regular_frozen_dinners_price > 0 ~ -1
+    # 2 points if there are 1 or two options
+    # need some clarification on what this code should be
+    TRUE ~ as.numeric(NA)
+  )
 
 }
 
