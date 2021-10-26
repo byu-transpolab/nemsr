@@ -4,12 +4,12 @@
 \alias{bread_cost}
 \title{compute bread cost points}
 \usage{
-bread_cost(whole_wheat_bread_cost, white_bread_cost)
+bread_cost(whole_wheat_bread_price, white_bread_price)
 }
 \arguments{
-\item{whole_wheat_bread_cost}{the cost of whole wheat bread}
+\item{whole_wheat_bread_price}{the cost of whole wheat bread}
 
-\item{white_bread_cost}{the cost of white bread}
+\item{white_bread_price}{the cost of white bread}
 }
 \value{
 the NEMS-S points associated with bread cost
@@ -18,6 +18,6 @@ the NEMS-S points associated with bread cost
 compute bread cost points
 }
 \examples{
-whole_wheat_bread_cost <- rnorm(10,1.5,.5)
-white_bread_cost <- rnorm(10,1.5,.3)
+whole_wheat_bread_price <- rnorm(10,1.5,.5)
+white_bread_price <- rnorm(10,1.5,.3)
 }
