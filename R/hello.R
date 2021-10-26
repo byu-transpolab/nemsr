@@ -112,7 +112,7 @@ ground_beef_cost <- function(lean_beef_price, regular_beef_price){
 #' @return the NEMS-S points associated with wiener price
 #' @examples
 #' lean_wieners_price <- rnorm(10,2.5,.3)
-#' regular_wieners_price <- rnorm(10,1.5,.5)
+#' regular_wieners_price <- rnorm(10,1.4,.5)
 #' wieners_cost(lean_wieners_price,regular_wieners_price)
 wieners_cost <- function(lean_wieners_price, regular_wieners_price){
   case_when(
