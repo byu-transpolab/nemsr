@@ -117,9 +117,9 @@ ground_beef_cost <- function(lean_beef_price, regular_beef_price){
 wieners_cost <- function(lean_wieners_price, regular_wieners_price){
   case_when(
     # -1 point if healthier option is more expensive
-    lean_wieners_price - regular_wieners_price > 0 ~ -1
+    lean_wieners_price - regular_wieners_price > 0 ~ -1,
     # 2 points if healthier option is less expensive
-    lean_wieners_price - regular_wieners_price < 0 ~ 2
+    lean_wieners_price - regular_wieners_price < 0 ~ 2,
     TRUE ~ as.numeric(NA)
   )
 
@@ -135,7 +135,7 @@ wieners_cost <- function(lean_wieners_price, regular_wieners_price){
 frozen_dinners_cost <- function(healthier_frozen_dinners_price, regular_frozen_dinners_price){
   case_when(
     # -1 point if healthier option is more expensive
-    healthier_frozen_dinners_price - regular_frozen_dinners_price > 0 ~ -1
+    healthier_frozen_dinners_price - regular_frozen_dinners_price > 0 ~ -1,
     # 2 points if there are 1 or two options
     # need some clarification on what this code should be
     TRUE ~ as.numeric(NA)
@@ -153,18 +153,35 @@ frozen_dinners_cost <- function(healthier_frozen_dinners_price, regular_frozen_d
 baked_goods_cost <- function(healthier_baked_goods_price, regular_baked_goods_price){
   case_when(
     # -1 point if healthier option more expensive
-    healthier_baked_goods_price - regular_baked_goods_price > 0 ~ -1
+    healthier_baked_goods_price - regular_baked_goods_price > 0 ~ -1,
     # 2 points if healthier option is less expensive
-    healthier_baked_goods_price - regular_baked_goods_price < 0 ~ 2
+    healthier_baked_goods_price - regular_baked_goods_price < 0 ~ 2,
   )
-
 }
 
+# shouldn't drinks be separated into juice drinks and sodas?
+#'compute drinks cost points
+#' @param healthier_drinks_price the price of 100% juice drinks
+#' @param regular_drinks_price the price of
 drinks_cost <- function(){
 
 }
 
-bread_cost <- function(){
+#'compute bread cost points
+#' @param whole_wheat_bread_cost the cost of whole wheat bread
+#' @param white_bread_cost the cost of white bread
+#' @return the NEMS-S points associated with bread cost
+#' @examples
+#' whole_wheat_bread_cost <- rnorm(10,1.5,.5)
+#' white_bread_cost <- rnorm(10,1.5,.3)
+bread_cost <- function(whole_wheat_bread_cost, white_bread_cost){
+  case_when(
+    # -1 point if wheat bread is more expensive than white bread
+    whole_wheat_bread_cost - white_bread_cost > 0 ~ -1,
+    # 2 points if wheat bread option is less expensive than white bread
+    whole_wheat_bread_cost - white_bread_cost < 0 ~ 2,
+    TRUE ~ as.numeric(NA)
+  )
 
 }
 
