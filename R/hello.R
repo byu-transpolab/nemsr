@@ -126,7 +126,6 @@ wieners_cost <- function(lean_wieners_price, regular_wieners_price){
     lean_wieners_price - regular_wieners_price < 0 ~ 2,
     TRUE ~ as.numeric(NA)
   )
-
 }
 
 #'compute frozen dinners cost points
@@ -144,7 +143,6 @@ frozen_dinners_cost <- function(healthier_frozen_dinners_price, regular_frozen_d
     # need some clarification on what this code should be
     TRUE ~ as.numeric(NA)
   )
-
 }
 
 #'compute baked goods cost points
@@ -236,9 +234,9 @@ chips_cost <- function(baked_chips_price, regular_chips_price){
 cereal_cost <- function(healthier_cereal_price, regular_cereal_price){
   case_when(
     # 2 points if healthier cereal is less expensive
-    healthier_cereal_price - regular_cereal_price < 0 ~ 2
+    healthier_cereal_price - regular_cereal_price < 0 ~ 2,
     # -1 points if healthier cereal is more expensive
-    healthier_cereal_price - regular_cereal_price > 0 ~ -1
+    healthier_cereal_price - regular_cereal_price > 0 ~ -1,
     TRUE ~ as.numeric(NA)
   )
 }
