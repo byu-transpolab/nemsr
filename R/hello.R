@@ -93,10 +93,17 @@ milk_cost <- function(lowfat_milk_price, whole_milk_price){
 #' @param regular_beef_price the price of normal fat ground beef
 #' @return the NEMS-S points associated with beef price
 #' @examples
-#' lean_beef_price <- rnorm()
-#' regular_beef_price <- rnorm()
+#' lean_beef_price <- rnorm(10,5.8,.5)
+#' regular_beef_price <- rnorm(10,5.5,.3)
 #' ground_beef_cost(lean_beef_price, regular_beef_price)
-ground_beef_cost <- function(){
+ground_beef_cost <- function(lean_beef_price, regular_beef_price){
+  case_when(
+    # -1 point if healthier option (lean) is more expensive
+    lean_beef_price - regular_beef_price > 0 ~ -1,
+    # 2 points if the healthier option is cheaper
+    lean_beef_price - regular_beef_price < 0 ~ 2,
+    TRUE ~ as.numeric(NA)
+  )
 
 }
 
