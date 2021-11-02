@@ -135,8 +135,18 @@ frozen_dinners_avail <- function(frozen_dinner_varieties) {
   )
 }
 
-baked_goods_avail <- function() {
-
+# compute the availability points associated with low-fat baked goods
+#' @param lowfat_baked_goods number of low-fat baked goods
+#' @return the NEMS-S points associated with availability of low-fat baked goods
+#' @examples
+#' lowfat_baked_goods <- sample(0:3, 10)
+#' baked_goods_avail(lowfat_baked_goods)
+baked_goods_avail <- function(lowfat_baked_goods) {
+  case_when(
+    # 2 points if there are any low-fat baked goods
+    lowfat_baked_goods > 0 ~ 2,
+    TRUE ~ as.numeric(NA)
+  )
 }
 
 soda_avail <- function(){
