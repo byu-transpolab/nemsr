@@ -23,14 +23,21 @@ convert_files <- function() {
 
 # Availability (30 points)
 #'compute milk availability points
-#' @param lowfat_milk_volume the number of low fat milk cartons available
-#' @param whole_milk_volume the number of whole milk cartons available
+#' @param lowfat_milk_number the number of low fat milk cartons available
+#' @param whole_milk_number the number of whole milk cartons available
 #' @return the NEMS-S points associated with milk availability
 #' @examples
-#' lowfat_milk_volume <- rnorm(10,2.8,.5)
-#' whole_milk_volume <- rnorm(10,3.1,.3)
-#' milk_cost(lowfat_milk_price, whole_milk_price)
-milk_avail <- function() {
+#' lowfat_milk_number <- rnorm(10,,)
+#' whole_milk_number <- rnorm(10,,)
+#' milk_avail(lowfat_milk_number, whole_milk_number)
+milk_avail <- function(lowfat_milk_number,whole_milk_number) {
+  case_when(
+    # 2 points if lowfat/skim milk is available
+    lowfat_milk_number > 0 ~ 2,
+    # 1 point if >50% ratio of lowest-fat to whole milk
+    lowfat_milk_number / whole_milk_number > 0.5 ~ 1,
+    TRUE ~ as.numeric(NA)
+  )
 
 }
 
