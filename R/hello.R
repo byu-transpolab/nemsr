@@ -22,6 +22,14 @@ convert_files <- function() {
 }
 
 # Availability (30 points)
+#'compute milk availability points
+#' @param lowfat_milk_volume the number of low fat milk cartons available
+#' @param whole_milk_volume the number of whole milk cartons available
+#' @return the NEMS-S points associated with milk availability
+#' @examples
+#' lowfat_milk_volume <- rnorm(10,2.8,.5)
+#' whole_milk_volume <- rnorm(10,3.1,.3)
+#' milk_cost(lowfat_milk_price, whole_milk_price)
 milk_avail <- function() {
 
 }
