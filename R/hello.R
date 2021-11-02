@@ -99,16 +99,20 @@ ground_beef_avail <- function(lean_beef_varieties) {
 }
 
 # compute the availability points associated with wieners
-#' @param fat_free_wieners
-#' @param light_wieners
+#' @param fat_free_wieners (fat content?)
+#' @param light_wieners (specific fat content?)
 #' @return the NEMS-S points associated with availability of fat free and light fat wieners
 #' @examples
 #' fat_free_wieners <- sample()
 #' light_wieners <- sample()
 #' wieners_avail(fat_free_wieners, light_wieners)
 wieners_avail <- function(fat_free_wieners, light_wieners) {
-  case_when
-
+  case_when(
+    # 2 points if there is fat free
+    # not sure how to do this-- it wouldnt be a numerical value
+    # 1 point if there are light but not fat free hot dogs (what are the ranges of these?)
+    # need help with this too
+  )
 }
 
 frozen_dinners_avail <- function() {
