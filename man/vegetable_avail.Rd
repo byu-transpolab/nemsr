@@ -6,6 +6,9 @@
 \usage{
 vegetable_avail(varieties_of_vegetables)
 }
+\arguments{
+\item{varieties_of_vegetables}{number of types of vegetables available}
+}
 \value{
 the NEMS-S points associated with vegetables availability
 }
