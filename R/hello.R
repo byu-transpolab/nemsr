@@ -182,9 +182,15 @@ juice_drinks_avail <- function(healthy_juice_varieties){
 #' @return the NEMS-S points associated with whole grain bread availability
 #' @examples
 #' varieties_of_whole_grain_bread <- sample(1:10, 10)
-#' vegetable_avail(varieties_of_vegetables)
-bread_avail <- function() {
-
+#' bread_avail(varieties_of_whole_grain_bread)
+bread_avail <- function(varieties_of_whole_grain_bread) {
+  case_when(
+    # 2 points if they offer whole grain bread
+    varieties_of_whole_grain_bread > 0 ~ 2,
+    # additional point if they offer >2 varieties of whole grain bread
+    varieties_of_whole_grain_bread > 2 ~ 3,
+    TRUE ~ as.numeric(NA)
+  )
 }
 
 chips_avail <- function() {
