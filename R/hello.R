@@ -124,15 +124,15 @@ wieners_avail <- function(fat_free_wieners, light_wieners) {
 frozen_dinners_avail <- function(frozen_dinner_varieties) {
   case_when(
     # 3 points if there are 3 options
-
+    frozen_dinner_varieties = 3 ~ 3,
     # 2 points if there are 2 options
-
+    frozen_dinner_varieties = 2 ~ 2,
     # 2 points if there is one option
-
+    frozen_dinner_varieties = 1 ~ 2,
     # 0 points if there are 0 options
-
+    frozen_dinner_varieties = 0 ~ 0,
+    TRUE ~ as.numeric(NA)
   )
-
 }
 
 baked_goods_avail <- function() {
