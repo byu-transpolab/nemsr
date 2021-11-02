@@ -178,7 +178,7 @@ juice_drinks_avail <- function(healthy_juice_varieties){
 }
 
 #' compute whole grain bread availability points
-#' @param varieties_of_whole_grain_bread
+#' @param varieties_of_whole_grain_bread number of types of whole grain bread available
 #' @return the NEMS-S points associated with whole grain bread availability
 #' @examples
 #' varieties_of_whole_grain_bread <- sample(1:10, 10)
@@ -209,8 +209,18 @@ chips_avail <- function(baked_chips_varieties) {
   )
 }
 
-cereal_avail <- function() {
-
+#' compute healthier cereal availability points
+#' @param healthy_cereal_varieties number of varieties of cereal with less than 7g of sugar per serving
+#' @return the NEMS-S points associated with healthier cereal availability
+#' @examples
+#' healthy_cereal_varieties <- sample(1:10, 10)
+#' cereal_avail(healthy_cereal_varieties)
+cereal_avail <- function(healthy_cereal_varieties) {
+  case_when(
+    # 2 points if a cereal with <7g sugar per serving available
+    healthy_cereal_varieties > 0 ~ 2,
+    TRUE ~ as.numeric(NA)
+  )
 }
 
 # Cost (18 points)
