@@ -60,7 +60,24 @@ fruit_avail <- function(varieties_of_fruit) {
   )
 }
 
-vegetable_avail <- function() {
+#' compute vegetable availability points
+#' @param varieties_of_vegetables
+#' @return the NEMS-S points associated with vegetables availability
+#' @examples
+#' varieties_of_vegetables <- sample(1:10, 10)
+#' vegetable_avail(varieties_of_vegetables)
+vegetable_avail <- function(varieties_of_vegetables) {
+  case_when(
+    # 0 points if 0 varieties of vegetables that are available
+    varieties_of_vegetables = 0 ~ 0,
+    # 1 point if <5 varieties are available
+    varieties_of_vegetables < 5 ~ 1,
+    # 2 points if 5-9 varieties are available
+    # varieties_of_vegetables -- need some help with this part
+    # 3 points if all 10 varieties are available
+    varieties_of_vegetables = 10 ~ 3,
+    TRUE ~ as.numeric(NA)
+  )
 
 }
 
