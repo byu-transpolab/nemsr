@@ -61,7 +61,7 @@ fruit_avail <- function(varieties_of_fruit) {
 }
 
 #' compute vegetable availability points
-#' @param varieties_of_vegetables
+#' @param varieties_of_vegetables number of types of vegetables available
 #' @return the NEMS-S points associated with vegetables availability
 #' @examples
 #' varieties_of_vegetables <- sample(1:10, 10)
@@ -177,7 +177,12 @@ juice_drinks_avail <- function(healthy_juice_varieties){
   )
 }
 
-
+#' compute whole grain bread availability points
+#' @param varieties_of_whole_grain_bread
+#' @return the NEMS-S points associated with whole grain bread availability
+#' @examples
+#' varieties_of_whole_grain_bread <- sample(1:10, 10)
+#' vegetable_avail(varieties_of_vegetables)
 bread_avail <- function() {
 
 }
