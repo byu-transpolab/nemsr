@@ -6,6 +6,9 @@
 \usage{
 bread_avail(varieties_of_whole_grain_bread)
 }
+\arguments{
+\item{varieties_of_whole_grain_bread}{number of types of whole grain bread available}
+}
 \value{
 the NEMS-S points associated with whole grain bread availability
 }
