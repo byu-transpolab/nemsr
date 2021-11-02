@@ -115,6 +115,13 @@ wieners_avail <- function(fat_free_wieners, light_wieners) {
   )
 }
 
+# compute the availability points associated with frozen dinners
+#' @param frozen_dinner_varieties the number of frozen dinner varieties offered (only )
+#' @return the NEMS-S points associated with availability of frozen dinners
+#' @examples
+#' fat_free_wieners <- sample()
+#' light_wieners <- sample()
+#' wieners_avail(fat_free_wieners, light_wieners)
 frozen_dinners_avail <- function() {
 
 }
