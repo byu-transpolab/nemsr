@@ -81,8 +81,11 @@ vegetable_avail <- function(varieties_of_vegetables) {
 }
 
 # compute the availability points associated with ground beef
-#' @param lean_beef_varieties the number of lean beef varieties
+#' @param lean_beef_varieties the number of lean beef varieties (<10% fat)
 #' @return the NEMS-S points associated with ground beef availability
+#' @examples
+#' lean_beef_varieties <- sample(1:4, 10)
+#' ground_beef_avail(lean_beef_varieties)
 ground_beef_avail <- function(lean_beef_varieties) {
   case_when(
     # 2 points if there is a lean beef option
@@ -95,7 +98,16 @@ ground_beef_avail <- function(lean_beef_varieties) {
   )
 }
 
-wieners_avail <- function() {
+# compute the availability points associated with wieners
+#' @param fat_free_wieners
+#' @param light_wieners
+#' @return the NEMS-S points associated with availability of fat free and light fat wieners
+#' @examples
+#' fat_free_wieners <- sample()
+#' light_wieners <- sample()
+#' wieners_avail(fat_free_wieners, light_wieners)
+wieners_avail <- function(fat_free_wieners, light_wieners) {
+  case_when
 
 }
 
