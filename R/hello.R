@@ -38,11 +38,26 @@ milk_avail <- function(lowfat_milk_number,whole_milk_number) {
     lowfat_milk_number / whole_milk_number > 0.5 ~ 1,
     TRUE ~ as.numeric(NA)
   )
-
 }
 
-fruit_avail <- function() {
-
+#' compute fruit availability points
+#' @param varieties_of_fruit
+#' @return the NEMS-S points associated with fruit availability
+#' @examples
+#' varieties_of_fruit <- sample(1:10, 10)
+#' fruit_avail(varieties_of_fruit)
+fruit_avail <- function(varieties_of_fruit) {
+  case_when(
+    # 0 points if 0 varieties of fruit are available
+    varieties_of_fruit = 0 ~ 0,
+    # 1 point if <5 varieties are available
+    varieties_of_fruit < 5 ~ 1,
+    # 2 points if 5-9 varieties are available
+    # varieties_of_fruit -- need some help with this part
+    # 3 points if all 10 varieties are available
+    varieties_of_fruit = 10 ~ 3,
+    TRUE ~ as.numeric(NA)
+  )
 }
 
 vegetable_avail <- function() {
