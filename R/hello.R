@@ -23,19 +23,19 @@ convert_files <- function() {
 
 # Availability (30 points)
 #'compute milk availability points
-#' @param lowfat_milk_number the number of low fat milk cartons available
-#' @param whole_milk_number the number of whole milk cartons available
+#' @param lowfat_milk_varieties the number of low fat milk cartons available
+#' @param whole_milk_varieties the number of whole milk cartons available
 #' @return the NEMS-S points associated with milk availability
 #' @examples
-#' lowfat_milk_number <- rnorm(10,,)
-#' whole_milk_number <- rnorm(10,,)
-#' milk_avail(lowfat_milk_number, whole_milk_number)
-milk_avail <- function(lowfat_milk_number,whole_milk_number) {
+#' lowfat_milk_varieties <- rnorm(10,,)
+#' whole_milk_varieties <- rnorm(10,,)
+#' milk_avail(lowfat_milk_varieties, whole_milk_varieties)
+milk_avail <- function(lowfat_milk_varieties,whole_milk_varieties) {
   case_when(
     # 2 points if lowfat/skim milk is available
-    lowfat_milk_number > 0 ~ 2,
+    lowfat_milk_varieties > 0 ~ 2,
     # 1 point if >50% ratio of lowest-fat to whole milk
-    lowfat_milk_number / whole_milk_number > 0.5 ~ 1,
+    lowfat_milk_varieties / whole_milk_varieties > 0.5 ~ 1,
     TRUE ~ as.numeric(NA)
   )
 }
@@ -78,11 +78,21 @@ vegetable_avail <- function(varieties_of_vegetables) {
     varieties_of_vegetables = 10 ~ 3,
     TRUE ~ as.numeric(NA)
   )
-
 }
 
-ground_beef_avail <- function() {
-
+# compute the availability points associated with ground beef
+#' @param lean_beef_varieties the number of lean beef varieties
+#' @return the NEMS-S points associated with ground beef availability
+ground_beef_avail <- function(lean_beef_varieties) {
+  case_when(
+    # 2 points if there is a lean beef option
+    lean_beef_varieties = 1 ~ 2,
+    # 3 points if there are 2-3 varieties of lean beef
+    # lean_beef_varieties ~ need help with the range
+    # 4 points if there are >3 varieties of lean beef
+    lean_beef_varieties > 3 ~ 4,
+    TRUE ~ as.numeric(NA)
+  )
 }
 
 wieners_avail <- function() {
