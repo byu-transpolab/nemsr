@@ -89,7 +89,7 @@ vegetable_avail <- function(varieties_of_vegetables) {
 ground_beef_avail <- function(lean_beef_varieties) {
   case_when(
     # 2 points if there is a lean beef option
-    lean_beef_varieties = 1 ~ 2,
+    lean_beef_varieties == 1 ~ 2,
     # 3 points if there are 2-3 varieties of lean beef
     lean_beef_varieties >= 2 & lean_beef_varieties < 4 ~ 3,
     # 4 points if there are >3 varieties of lean beef
