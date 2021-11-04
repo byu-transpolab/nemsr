@@ -49,13 +49,13 @@ milk_avail <- function(lowfat_milk_varieties,whole_milk_varieties) {
 fruit_avail <- function(varieties_of_fruit) {
   case_when(
     # 0 points if 0 varieties of fruit are available
-    varieties_of_fruit = 0 ~ 0,
+    varieties_of_fruit == 0 ~ 0,
     # 1 point if <5 varieties are available
     varieties_of_fruit < 5 ~ 1,
     # 2 points if 5-9 varieties are available
     varieties_of_fruit >= 5 & varieties_of_fruit < 10 ~ 2,
     # 3 points if all 10 varieties are available
-    varieties_of_fruit = 10 ~ 3,
+    varieties_of_fruit == 10 ~ 3,
     TRUE ~ as.numeric(NA)
   )
 }
