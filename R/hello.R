@@ -124,13 +124,13 @@ wieners_avail <- function(fat_free_wieners, light_wieners) {
 frozen_dinners_avail <- function(frozen_dinner_varieties) {
   case_when(
     # 3 points if there are 3 options
-    frozen_dinner_varieties = 3 ~ 3,
+    frozen_dinner_varieties == 3 ~ 3,
     # 2 points if there are 2 options
-    frozen_dinner_varieties = 2 ~ 2,
+    frozen_dinner_varieties == 2 ~ 2,
     # 2 points if there is one option
-    frozen_dinner_varieties = 1 ~ 2,
+    frozen_dinner_varieties == 1 ~ 2,
     # 0 points if there are 0 options
-    frozen_dinner_varieties = 0 ~ 0,
+    frozen_dinner_varieties == 0 ~ 0,
     TRUE ~ as.numeric(NA)
   )
 }
@@ -186,9 +186,9 @@ juice_drinks_avail <- function(healthy_juice_varieties){
 bread_avail <- function(varieties_of_whole_grain_bread) {
   case_when(
     # 2 points if they offer whole grain bread
-    varieties_of_whole_grain_bread > 0 ~ 2,
+    varieties_of_whole_grain_bread > 0 & varieties_of_whole_grain_bread < 2 ~ 2,
     # additional point if they offer >2 varieties of whole grain bread
-    varieties_of_whole_grain_bread > 2 ~ 3,
+    varieties_of_whole_grain_bread >= 2 ~ 3,
     TRUE ~ as.numeric(NA)
   )
 }
