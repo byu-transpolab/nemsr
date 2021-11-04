@@ -202,7 +202,7 @@ bread_avail <- function(varieties_of_whole_grain_bread) {
 chips_avail <- function(baked_chips_varieties) {
   case_when(
     # 2 points for having baked chips
-    baked_chips_varieties > 0 ~ 2,
+    baked_chips_varieties > 0 & baked_chips_varieties <= 2 ~ 2,
     # 1 additional point for having >2 varieties of baked chips
     baked_chips_varieties > 2 ~ 3,
     TRUE ~ as.numeric(NA)
