@@ -53,7 +53,7 @@ fruit_avail <- function(varieties_of_fruit) {
     # 1 point if <5 varieties are available
     varieties_of_fruit < 5 ~ 1,
     # 2 points if 5-9 varieties are available
-    # varieties_of_fruit -- need some help with this part
+    varieties_of_fruit >= 5 & varieties_of_fruit < 10 ~ 2,
     # 3 points if all 10 varieties are available
     varieties_of_fruit = 10 ~ 3,
     TRUE ~ as.numeric(NA)
