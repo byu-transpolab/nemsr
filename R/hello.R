@@ -80,7 +80,7 @@ vegetable_avail <- function(varieties_of_vegetables) {
   )
 }
 
-# compute the availability points associated with ground beef
+#' compute the availability points associated with ground beef
 #' @param lean_beef_varieties the number of lean beef varieties (<10% fat)
 #' @return the NEMS-S points associated with ground beef availability
 #' @examples
@@ -98,7 +98,7 @@ ground_beef_avail <- function(lean_beef_varieties) {
   )
 }
 
-# compute the availability points associated with wieners
+#' compute the availability points associated with wieners
 #' @param fat_free_wieners (fat content?)
 #' @param light_wieners (specific fat content?)
 #' @return the NEMS-S points associated with availability of fat free and light fat wieners
@@ -115,7 +115,7 @@ wieners_avail <- function(fat_free_wieners, light_wieners) {
   )
 }
 
-# compute the availability points associated with frozen dinners
+#' compute the availability points associated with frozen dinners
 #' @param frozen_dinner_varieties the number of frozen dinner varieties offered (only )
 #' @return the NEMS-S points associated with availability of frozen dinners
 #' @examples
@@ -135,7 +135,7 @@ frozen_dinners_avail <- function(frozen_dinner_varieties) {
   )
 }
 
-# compute the availability points associated with low-fat baked goods
+#' compute the availability points associated with low-fat baked goods
 #' @param lowfat_baked_goods number of low-fat baked goods
 #' @return the NEMS-S points associated with availability of low-fat baked goods
 #' @examples
@@ -149,7 +149,7 @@ baked_goods_avail <- function(lowfat_baked_goods) {
   )
 }
 
-# compute the availability points associated with diet soda
+#' compute the availability points associated with diet soda
 #' @param diet_soda_varieties the number of diet sodas available
 #' @return the NEMS-S points associated with availability of diet soda
 #' @examples
@@ -163,7 +163,7 @@ soda_avail <- function(diet_soda_varieties){
   )
 }
 
-# compute the availability points associated with 100% juice drinks
+#' compute the availability points associated with 100% juice drinks
 #' @param healthy_juice_varieties the number of 100% juice drinks available
 #' @return the NEMS-S points associated with availability of healthy juice drinks
 #' @examples
