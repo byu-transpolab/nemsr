@@ -45,7 +45,7 @@ milk_avail <- function(lowfat_milk_varieties,whole_milk_varieties) {
 
 #' Compute fruit availability points
 #'
-#' This function takes in the number of varieties of fruit at a given store and returns the NEMS-S points associated with the availibility.
+#' This function takes in the number of varieties of fruit at a given store and returns the NEMS-S points associated with the availability.
 #'
 #' @param varieties_of_fruit The number of fruit types availiable.
 #' @return The NEMS-S points associated with fruit availability.
@@ -66,9 +66,12 @@ fruit_avail <- function(varieties_of_fruit) {
   )
 }
 
-#' compute vegetable availability points
-#' @param varieties_of_vegetables number of types of vegetables available
-#' @return the NEMS-S points associated with vegetables availability
+#' Compute vegetable availability points
+#'
+#' This function takes in the number of varieties of vegetables at a given store and returns the NEMS-S points associated with the availability.
+#'
+#' @param varieties_of_vegetables Number of types of vegetables available.
+#' @return The NEMS-S points associated with vegetables availability.
 #' @examples
 #' varieties_of_vegetables <- sample(1:10, 10)
 #' vegetable_avail(varieties_of_vegetables)
