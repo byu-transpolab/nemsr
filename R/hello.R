@@ -153,9 +153,12 @@ frozen_dinners_avail <- function(frozen_dinner_varieties) {
   )
 }
 
-#' compute the availability points associated with low-fat baked goods
-#' @param lowfat_baked_goods number of low-fat baked goods
-#' @return the NEMS-S points associated with availability of low-fat baked goods
+#' Compute the availability points associated with low-fat baked goods
+#'
+#' This function takes in the number of varieties of low-fat baked goods and returns the NEMS-S points associated with availability.
+#'
+#' @param lowfat_baked_goods The number of low-fat baked goods.
+#' @return The NEMS-S points associated with availability of low-fat baked goods.
 #' @examples
 #' lowfat_baked_goods <- sample(0:3, 10)
 #' baked_goods_avail(lowfat_baked_goods)
