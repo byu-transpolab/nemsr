@@ -223,9 +223,12 @@ bread_avail <- function(varieties_of_whole_grain_bread) {
   )
 }
 
-#' compute baked chips availability points
-#' @param baked_chips_varieties varieties of baked chips offered
-#' @return the NEMS-S points associated with baked chips availability
+#' Compute baked chips availability points
+#'
+#' This function takes in the number of varieties of baked chips and returns the NEMS-S points associated with availability.
+#'
+#' @param baked_chips_varieties The number of varieties of baked chips offered.
+#' @return The NEMS-S points associated with baked chips availability.
 #' @examples
 #' baked_chips_varieties <- sample(1:10, 10)
 #' chips_avail(baked_chips_varieties)
