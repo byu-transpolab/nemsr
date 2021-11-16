@@ -326,10 +326,13 @@ wieners_cost <- function(lean_wieners_price, regular_wieners_price){
   )
 }
 
-#'compute frozen dinners cost points
-#' @param healthier_frozen_dinners_price the price of healthier option for frozen dinners
-#' @param regular_frozen_dinners_price the price of regular fat frozen dinners
-#' @return the NEMS-S points associated with frozen dinners price
+#' Compute frozen dinners cost points
+#'
+#' This function takes in the cost of healthier and regular frozen dinners and compares them to return a NEMS-S score for the cost.
+#'
+#' @param healthier_frozen_dinners_price The price of healthier option for frozen dinners. (specifics?)
+#' @param regular_frozen_dinners_price The price of regular fat frozen dinners.
+#' @return The NEMS-S points associated with frozen dinners price.
 #' @examples
 #' healthier_frozen_dinners_price <- rnorm(10,4.5,.5)
 #' regular_frozen_dinners_price <- rnorm(10,5.1,.3)
