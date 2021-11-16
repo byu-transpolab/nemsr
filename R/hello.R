@@ -89,9 +89,12 @@ vegetable_avail <- function(varieties_of_vegetables) {
   )
 }
 
-#' compute the availability points associated with ground beef
-#' @param lean_beef_varieties the number of lean beef varieties (<10% fat)
-#' @return the NEMS-S points associated with ground beef availability
+#' Compute the availability points associated with ground beef
+#'
+#' This function takes in the number of varieties of lean and regular fat beef and returns the NEMS-S points associated with availability.
+#'
+#' @param lean_beef_varieties The number of lean beef varieties (<10% fat).
+#' @return The NEMS-S points associated with ground beef availability.
 #' @examples
 #' lean_beef_varieties <- sample(1:4, 10)
 #' ground_beef_avail(lean_beef_varieties)
