@@ -110,7 +110,10 @@ ground_beef_avail <- function(lean_beef_varieties) {
   )
 }
 
-#' compute the availability points associated with wieners
+#' Compute the availability points associated with wieners
+#'
+#' This function takes in the .... this needs to be finished
+#'
 #' @param fat_free_wieners (fat content?)
 #' @param light_wieners (specific fat content?)
 #' @return the NEMS-S points associated with availability of fat free and light fat wieners
