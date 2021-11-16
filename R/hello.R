@@ -305,10 +305,13 @@ ground_beef_cost <- function(lean_beef_price, regular_beef_price){
   )
 }
 
-#'compute wieners cost points
-#' @param lean_wieners_price the price of hot dogs with less fat (specific fat content?)
-#' @param regular_wieners_price the price of normal hot dogs
-#' @return the NEMS-S points associated with wiener price
+#' Compute wieners cost points
+#'
+#' This function takes in the cost of lean and regular fat weiners and compares them to return a NEMS-S score for the cost.
+#'
+#' @param lean_wieners_price The price of hot dogs with less fat (specific fat content?).
+#' @param regular_wieners_price The price of normal fat hot dogs.
+#' @return The NEMS-S points associated with wiener price.
 #' @examples
 #' lean_wieners_price <- rnorm(10,2.5,.3)
 #' regular_wieners_price <- rnorm(10,1.4,.5)
