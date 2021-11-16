@@ -2,18 +2,18 @@
 % Please edit documentation in R/hello.R
 \name{cereal_avail}
 \alias{cereal_avail}
-\title{compute healthier cereal availability points}
+\title{Compute healthier cereal availability points}
 \usage{
 cereal_avail(healthy_cereal_varieties)
 }
 \arguments{
-\item{healthy_cereal_varieties}{number of varieties of cereal with less than 7g of sugar per serving}
+\item{healthy_cereal_varieties}{The number of varieties of cereal with less than 7g of sugar per serving.}
 }
 \value{
-the NEMS-S points associated with healthier cereal availability
+The NEMS-S points associated with healthier cereal availability.
 }
 \description{
-compute healthier cereal availability points
+This function takes in the number of varieties of healthier cereal options and returns the NEMS-S points associated with availability.
 }
 \examples{
 healthy_cereal_varieties <- sample(1:10, 10)

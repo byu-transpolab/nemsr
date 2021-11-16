@@ -2,18 +2,18 @@
 % Please edit documentation in R/hello.R
 \name{ground_beef_avail}
 \alias{ground_beef_avail}
-\title{compute the availability points associated with ground beef}
+\title{Compute the availability points associated with ground beef}
 \usage{
 ground_beef_avail(lean_beef_varieties)
 }
 \arguments{
-\item{lean_beef_varieties}{the number of lean beef varieties (<10% fat)}
+\item{lean_beef_varieties}{The number of lean beef varieties (<10% fat).}
 }
 \value{
-the NEMS-S points associated with ground beef availability
+The NEMS-S points associated with ground beef availability.
 }
 \description{
-compute the availability points associated with ground beef
+This function takes in the number of varieties of lean and regular fat beef and returns the NEMS-S points associated with availability.
 }
 \examples{
 lean_beef_varieties <- sample(1:4, 10)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/hello.R
 \name{wieners_avail}
 \alias{wieners_avail}
-\title{compute the availability points associated with wieners}
+\title{Compute the availability points associated with wieners}
 \usage{
 wieners_avail(fat_free_wieners, light_wieners)
 }
@@ -15,7 +15,7 @@ wieners_avail(fat_free_wieners, light_wieners)
 the NEMS-S points associated with availability of fat free and light fat wieners
 }
 \description{
-compute the availability points associated with wieners
+This function takes in the .... this needs to be finished
 }
 \examples{
 fat_free_wieners <- sample()

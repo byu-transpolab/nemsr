@@ -2,18 +2,18 @@
 % Please edit documentation in R/hello.R
 \name{bread_avail}
 \alias{bread_avail}
-\title{compute whole grain bread availability points}
+\title{Compute whole grain bread availability points}
 \usage{
 bread_avail(varieties_of_whole_grain_bread)
 }
 \arguments{
-\item{varieties_of_whole_grain_bread}{number of types of whole grain bread available}
+\item{varieties_of_whole_grain_bread}{The number of types of whole grain bread available.}
 }
 \value{
-the NEMS-S points associated with whole grain bread availability
+The NEMS-S points associated with whole grain bread availability.
 }
 \description{
-compute whole grain bread availability points
+This function takes in the number of varieties of whole grain bread and returns the NEMS-S points associated with availability.
 }
 \examples{
 varieties_of_whole_grain_bread <- sample(1:10, 10)

@@ -2,18 +2,18 @@
 % Please edit documentation in R/hello.R
 \name{baked_goods_avail}
 \alias{baked_goods_avail}
-\title{compute the availability points associated with low-fat baked goods}
+\title{Compute the availability points associated with low-fat baked goods}
 \usage{
 baked_goods_avail(lowfat_baked_goods)
 }
 \arguments{
-\item{lowfat_baked_goods}{number of low-fat baked goods}
+\item{lowfat_baked_goods}{The number of low-fat baked goods.}
 }
 \value{
-the NEMS-S points associated with availability of low-fat baked goods
+The NEMS-S points associated with availability of low-fat baked goods.
 }
 \description{
-compute the availability points associated with low-fat baked goods
+This function takes in the number of varieties of low-fat baked goods and returns the NEMS-S points associated with availability.
 }
 \examples{
 lowfat_baked_goods <- sample(0:3, 10)

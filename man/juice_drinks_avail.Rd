@@ -2,18 +2,18 @@
 % Please edit documentation in R/hello.R
 \name{juice_drinks_avail}
 \alias{juice_drinks_avail}
-\title{compute the availability points associated with 100% juice drinks}
+\title{Compute the availability points associated with healthier juice drinks}
 \usage{
 juice_drinks_avail(healthy_juice_varieties)
 }
 \arguments{
-\item{healthy_juice_varieties}{the number of 100% juice drinks available}
+\item{healthy_juice_varieties}{The number of 100% juice drinks available.}
 }
 \value{
-the NEMS-S points associated with availability of healthy juice drinks
+The NEMS-S points associated with availability of healthy juice drinks.
 }
 \description{
-compute the availability points associated with 100% juice drinks
+This function takes in the number of varieties of 100% juice drinks and returns the NEMS-S points associated with availability.
 }
 \examples{
 healthy_juice_varieties <- sample(0:3, 10)

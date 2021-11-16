@@ -2,20 +2,20 @@
 % Please edit documentation in R/hello.R
 \name{milk_cost}
 \alias{milk_cost}
-\title{compute milk cost points}
+\title{Compute milk cost points}
 \usage{
 milk_cost(lowfat_milk_price, whole_milk_price)
 }
 \arguments{
-\item{lowfat_milk_price}{the price of low fat milk}
+\item{lowfat_milk_price}{The price of low fat milk.}
 
-\item{whole_milk_price}{the price of whole milk}
+\item{whole_milk_price}{The price of whole milk.}
 }
 \value{
-the NEMS-S points associated with milk price
+The NEMS-S points associated with milk price.
 }
 \description{
-compute milk cost points
+This function takes in the cost of lowfat and whole milk and compares them to return a NEMS-S score for the cost.
 }
 \examples{
 lowfat_milk_price <- rnorm(10,2.8,.5)

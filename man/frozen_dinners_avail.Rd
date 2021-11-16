@@ -2,18 +2,18 @@
 % Please edit documentation in R/hello.R
 \name{frozen_dinners_avail}
 \alias{frozen_dinners_avail}
-\title{compute the availability points associated with frozen dinners}
+\title{Compute the availability points associated with frozen dinners}
 \usage{
 frozen_dinners_avail(frozen_dinner_varieties)
 }
 \arguments{
-\item{frozen_dinner_varieties}{the number of frozen dinner varieties offered (only )}
+\item{frozen_dinner_varieties}{The number of frozen dinner varieties offered.}
 }
 \value{
-the NEMS-S points associated with availability of frozen dinners
+The NEMS-S points associated with availability of frozen dinners.
 }
 \description{
-compute the availability points associated with frozen dinners
+This function takes in the number of varieties of frozen dinners and returns the NEMS-S points associated with availability.
 }
 \examples{
 frozen_dinner_varieties <- sample(0:3, 10)

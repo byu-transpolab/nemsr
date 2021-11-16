@@ -2,18 +2,18 @@
 % Please edit documentation in R/hello.R
 \name{chips_avail}
 \alias{chips_avail}
-\title{compute baked chips availability points}
+\title{Compute baked chips availability points}
 \usage{
 chips_avail(baked_chips_varieties)
 }
 \arguments{
-\item{baked_chips_varieties}{varieties of baked chips offered}
+\item{baked_chips_varieties}{The number of varieties of baked chips offered.}
 }
 \value{
-the NEMS-S points associated with baked chips availability
+The NEMS-S points associated with baked chips availability.
 }
 \description{
-compute baked chips availability points
+This function takes in the number of varieties of baked chips and returns the NEMS-S points associated with availability.
 }
 \examples{
 baked_chips_varieties <- sample(1:10, 10)
