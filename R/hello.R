@@ -365,10 +365,13 @@ baked_goods_cost <- function(healthier_baked_goods_price, regular_baked_goods_pr
   )
 }
 
-#'compute soda cost points
-#' @param diet_soda_price the price regular soda
-#' @param regular_soda_price the price of healthier soda
-#' @return the NEMS_S points associated with soda
+#' Compute soda cost points
+#'
+#' This function takes in the cost of healthier and regular soda and compares them to return a NEMS-S score for the cost.
+#'
+#' @param diet_soda_price The price of regular soda.
+#' @param regular_soda_price The price of healthier soda.
+#' @return The NEMS_S points associated with soda price.
 #' @examples
 #' diet_soda_price <- rnorm(10,4.1,.5)
 #' regular_soda_price <- rnorm(10,4.1,.3)
