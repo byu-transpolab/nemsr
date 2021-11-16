@@ -187,9 +187,12 @@ soda_avail <- function(diet_soda_varieties){
   )
 }
 
-#' compute the availability points associated with 100% juice drinks
-#' @param healthy_juice_varieties the number of 100% juice drinks available
-#' @return the NEMS-S points associated with availability of healthy juice drinks
+#' Compute the availability points associated with healthier juice drinks
+#'
+#' This function takes in the number of varieties of 100% juice drinks and returns the NEMS-S points associated with availability.
+#'
+#' @param healthy_juice_varieties The number of 100% juice drinks available.
+#' @return The NEMS-S points associated with availability of healthy juice drinks.
 #' @examples
 #' healthy_juice_varieties <- sample(0:3, 10)
 #' juice_drinks_avail(healthy_juice_varieties)
