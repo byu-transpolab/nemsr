@@ -2,7 +2,7 @@
 % Please edit documentation in R/hello.R
 \name{milk_avail}
 \alias{milk_avail}
-\title{compute milk availability points}
+\title{Compute milk availability points}
 \usage{
 milk_avail(lowfat_milk_varieties, whole_milk_varieties)
 }
@@ -15,7 +15,7 @@ milk_avail(lowfat_milk_varieties, whole_milk_varieties)
 the NEMS-S points associated with milk availability
 }
 \description{
-compute milk availability points
+This function takes in the number of lowfat and whole milk varieties at a given store and returns the NEMS-S points associated with the availability.
 }
 \examples{
 lowfat_milk_varieties <- rnorm(10,,)
