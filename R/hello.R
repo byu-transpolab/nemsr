@@ -400,10 +400,13 @@ juice_drinks_cost <- function(healthier_juice_drinks_price, regular_juice_drinks
   )
 }
 
-#'compute bread cost points
-#' @param whole_wheat_bread_price the cost of whole wheat bread
-#' @param white_bread_price the cost of white bread
-#' @return the NEMS-S points associated with bread cost
+#' Compute bread cost points
+#'
+#' This function takes in the cost of whole wheat bread and white bread and compares them to return a NEMS-S score for the cost.
+#'
+#' @param whole_wheat_bread_price The cost of whole wheat bread.
+#' @param white_bread_price The cost of white bread.
+#' @return The NEMS-S points associated with bread cost.
 #' @examples
 #' whole_wheat_bread_price <- rnorm(10,1.5,.5)
 #' white_bread_price <- rnorm(10,1.5,.3)
