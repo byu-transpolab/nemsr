@@ -383,10 +383,13 @@ soda_cost <- function(diet_soda_price, regular_soda_price){
   )
 }
 
-#'compute juice drinks cost points
-#' @param healthier_juice_drinks_price the cost of 100% juice drinks
-#' @param regular_juice_drinks_price the cost of non 100% juice drinks
-#' @return the NEMS_S points associated with juice drinks
+#' Compute juice drinks cost points
+#'
+#' This function takes in the cost of healthier and regular juice and compares them to return a NEMS-S score for the cost.
+#'
+#' @param healthier_juice_drinks_price The cost of 100% juice drinks.
+#' @param regular_juice_drinks_price The cost of non 100% juice drinks.
+#' @return The NEMS_S points associated with juice drinks cost.
 #' @examples
 #' healthier_juice_drinks_price <- rnorm(10,4.1,.5)
 #' regular_juice_drinks_price <- rnorm(10,4.1,.3)
