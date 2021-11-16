@@ -2,18 +2,18 @@
 % Please edit documentation in R/hello.R
 \name{vegetable_avail}
 \alias{vegetable_avail}
-\title{compute vegetable availability points}
+\title{Compute vegetable availability points}
 \usage{
 vegetable_avail(varieties_of_vegetables)
 }
 \arguments{
-\item{varieties_of_vegetables}{number of types of vegetables available}
+\item{varieties_of_vegetables}{Number of types of vegetables available.}
 }
 \value{
-the NEMS-S points associated with vegetables availability
+The NEMS-S points associated with vegetables availability.
 }
 \description{
-compute vegetable availability points
+This function takes in the number of varieties of vegetables at a given store and returns the NEMS-S points associated with the availability.
 }
 \examples{
 varieties_of_vegetables <- sample(1:10, 10)

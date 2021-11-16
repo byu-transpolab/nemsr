@@ -7,12 +7,12 @@
 milk_avail(lowfat_milk_varieties, whole_milk_varieties)
 }
 \arguments{
-\item{lowfat_milk_varieties}{the number of low fat milk cartons available}
+\item{lowfat_milk_varieties}{The number of low fat milk cartons available.}
 
-\item{whole_milk_varieties}{the number of whole milk cartons available}
+\item{whole_milk_varieties}{The number of whole milk cartons available.}
 }
 \value{
-the NEMS-S points associated with milk availability
+The NEMS-S points associated with milk availability.
 }
 \description{
 This function takes in the number of lowfat and whole milk varieties at a given store and returns the NEMS-S points associated with the availability.

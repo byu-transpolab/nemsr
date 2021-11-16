@@ -2,15 +2,18 @@
 % Please edit documentation in R/hello.R
 \name{fruit_avail}
 \alias{fruit_avail}
-\title{compute fruit availability points}
+\title{Compute fruit availability points}
 \usage{
 fruit_avail(varieties_of_fruit)
 }
+\arguments{
+\item{varieties_of_fruit}{The number of fruit types availiable.}
+}
 \value{
-the NEMS-S points associated with fruit availability
+The NEMS-S points associated with fruit availability.
 }
 \description{
-compute fruit availability points
+This function takes in the number of varieties of fruit at a given store and returns the NEMS-S points associated with the availability.
 }
 \examples{
 varieties_of_fruit <- sample(1:10, 10)
