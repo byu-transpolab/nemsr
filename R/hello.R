@@ -26,9 +26,9 @@ convert_files <- function() {
 #'
 #' This function takes in the number of lowfat and whole milk varieties at a given store and returns the NEMS-S points associated with the availability.
 #'
-#' @param lowfat_milk_varieties the number of low fat milk cartons available
-#' @param whole_milk_varieties the number of whole milk cartons available
-#' @return the NEMS-S points associated with milk availability
+#' @param lowfat_milk_varieties The number of low fat milk cartons available.
+#' @param whole_milk_varieties The number of whole milk cartons available.
+#' @return The NEMS-S points associated with milk availability.
 #' @examples
 #' lowfat_milk_varieties <- rnorm(10,,)
 #' whole_milk_varieties <- rnorm(10,,)
