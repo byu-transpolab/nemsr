@@ -242,9 +242,12 @@ chips_avail <- function(baked_chips_varieties) {
   )
 }
 
-#' compute healthier cereal availability points
-#' @param healthy_cereal_varieties number of varieties of cereal with less than 7g of sugar per serving
-#' @return the NEMS-S points associated with healthier cereal availability
+#' Compute healthier cereal availability points
+#'
+#' This function takes in the number of varieties of healthier cereal options and returns the NEMS-S points associated with availability.
+#'
+#' @param healthy_cereal_varieties The number of varieties of cereal with less than 7g of sugar per serving.
+#' @return The NEMS-S points associated with healthier cereal availability.
 #' @examples
 #' healthy_cereal_varieties <- sample(1:10, 10)
 #' cereal_avail(healthy_cereal_varieties)
