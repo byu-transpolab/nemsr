@@ -2,20 +2,20 @@
 % Please edit documentation in R/hello.R
 \name{soda_cost}
 \alias{soda_cost}
-\title{compute soda cost points}
+\title{Compute soda cost points}
 \usage{
 soda_cost(diet_soda_price, regular_soda_price)
 }
 \arguments{
-\item{diet_soda_price}{the price regular soda}
+\item{diet_soda_price}{The price of regular soda.}
 
-\item{regular_soda_price}{the price of healthier soda}
+\item{regular_soda_price}{The price of healthier soda.}
 }
 \value{
-the NEMS_S points associated with soda
+The NEMS_S points associated with soda price.
 }
 \description{
-compute soda cost points
+This function takes in the cost of healthier and regular soda and compares them to return a NEMS-S score for the cost.
 }
 \examples{
 diet_soda_price <- rnorm(10,4.1,.5)

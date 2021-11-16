@@ -2,20 +2,20 @@
 % Please edit documentation in R/hello.R
 \name{chips_cost}
 \alias{chips_cost}
-\title{compute chips cost points}
+\title{Compute chips cost points}
 \usage{
 chips_cost(baked_chips_price, regular_chips_price)
 }
 \arguments{
-\item{baked_chips_price}{the price of baked chips}
+\item{baked_chips_price}{The price of baked chips.}
 
-\item{regular_chips_price}{the price of regular chips}
+\item{regular_chips_price}{The price of regular chips.}
 }
 \value{
-the NEMS-S points associated with chips
+The NEMS-S points associated with chips cost.
 }
 \description{
-compute chips cost points
+This function takes in the cost of baked and regular chips and compares them to return a NEMS-S score for the cost.
 }
 \examples{
 baked_chips_price <- rnorm(10,2.5,.5)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/hello.R
 \name{frozen_dinners_cost}
 \alias{frozen_dinners_cost}
-\title{compute frozen dinners cost points}
+\title{Compute frozen dinners cost points}
 \usage{
 frozen_dinners_cost(
   healthier_frozen_dinners_price,
@@ -10,15 +10,15 @@ frozen_dinners_cost(
 )
 }
 \arguments{
-\item{healthier_frozen_dinners_price}{the price of healthier option for frozen dinners}
+\item{healthier_frozen_dinners_price}{The price of healthier option for frozen dinners. (specifics?)}
 
-\item{regular_frozen_dinners_price}{the price of regular fat frozen dinners}
+\item{regular_frozen_dinners_price}{The price of regular fat frozen dinners.}
 }
 \value{
-the NEMS-S points associated with frozen dinners price
+The NEMS-S points associated with frozen dinners price.
 }
 \description{
-compute frozen dinners cost points
+This function takes in the cost of healthier and regular frozen dinners and compares them to return a NEMS-S score for the cost.
 }
 \examples{
 healthier_frozen_dinners_price <- rnorm(10,4.5,.5)

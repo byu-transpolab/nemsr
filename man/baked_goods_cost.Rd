@@ -2,20 +2,20 @@
 % Please edit documentation in R/hello.R
 \name{baked_goods_cost}
 \alias{baked_goods_cost}
-\title{compute baked goods cost points}
+\title{Compute baked goods cost points}
 \usage{
 baked_goods_cost(healthier_baked_goods_price, regular_baked_goods_price)
 }
 \arguments{
-\item{healthier_baked_goods_price}{the price of lower fat baked goods}
+\item{healthier_baked_goods_price}{The price of lower fat baked goods (fat content).}
 
-\item{regular_baked_goods_price}{the price of normal fat baked goods}
+\item{regular_baked_goods_price}{The price of normal fat baked goods.}
 }
 \value{
-the NEMS-S points associated with baked goods price
+The NEMS-S points associated with baked goods price.
 }
 \description{
-compute baked goods cost points
+This function takes in the cost of healthier and regular baked goods and compares them to return a NEMS-S score for the cost.
 }
 \examples{
 healthier_baked_goods_price <- rnorm(10,3.2,.5)

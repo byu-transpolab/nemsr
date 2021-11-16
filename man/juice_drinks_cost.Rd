@@ -2,20 +2,20 @@
 % Please edit documentation in R/hello.R
 \name{juice_drinks_cost}
 \alias{juice_drinks_cost}
-\title{compute juice drinks cost points}
+\title{Compute juice drinks cost points}
 \usage{
 juice_drinks_cost(healthier_juice_drinks_price, regular_juice_drinks_price)
 }
 \arguments{
-\item{healthier_juice_drinks_price}{the cost of 100% juice drinks}
+\item{healthier_juice_drinks_price}{The cost of 100% juice drinks.}
 
-\item{regular_juice_drinks_price}{the cost of non 100% juice drinks}
+\item{regular_juice_drinks_price}{The cost of non 100% juice drinks.}
 }
 \value{
-the NEMS_S points associated with juice drinks
+The NEMS_S points associated with juice drinks cost.
 }
 \description{
-compute juice drinks cost points
+This function takes in the cost of healthier and regular juice and compares them to return a NEMS-S score for the cost.
 }
 \examples{
 healthier_juice_drinks_price <- rnorm(10,4.1,.5)

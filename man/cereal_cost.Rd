@@ -2,20 +2,20 @@
 % Please edit documentation in R/hello.R
 \name{cereal_cost}
 \alias{cereal_cost}
-\title{compute cereal cost points}
+\title{Compute cereal cost points}
 \usage{
 cereal_cost(healthier_cereal_price, regular_cereal_price)
 }
 \arguments{
-\item{healthier_cereal_price}{the price of healthier cereal (<7g of sugar per serving)}
+\item{healthier_cereal_price}{The price of healthier cereal (<7g of sugar per serving).}
 
-\item{regular_cereal_price}{the price of regular cereal (>7g of sugar per serving)}
+\item{regular_cereal_price}{The price of regular cereal (>7g of sugar per serving).}
 }
 \value{
-the NEMS-S points associated with cereal cost
+The NEMS-S points associated with cereal cost.
 }
 \description{
-compute cereal cost points
+This function takes in the cost of healthier and regular cereal and compares them to return a NEMS-S score for the cost.
 }
 \examples{
 healthier_cereal_price <- rnorm(10,4.1,.5)

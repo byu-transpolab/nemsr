@@ -2,20 +2,20 @@
 % Please edit documentation in R/hello.R
 \name{ground_beef_cost}
 \alias{ground_beef_cost}
-\title{compute ground beef cost points}
+\title{Compute ground beef cost points}
 \usage{
 ground_beef_cost(lean_beef_price, regular_beef_price)
 }
 \arguments{
-\item{lean_beef_price}{the price of lean ground beef}
+\item{lean_beef_price}{The price of lean ground beef.}
 
-\item{regular_beef_price}{the price of normal fat ground beef}
+\item{regular_beef_price}{The price of normal fat ground beef. (the specific fat content?)}
 }
 \value{
 the NEMS-S points associated with beef price
 }
 \description{
-compute ground beef cost points
+This function takes in the cost of lean and regular ground beef and compares them to return a NEMS-S score for the cost.
 }
 \examples{
 lean_beef_price <- rnorm(10,5.8,.5)

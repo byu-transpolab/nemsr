@@ -2,20 +2,20 @@
 % Please edit documentation in R/hello.R
 \name{wieners_cost}
 \alias{wieners_cost}
-\title{compute wieners cost points}
+\title{Compute wieners cost points}
 \usage{
 wieners_cost(lean_wieners_price, regular_wieners_price)
 }
 \arguments{
-\item{lean_wieners_price}{the price of hot dogs with less fat (specific fat content?)}
+\item{lean_wieners_price}{The price of hot dogs with less fat (specific fat content?).}
 
-\item{regular_wieners_price}{the price of normal hot dogs}
+\item{regular_wieners_price}{The price of normal fat hot dogs.}
 }
 \value{
-the NEMS-S points associated with wiener price
+The NEMS-S points associated with wiener price.
 }
 \description{
-compute wieners cost points
+This function takes in the cost of lean and regular fat weiners and compares them to return a NEMS-S score for the cost.
 }
 \examples{
 lean_wieners_price <- rnorm(10,2.5,.3)

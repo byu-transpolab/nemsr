@@ -2,20 +2,20 @@
 % Please edit documentation in R/hello.R
 \name{bread_cost}
 \alias{bread_cost}
-\title{compute bread cost points}
+\title{Compute bread cost points}
 \usage{
 bread_cost(whole_wheat_bread_price, white_bread_price)
 }
 \arguments{
-\item{whole_wheat_bread_price}{the cost of whole wheat bread}
+\item{whole_wheat_bread_price}{The cost of whole wheat bread.}
 
-\item{white_bread_price}{the cost of white bread}
+\item{white_bread_price}{The cost of white bread.}
 }
 \value{
-the NEMS-S points associated with bread cost
+The NEMS-S points associated with bread cost.
 }
 \description{
-compute bread cost points
+This function takes in the cost of whole wheat bread and white bread and compares them to return a NEMS-S score for the cost.
 }
 \examples{
 whole_wheat_bread_price <- rnorm(10,1.5,.5)
