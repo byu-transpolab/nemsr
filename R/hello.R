@@ -261,7 +261,7 @@ cereal_avail <- function(healthy_cereal_varieties) {
 
 # Cost (18 points)
 
-#'Compute milk cost points
+#' Compute milk cost points
 #'
 #' This function takes in the cost of lowfat and whole milk and compares them to return a NEMS-S score for the cost.
 #'
@@ -284,9 +284,12 @@ milk_cost <- function(lowfat_milk_price, whole_milk_price){
   )
 }
 
-#'compute ground beef cost points
-#' @param lean_beef_price the price of lean ground beef
-#' @param regular_beef_price the price of normal fat ground beef
+#' Compute ground beef cost points
+#'
+#' This function takes in the cost of lean and regular ground beef and compares them to return a NEMS-S score for the cost.
+#'
+#' @param lean_beef_price The price of lean ground beef.
+#' @param regular_beef_price The price of normal fat ground beef. (the specific fat content?)
 #' @return the NEMS-S points associated with beef price
 #' @examples
 #' lean_beef_price <- rnorm(10,5.8,.5)
