@@ -170,9 +170,12 @@ baked_goods_avail <- function(lowfat_baked_goods) {
   )
 }
 
-#' compute the availability points associated with diet soda
-#' @param diet_soda_varieties the number of diet sodas available
-#' @return the NEMS-S points associated with availability of diet soda
+#' Compute the availability points associated with diet soda
+#'
+#' This function takes in the number of varieties of diet sodas available and returns the NEMS-S points associated with availability.
+#'
+#' @param diet_soda_varieties The number of diet sodas available.
+#' @return The NEMS-S points associated with availability of diet soda.
 #' @examples
 #' diet_soda_varieties <- sample(0:3, 10)
 #' soda_avail(diet_soda_varieties)
