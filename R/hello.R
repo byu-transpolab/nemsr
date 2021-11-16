@@ -420,10 +420,13 @@ bread_cost <- function(whole_wheat_bread_price, white_bread_price){
   )
 }
 
-#'compute chips cost points
-#' @param baked_chips_price the price of baked chips
-#' @param regular_chips_price the price of regular chips
-#' @return the NEMS-S points associated with chips
+#' Compute chips cost points
+#'
+#' This function takes in the cost of baked and regular chips and compares them to return a NEMS-S score for the cost.
+#'
+#' @param baked_chips_price The price of baked chips.
+#' @param regular_chips_price The price of regular chips.
+#' @return The NEMS-S points associated with chips cost.
 #' @examples
 #' baked_chips_price <- rnorm(10,2.5,.5)
 #' regular_chips_price <- rnorm(10,2.8,.3)
