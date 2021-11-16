@@ -204,9 +204,12 @@ juice_drinks_avail <- function(healthy_juice_varieties){
   )
 }
 
-#' compute whole grain bread availability points
-#' @param varieties_of_whole_grain_bread number of types of whole grain bread available
-#' @return the NEMS-S points associated with whole grain bread availability
+#' Compute whole grain bread availability points
+#'
+#' This function takes in the number of varieties of whole grain bread and returns the NEMS-S points associated with availability.
+#'
+#' @param varieties_of_whole_grain_bread The number of types of whole grain bread available.
+#' @return The NEMS-S points associated with whole grain bread availability.
 #' @examples
 #' varieties_of_whole_grain_bread <- sample(1:10, 10)
 #' bread_avail(varieties_of_whole_grain_bread)
