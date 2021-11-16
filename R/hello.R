@@ -261,10 +261,13 @@ cereal_avail <- function(healthy_cereal_varieties) {
 
 # Cost (18 points)
 
-#'compute milk cost points
-#' @param lowfat_milk_price the price of low fat milk
-#' @param whole_milk_price the price of whole milk
-#' @return the NEMS-S points associated with milk price
+#'Compute milk cost points
+#'
+#' This function takes in the cost of lowfat and whole milk and compares them to return a NEMS-S score for the cost.
+#'
+#' @param lowfat_milk_price The price of low fat milk.
+#' @param whole_milk_price The price of whole milk.
+#' @return The NEMS-S points associated with milk price.
 #' @examples
 #' lowfat_milk_price <- rnorm(10,2.8,.5)
 #' whole_milk_price <- rnorm(10,3.1,.3)
