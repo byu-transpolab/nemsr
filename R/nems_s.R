@@ -13,9 +13,6 @@
 #   Check Package:             'Cmd + Shift + E'
 #   Test Package:              'Cmd + Shift + T'
 
-hello <- function() {
-  print("Hello, world!")
-}
 
 convert_files <- function() {
   #convert files given into csv
@@ -39,7 +36,7 @@ milk_avail <- function(lowfat_milk_varieties,whole_milk_varieties) {
     # 2 points if lowfat/skim milk is available
     lowfat_milk_varieties > 0 ~ 2,
     # 1 point if >50% ratio of lowest-fat to whole milk
-    lowfat_milk_varieties / whole_milk_varieties > 0.5 ~ 1,
+    lowfat_milk_varieties / whole_milk_varieties > 0.5 ~ 3,
     TRUE ~ as.numeric(NA)
   )
 }
@@ -218,6 +215,7 @@ juice_drinks_avail <- function(healthy_juice_varieties){
 #'
 #' This function takes in the number of varieties of whole grain bread and returns the NEMS-S points associated with availability.
 #'
+#' @details This function implements the scoring method described in Table X of the NEMS-S manual. "Low-fat milk" is considered skim milk or 1% fat, whichever is available.
 #' @param varieties_of_whole_grain_bread The number of types of whole grain bread available.
 #' @return The NEMS-S points associated with whole grain bread availability.
 #' @examples
