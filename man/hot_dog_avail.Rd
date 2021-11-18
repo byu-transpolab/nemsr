@@ -15,7 +15,7 @@ hot_dog_avail(fat_free_hot_dogs, light_hot_dogs)
 the NEMS-S points associated with availability of fat free and light fat hot dogs.
 }
 \description{
-This function takes in the number of varieties of fat free hot and light hot dogs and returns the NEMS-S points associated with availability.
+This function takes in the number of varieties of fat free and light hot dogs and returns the NEMS-S points associated with availability.
 }
 \details{
 This function implements the scoring method described in Table X of the NEMS-S manual. "Fat free hot dogs" have 0 grams of fat per serving, and "light hot dogs" have less than or equal to 7 grams of fat per serving.
