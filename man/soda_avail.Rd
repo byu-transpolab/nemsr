@@ -15,6 +15,9 @@ The NEMS-S points associated with availability of diet soda.
 \description{
 This function takes in the number of varieties of diet sodas available and returns the NEMS-S points associated with availability.
 }
+\details{
+This function implements the scoring method described in Table X of the NEMS-S manual. "Diet soda" has 0 kcal per serving.
+}
 \examples{
 diet_soda_varieties <- sample(0:3, 10)
 soda_avail(diet_soda_varieties)

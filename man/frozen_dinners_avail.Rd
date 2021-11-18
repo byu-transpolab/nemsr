@@ -15,6 +15,9 @@ The NEMS-S points associated with availability of frozen dinners.
 \description{
 This function takes in the number of varieties of frozen dinners and returns the NEMS-S points associated with availability.
 }
+\details{
+This function implements the scoring method described in Table X of the NEMS-S manual.
+}
 \examples{
 frozen_dinner_varieties <- sample(0:3, 10)
 frozen_dinners_avail(frozen_dinner_varieties)

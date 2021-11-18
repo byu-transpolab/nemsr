@@ -15,6 +15,9 @@ The NEMS-S points associated with availability of low-fat baked goods.
 \description{
 This function takes in the number of varieties of low-fat baked goods and returns the NEMS-S points associated with availability.
 }
+\details{
+This function implements the scoring method described in Table X of the NEMS-S manual. "Low-fat baked goods" are baked goods with less than or equal to 3 grams of fat per serving.
+}
 \examples{
 lowfat_baked_goods <- sample(0:3, 10)
 baked_goods_avail(lowfat_baked_goods)

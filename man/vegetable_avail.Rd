@@ -15,6 +15,9 @@ The NEMS-S points associated with vegetables availability.
 \description{
 This function takes in the number of varieties of vegetables at a given store and returns the NEMS-S points associated with the availability.
 }
+\details{
+This function implements the scoring method described in Table X of the NEMS-S manual.
+}
 \examples{
 varieties_of_vegetables <- sample(1:10, 10)
 vegetable_avail(varieties_of_vegetables)

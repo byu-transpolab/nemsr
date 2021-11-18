@@ -7,13 +7,16 @@
 fruit_avail(varieties_of_fruit)
 }
 \arguments{
-\item{varieties_of_fruit}{The number of fruit types availiable.}
+\item{varieties_of_fruit}{The number of fruit types available.}
 }
 \value{
 The NEMS-S points associated with fruit availability.
 }
 \description{
 This function takes in the number of varieties of fruit at a given store and returns the NEMS-S points associated with the availability.
+}
+\details{
+This function implements the scoring method described in Table X of the NEMS-S manual.
 }
 \examples{
 varieties_of_fruit <- sample(1:10, 10)
