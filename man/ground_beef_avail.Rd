@@ -7,7 +7,7 @@
 ground_beef_avail(lean_beef_varieties)
 }
 \arguments{
-\item{lean_beef_varieties}{The number of lean beef varieties (<10% fat).}
+\item{lean_beef_varieties}{The number of lean beef varieties (<10 percent fat).}
 }
 \value{
 The NEMS-S points associated with ground beef availability.
