@@ -140,6 +140,7 @@ hot_dog_avail <- function(fat_free_hot_dogs, light_hot_dogs) {
 #'
 #' This function takes in the number of varieties of frozen dinners and returns the NEMS-S points associated with availability.
 #'
+#' @details This function implements the scoring method described in Table X of the NEMS-S manual.
 #' @param frozen_dinner_varieties The number of frozen dinner varieties offered.
 #' @return The NEMS-S points associated with availability of frozen dinners.
 #' @examples
