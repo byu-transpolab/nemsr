@@ -114,23 +114,25 @@ ground_beef_avail <- function(lean_beef_varieties) {
   )
 }
 
-#' Compute the availability points associated with wieners
+#' Compute the availability points associated with hot dogs
 #'
-#' This function takes in the .... this needs to be finished
+#' This function takes in the number of varieties of fat free hot and light hot dogs and returns the NEMS-S points associated with availability.
 #'
-#' @param fat_free_wieners (fat content?)
-#' @param light_wieners (specific fat content?)
-#' @return the NEMS-S points associated with availability of fat free and light fat wieners
+#' @details This function implements the scoring method described in Table X of the NEMS-S manual. "Low-fat milk" is considered skim milk or 1% fat, whichever is available.
+#' @param fat_free_hot_dogs The number of varieties of fat free hot dogs (0g fat per serving).
+#' @param light_hot_dogs The number of varieties of light hot dogs (<=7g fat per serving).
+#' @return the NEMS-S points associated with availability of fat free and light fat hot dogs.
 #' @examples
-#' fat_free_wieners <- sample()
-#' light_wieners <- sample()
-#' wieners_avail(fat_free_wieners, light_wieners)
-wieners_avail <- function(fat_free_wieners, light_wieners) {
+#' fat_free_hot_dogs <- sample()
+#' light_hot_dogs <- sample()
+#' hot_dog_avail(fat_free_hot_dogs, light_hot_dogs)
+hot_dog_avail <- function(fat_free_hot_dogs, light_hot_dogs) {
   case_when(
     # 2 points if there is fat free
-    # not sure how to do this-- it wouldnt be a numerical value
-    # 1 point if there are light but not fat free hot dogs (what are the ranges of these?)
-    # need help with this too
+    fat_free_hot_dogs > 0 ~ 2,
+    # 1 point if there is not fat free but there is light hot dogs
+    light_hot_dogs > 0 ~ 1,
+    TRUE ~ as.numeric(NA)
   )
 }
 
