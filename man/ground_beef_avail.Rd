@@ -16,7 +16,7 @@ The NEMS-S points associated with ground beef availability.
 This function takes in the number of varieties of lean and regular fat beef and returns the NEMS-S points associated with availability.
 }
 \details{
-This function implements the scoring method described in Table X of the NEMS-S manual. "Standard ground beef" is 80 percent lean and 20 percent fat by weight. "Lean ground beef" is 90% lean and 10% fat (or less fat percentage) by weight, whichever is available.
+This function implements the scoring method described in Table X of the NEMS-S manual. "Standard ground beef" is 80 percent lean and 20 percent fat by weight. "Lean ground beef" is 90 percent lean and 10 percent fat (or less fat percentage) by weight.
 }
 \examples{
 lean_beef_varieties <- sample(1:4, 10)
