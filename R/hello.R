@@ -26,7 +26,7 @@ convert_files <- function() {
 #'
 #' This function takes in the number of lowfat and whole milk varieties at a given store and returns the NEMS-S points associated with the availability.
 #'
-#' @details This function implements the scoring method described in Table X of the NEMS-S manual. "Low-fat milk" is considered skim milk or 1% fat, whichever is available.
+#' @details This function implements the scoring method described in Table X of the NEMS-S manual. "Low-fat milk" is considered skim milk or 1 percent fat, whichever is available.
 #' @param lowfat_milk_varieties The number of low fat milk cartons available.
 #' @param whole_milk_varieties The number of whole milk cartons available.
 #' @return The NEMS-S points associated with milk availability.
