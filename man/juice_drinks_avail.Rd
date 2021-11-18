@@ -15,6 +15,9 @@ The NEMS-S points associated with availability of healthy juice drinks.
 \description{
 This function takes in the number of varieties of 100% juice drinks and returns the NEMS-S points associated with availability.
 }
+\details{
+This function implements the scoring method described in Table X of the NEMS-S manual. "Healthy juice" is 100 percent juice drinks, natural fruit juice with no added sugars.
+}
 \examples{
 healthy_juice_varieties <- sample(0:3, 10)
 juice_drinks_avail(healthy_juice_varieties)
