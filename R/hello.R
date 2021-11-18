@@ -96,7 +96,7 @@ vegetable_avail <- function(varieties_of_vegetables) {
 #'
 #' This function takes in the number of varieties of lean and regular fat beef and returns the NEMS-S points associated with availability.
 #'
-#' @details This function implements the scoring method described in Table X of the NEMS-S manual. "Standard ground beef" is 80% lean and 20% fat by weight. "Lean ground beef" is 90% lean and 10% fat (or less fat) by weight, whichever is available.
+#' @details This function implements the scoring method described in Table X of the NEMS-S manual. "Standard ground beef" is 80% lean and 20% fat by weight. "Lean ground beef" is 90% lean and 10% fat (or less fat percentage) by weight, whichever is available.
 #' @param lean_beef_varieties The number of lean beef varieties (<10% fat).
 #' @return The NEMS-S points associated with ground beef availability.
 #' @examples
@@ -164,6 +164,7 @@ frozen_dinners_avail <- function(frozen_dinner_varieties) {
 #'
 #' This function takes in the number of varieties of low-fat baked goods and returns the NEMS-S points associated with availability.
 #'
+#' @details This function implements the scoring method described in Table X of the NEMS-S manual. "Low-fat baked goods" are baked goods with less than or equal to 3 grams of fat per serving.
 #' @param lowfat_baked_goods The number of low-fat baked goods.
 #' @return The NEMS-S points associated with availability of low-fat baked goods.
 #' @examples
