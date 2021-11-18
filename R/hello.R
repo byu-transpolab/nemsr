@@ -118,7 +118,7 @@ ground_beef_avail <- function(lean_beef_varieties) {
 #'
 #' This function takes in the number of varieties of fat free hot and light hot dogs and returns the NEMS-S points associated with availability.
 #'
-#' @details This function implements the scoring method described in Table X of the NEMS-S manual. "Low-fat milk" is considered skim milk or 1% fat, whichever is available.
+#' @details This function implements the scoring method described in Table X of the NEMS-S manual. "Fat free hot dogs" have 0 grams of fat per serving, and "light hot dogs" have less than or equal to 7 grams of fat per serving.
 #' @param fat_free_hot_dogs The number of varieties of fat free hot dogs (0g fat per serving).
 #' @param light_hot_dogs The number of varieties of light hot dogs (<=7g fat per serving).
 #' @return the NEMS-S points associated with availability of fat free and light fat hot dogs.
