@@ -72,6 +72,7 @@ fruit_avail <- function(varieties_of_fruit) {
 #'
 #' This function takes in the number of varieties of vegetables at a given store and returns the NEMS-S points associated with the availability.
 #'
+#' @details This function implements the scoring method described in Table X of the NEMS-S manual.
 #' @param varieties_of_vegetables Number of types of vegetables available.
 #' @return The NEMS-S points associated with vegetables availability.
 #' @examples
@@ -95,6 +96,7 @@ vegetable_avail <- function(varieties_of_vegetables) {
 #'
 #' This function takes in the number of varieties of lean and regular fat beef and returns the NEMS-S points associated with availability.
 #'
+#' @details This function implements the scoring method described in Table X of the NEMS-S manual. "Standard ground beef" is 80% lean and 20% fat by weight. "Lean ground beef" is 90% lean and 10% fat (or less fat) by weight, whichever is available.
 #' @param lean_beef_varieties The number of lean beef varieties (<10% fat).
 #' @return The NEMS-S points associated with ground beef availability.
 #' @examples
