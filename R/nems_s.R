@@ -33,9 +33,11 @@ convert_files <- function() {
 #' milk_avail(lowfat_milk_varieties, whole_milk_varieties)
 milk_avail <- function(lowfat_milk_varieties,whole_milk_varieties) {
   case_when(
+    # 0 points if no lowfat/skim milk is available
+    lowfat_milk_varieties = 0 ~ 0,
     # 2 points if lowfat/skim milk is available
     lowfat_milk_varieties > 0 ~ 2,
-    # 1 point if >50% ratio of lowest-fat to whole milk
+    # 1 additional point if >50% ratio of lowest-fat to whole milk
     lowfat_milk_varieties / whole_milk_varieties > 0.5 ~ 3,
     TRUE ~ as.numeric(NA)
   )
