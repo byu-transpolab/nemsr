@@ -34,7 +34,7 @@ convert_files <- function() {
 milk_avail <- function(lowfat_milk_varieties,whole_milk_varieties) {
   case_when(
     # 0 points if no lowfat/skim milk is available
-    lowfat_milk_varieties = 0 ~ 0,
+    lowfat_milk_varieties == 0 ~ 0,
     # 2 points if lowfat/skim milk is available
     lowfat_milk_varieties > 0 ~ 2,
     # 1 additional point if >50% ratio of lowest-fat to whole milk
@@ -103,6 +103,8 @@ vegetable_avail <- function(varieties_of_vegetables) {
 #' ground_beef_avail(lean_beef_varieties)
 ground_beef_avail <- function(lean_beef_varieties) {
   case_when(
+    # 0 points if there is not a lean beef option
+    lean_beef_varieties == 0 ~ 0,
     # 2 points if there is a lean beef option
     lean_beef_varieties == 1 ~ 2,
     # 3 points if there are 2-3 varieties of lean beef
