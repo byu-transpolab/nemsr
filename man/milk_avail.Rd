@@ -18,7 +18,7 @@ The NEMS-S points associated with milk availability.
 This function takes in the number of lowfat and whole milk varieties at a given store and returns the NEMS-S points associated with the availability.
 }
 \details{
-This function implements the scoring method described in Table X of the NEMS-S manual. "Low-fat milk" is considered skim milk or 1% fat, whichever is available.
+This function implements the scoring method described in Table X of the NEMS-S manual. "Low-fat milk" is considered skim milk or 1 percent fat, whichever is available.
 }
 \examples{
 lowfat_milk_varieties <- rnorm(10,,)
