@@ -17,6 +17,9 @@ the NEMS-S points associated with beef price
 \description{
 This function takes in the cost of lean and regular ground beef and compares them to return a NEMS-S score for the cost.
 }
+\details{
+This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Standard ground beef" is 80 percent lean and 20 percent fat by weight. "Lean ground beef" is 90 percent lean and 10 percent fat (or less fat percentage) by weight.
+}
 \examples{
 lean_beef_price <- rnorm(10,5.8,.5)
 regular_beef_price <- rnorm(10,5.5,.3)

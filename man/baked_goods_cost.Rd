@@ -17,6 +17,9 @@ The NEMS-S points associated with baked goods price.
 \description{
 This function takes in the cost of healthier and regular baked goods and compares them to return a NEMS-S score for the cost.
 }
+\details{
+This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Low-fat baked goods" are baked goods with less than or equal to 3 grams of fat per serving.
+}
 \examples{
 healthier_baked_goods_price <- rnorm(10,3.2,.5)
 regular_baked_goods_price <- rnorm(10,3.0,.3)

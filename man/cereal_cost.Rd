@@ -17,6 +17,9 @@ The NEMS-S points associated with cereal cost.
 \description{
 This function takes in the cost of healthier and regular cereal and compares them to return a NEMS-S score for the cost.
 }
+\details{
+This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Healthier cereal" has less than 7g of sugar per serving.
+}
 \examples{
 healthier_cereal_price <- rnorm(10,4.1,.5)
 regular_cereal_price <- rnorm(10,3.5,.3)

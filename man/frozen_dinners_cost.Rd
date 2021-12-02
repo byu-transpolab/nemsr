@@ -20,6 +20,9 @@ The NEMS-S points associated with frozen dinners price.
 \description{
 This function takes in the cost of healthier and regular frozen dinners and compares them to return a NEMS-S score for the cost.
 }
+\details{
+This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Healthier frozen dinners" have less than or equal to 9g of fat per serving (an 8-11 oz package), as written in Measure 6 in the NEMS-S Protocol.
+}
 \examples{
 healthier_frozen_dinners_price <- rnorm(10,4.5,.5)
 regular_frozen_dinners_price <- rnorm(10,5.1,.3)

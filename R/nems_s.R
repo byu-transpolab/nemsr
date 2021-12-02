@@ -293,7 +293,7 @@ cereal_avail <- function(healthier_cereal_varieties) {
 #'
 #' This function takes in the cost of low-fat and whole milk and compares them to return a NEMS-S score for the cost.
 #'
-#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Lowfat milk" is considered skim milk or 1 percent fat, whichever is available.
+#' @details This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Lowfat milk" is considered skim milk or 1 percent fat, whichever is available.
 #' @param lowfat_milk_price The price of low-fat milk.
 #' @param whole_milk_price The price of whole milk.
 #' @return The NEMS-S points associated with milk price.
