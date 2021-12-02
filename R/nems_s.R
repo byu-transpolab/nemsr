@@ -219,7 +219,7 @@ juice_drinks_avail <- function(healthy_juice_varieties){
 #'
 #' This function takes in the number of varieties of whole grain bread and returns the NEMS-S points associated with availability.
 #'
-#' @details This function implements the scoring method described in Table X of the NEMS-S manual. "Low-fat milk" is considered skim milk or 1% fat, whichever is available.
+#' @details This function implements the scoring method described in Measure 9 of the NEMS-S Protocol. "Low-fat milk" is considered skim milk or 1% fat, whichever is available.
 #' @param varieties_of_whole_grain_bread The number of types of whole grain bread available.
 #' @return The NEMS-S points associated with whole grain bread availability.
 #' @examples
@@ -235,21 +235,22 @@ bread_avail <- function(varieties_of_whole_grain_bread) {
   )
 }
 
-#' Compute baked chips availability points
+#' Compute lowfat chips availability points
 #'
-#' This function takes in the number of varieties of baked chips and returns the NEMS-S points associated with availability.
+#' This function takes in the number of varieties of lowfat chips and returns the NEMS-S points associated with availability.
 #'
-#' @param baked_chips_varieties The number of varieties of baked chips offered.
-#' @return The NEMS-S points associated with baked chips availability.
+#' @details This function implements the scoring method described in Measure 10 of the NEMS-S Protocol. "Lowfat chips" are chips with less than or equal to 3g of fat per one ounce serving.
+#' @param lowfat_chips_varieties The number of varieties of lowfat chips offered.
+#' @return The NEMS-S points associated with lowfat chips availability.
 #' @examples
-#' baked_chips_varieties <- sample(1:10, 10)
-#' chips_avail(baked_chips_varieties)
-chips_avail <- function(baked_chips_varieties) {
+#' lowfat_chips_varieties <- sample(1:10, 10)
+#' chips_avail(lowfat_chips_varieties)
+chips_avail <- function(lowfat_chips_varieties) {
   case_when(
-    # 2 points for having baked chips
-    baked_chips_varieties > 0 & baked_chips_varieties <= 2 ~ 2,
-    # 1 additional point for having >2 varieties of baked chips
-    baked_chips_varieties > 2 ~ 3,
+    # 2 points for having lowfat chips
+    lowfat_chips_varieties > 0 & lowfat_chips_varieties <= 2 ~ 2,
+    # 1 additional point for having >2 varieties of lowfat chips
+    lowfat_chips_varieties > 2 ~ 3,
     TRUE ~ as.numeric(NA)
   )
 }
@@ -258,6 +259,7 @@ chips_avail <- function(baked_chips_varieties) {
 #'
 #' This function takes in the number of varieties of healthier cereal options and returns the NEMS-S points associated with availability.
 #'
+#' @details This function implements the scoring method described in Measure 11 of the NEMS-S Protocol.
 #' @param healthy_cereal_varieties The number of varieties of cereal with less than 7g of sugar per serving.
 #' @return The NEMS-S points associated with healthier cereal availability.
 #' @examples
