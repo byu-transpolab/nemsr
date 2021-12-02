@@ -132,7 +132,7 @@ hot_dog_avail <- function(fat_free_hot_dogs, light_hot_dogs) {
     # 0 points if no fat free or light hot dogs are available
     fat_free_hot_dogs == 0 & light_hot_dogs == 0 ~ 0
     # 2 points if there are fat free hot dogs
-    # fat_free_hot_dogs > 0 ~ 2,
+    fat_free_hot_dogs > 0 ~ 2,
     # 1 point if there are not fat free but there are light hot dogs
     fat_free_hot_dogs == 0 & light_hot_dogs > 0 ~ 1,
     TRUE ~ as.numeric(NA)
