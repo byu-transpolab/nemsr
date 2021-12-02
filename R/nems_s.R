@@ -455,7 +455,7 @@ juice_drinks_cost <- function(healthier_juice_drinks_price, regular_juice_drinks
 #' regular_soda_price <- rnorm(10,4.1,.3)
 #' healthier_juice_drinks_price <- rnorm(10,4.1,.5)
 #' regular_juice_drinks_price <- rnorm(10,4.1,.3)
-juice_drinks_cost <- function(healthier_juice_drinks_price, regular_juice_drinks_price){
+juice_drinks_cost <- function(diet_soda_price, regular_soda_price, healthier_juice_drinks_price, regular_juice_drinks_price){
   case_when(
     # 0 points if 100% juice drink is less expensive or diet soda is less expensive
     # need help with this
