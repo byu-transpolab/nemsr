@@ -215,6 +215,8 @@ soda_avail <- function(diet_soda_varieties){
 #' juice_drinks_avail(healthy_juice_varieties)
 juice_drinks_avail <- function(healthy_juice_varieties){
   case_when(
+    # 0 points if healthier juice drinks are not available
+    healthy_juice_varieties == 0 ~ 0,
     # 1 point if healthier juice drinks are available
     healthy_juice_varieties > 0 ~ 1,
     TRUE ~ as.numeric(NA)
@@ -233,6 +235,8 @@ juice_drinks_avail <- function(healthy_juice_varieties){
 #' bread_avail(varieties_of_whole_grain_bread)
 bread_avail <- function(varieties_of_whole_grain_bread) {
   case_when(
+    # 0 points if they do not offer whole grain bread
+    varieties_of_whole_grain_bread == 0 ~ 0,
     # 2 points if they offer whole grain bread
     varieties_of_whole_grain_bread > 0 & varieties_of_whole_grain_bread < 2 ~ 2,
     # additional point if they offer >2 varieties of whole grain bread
@@ -253,9 +257,11 @@ bread_avail <- function(varieties_of_whole_grain_bread) {
 #' chips_avail(lowfat_chips_varieties)
 chips_avail <- function(lowfat_chips_varieties) {
   case_when(
-    # 2 points for having lowfat chips
+    # 0 points if they do not have low-fat chips
+    lowfat_chips_varieties == 0 ~ 0,
+    # 2 points for having low-fat chips
     lowfat_chips_varieties > 0 & lowfat_chips_varieties <= 2 ~ 2,
-    # 1 additional point for having >2 varieties of lowfat chips
+    # 1 additional point for having >2 varieties of low-fat chips
     lowfat_chips_varieties > 2 ~ 3,
     TRUE ~ as.numeric(NA)
   )
