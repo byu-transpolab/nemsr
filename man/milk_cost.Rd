@@ -18,7 +18,7 @@ The NEMS-S points associated with milk price.
 This function takes in the cost of low-fat and whole milk and compares them to return a NEMS-S score for the cost.
 }
 \details{
-This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Lowfat milk" is considered skim milk or 1 percent fat, whichever is available.
+This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Lowfat milk" is considered skim milk or 1 percent fat, whichever is available.
 }
 \examples{
 lowfat_milk_price <- rnorm(10,2.8,.5)
