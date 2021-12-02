@@ -23,7 +23,7 @@ convert_files <- function() {
 #'
 #' This function takes in the number of lowfat and whole milk varieties at a given store and returns the NEMS-S points associated with the availability.
 #'
-#' @details This function implements the scoring method described in Table X of the NEMS-S manual. "Low-fat milk" is considered skim milk or 1 percent fat, whichever is available.
+#' @details This function implements the scoring method described in Measure 1 of the NEMS-S Protocol. "Low-fat milk" is considered skim milk or 1 percent fat, whichever is available.
 #' @param lowfat_milk_varieties The number of low fat milk cartons available.
 #' @param whole_milk_varieties The number of whole milk cartons available.
 #' @return The NEMS-S points associated with milk availability.
@@ -47,7 +47,7 @@ milk_avail <- function(lowfat_milk_varieties,whole_milk_varieties) {
 #'
 #' This function takes in the number of varieties of fruit at a given store and returns the NEMS-S points associated with the availability.
 #'
-#' @details This function implements the scoring method described in Table X of the NEMS-S manual.
+#' @details This function implements the scoring method described in Measure 2 of the NEMS-S Protocol.
 #' @param varieties_of_fruit The number of fruit types available.
 #' @return The NEMS-S points associated with fruit availability.
 #' @examples
@@ -71,7 +71,7 @@ fruit_avail <- function(varieties_of_fruit) {
 #'
 #' This function takes in the number of varieties of vegetables at a given store and returns the NEMS-S points associated with the availability.
 #'
-#' @details This function implements the scoring method described in Table X of the NEMS-S manual.
+#' @details This function implements the scoring method described in Measure 3 of the NEMS-S Protocol.
 #' @param varieties_of_vegetables Number of types of vegetables available.
 #' @return The NEMS-S points associated with vegetables availability.
 #' @examples
@@ -95,7 +95,7 @@ vegetable_avail <- function(varieties_of_vegetables) {
 #'
 #' This function takes in the number of varieties of lean and regular fat beef and returns the NEMS-S points associated with availability.
 #'
-#' @details This function implements the scoring method described in Table X of the NEMS-S manual. "Standard ground beef" is 80 percent lean and 20 percent fat by weight. "Lean ground beef" is 90 percent lean and 10 percent fat (or less fat percentage) by weight.
+#' @details This function implements the scoring method described in Measure 4 of the NEMS-S Protocol. "Standard ground beef" is 80 percent lean and 20 percent fat by weight. "Lean ground beef" is 90 percent lean and 10 percent fat (or less fat percentage) by weight.
 #' @param lean_beef_varieties The number of lean beef varieties (<10 percent fat).
 #' @return The NEMS-S points associated with ground beef availability.
 #' @examples
