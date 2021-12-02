@@ -465,8 +465,6 @@ juice_drinks_cost <- function(diet_soda_price, regular_soda_price, healthier_jui
   )
 }
 
-
-
 #' Compute bread cost points
 #'
 #' This function takes in the cost of whole wheat bread and white bread and compares them to return a NEMS-S score for the cost.
