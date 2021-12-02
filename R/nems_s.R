@@ -219,7 +219,7 @@ juice_drinks_avail <- function(healthy_juice_varieties){
 #'
 #' This function takes in the number of varieties of whole grain bread and returns the NEMS-S points associated with availability.
 #'
-#' @details This function implements the scoring method described in Measure 9 of the NEMS-S Protocol. "Low-fat milk" is considered skim milk or 1% fat, whichever is available.
+#' @details This function implements the scoring method described in Measure 9 of the NEMS-S Protocol. "Whole grain bread" is 100% whole wheat and whole grain bread, and it is the healthier option.
 #' @param varieties_of_whole_grain_bread The number of types of whole grain bread available.
 #' @return The NEMS-S points associated with whole grain bread availability.
 #' @examples
@@ -407,6 +407,7 @@ soda_cost <- function(diet_soda_price, regular_soda_price){
 #'
 #' This function takes in the cost of healthier and regular juice and compares them to return a NEMS-S score for the cost.
 #'
+#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Healthy juice" is 100 percent juice drinks, natural fruit juice with no added sugars.
 #' @param healthier_juice_drinks_price The cost of 100% juice drinks.
 #' @param regular_juice_drinks_price The cost of non 100% juice drinks.
 #' @return The NEMS_S points associated with juice drinks cost.
@@ -424,6 +425,7 @@ juice_drinks_cost <- function(healthier_juice_drinks_price, regular_juice_drinks
 #'
 #' This function takes in the cost of whole wheat bread and white bread and compares them to return a NEMS-S score for the cost.
 #'
+#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Whole grain bread" is 100% whole wheat and whole grain bread, and it is the healthier option. "White bread" is the regular option, bread made with refined flour.
 #' @param whole_wheat_bread_price The cost of whole wheat bread.
 #' @param white_bread_price The cost of white bread.
 #' @return The NEMS-S points associated with bread cost.
