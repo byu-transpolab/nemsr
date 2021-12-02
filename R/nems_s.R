@@ -119,7 +119,7 @@ ground_beef_avail <- function(lean_beef_varieties) {
 #'
 #' This function takes in the number of varieties of fat free and light hot dogs and returns the NEMS-S points associated with availability.
 #'
-#' @details This function implements the scoring method described in Table X of the NEMS-S manual. "Fat free hot dogs" have 0 grams of fat per serving, and "light hot dogs" have less than or equal to 7 grams of fat per serving.
+#' @details This function implements the scoring method described in Measure 5 of the NEMS-S Protocol. "Fat free hot dogs" have 0 grams of fat per serving, and "light hot dogs" have less than or equal to 7 grams of fat per serving.
 #' @param fat_free_hot_dogs The number of varieties of fat free hot dogs (0g fat per serving).
 #' @param light_hot_dogs The number of varieties of light hot dogs (<=7g fat per serving).
 #' @return the NEMS-S points associated with availability of fat free and light fat hot dogs.
@@ -141,7 +141,7 @@ hot_dog_avail <- function(fat_free_hot_dogs, light_hot_dogs) {
 #'
 #' This function takes in the number of varieties of frozen dinners and returns the NEMS-S points associated with availability.
 #'
-#' @details This function implements the scoring method described in Table X of the NEMS-S manual.
+#' @details This function implements the scoring method described in Measure 6 of the NEMS-S Protocol.
 #' @param frozen_dinner_varieties The number of frozen dinner varieties offered.
 #' @return The NEMS-S points associated with availability of frozen dinners.
 #' @examples
@@ -165,7 +165,7 @@ frozen_dinners_avail <- function(frozen_dinner_varieties) {
 #'
 #' This function takes in the number of varieties of low-fat baked goods and returns the NEMS-S points associated with availability.
 #'
-#' @details This function implements the scoring method described in Table X of the NEMS-S manual. "Low-fat baked goods" are baked goods with less than or equal to 3 grams of fat per serving.
+#' @details This function implements the scoring method described in Measure 7 of the NEMS-S Protocol. "Low-fat baked goods" are baked goods with less than or equal to 3 grams of fat per serving.
 #' @param lowfat_baked_goods The number of low-fat baked goods.
 #' @return The NEMS-S points associated with availability of low-fat baked goods.
 #' @examples
@@ -183,7 +183,7 @@ baked_goods_avail <- function(lowfat_baked_goods) {
 #'
 #' This function takes in the number of varieties of diet sodas available and returns the NEMS-S points associated with availability.
 #'
-#' @details This function implements the scoring method described in Table X of the NEMS-S manual. "Diet soda" has 0 kcal per serving.
+#' @details This function implements the scoring method described in Measure 8 of the NEMS-S Protocol. "Diet soda" has 0 kcal per serving.
 #' @param diet_soda_varieties The number of diet sodas available.
 #' @return The NEMS-S points associated with availability of diet soda.
 #' @examples
@@ -201,7 +201,7 @@ soda_avail <- function(diet_soda_varieties){
 #'
 #' This function takes in the number of varieties of 100 percent juice drinks and returns the NEMS-S points associated with availability.
 #'
-#' @details This function implements the scoring method described in Table X of the NEMS-S manual. "Healthy juice" is 100 percent juice drinks, natural fruit juice with no added sugars.
+#' @details This function implements the scoring method described in Measure 8 of the NEMS-S Protocol. "Healthy juice" is 100 percent juice drinks, natural fruit juice with no added sugars.
 #' @param healthy_juice_varieties The number of 100 percent juice drinks available.
 #' @return The NEMS-S points associated with availability of healthy juice drinks.
 #' @examples
