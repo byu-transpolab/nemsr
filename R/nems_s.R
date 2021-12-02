@@ -279,6 +279,8 @@ chips_avail <- function(lowfat_chips_varieties) {
 #' cereal_avail(healthier_cereal_varieties)
 cereal_avail <- function(healthier_cereal_varieties) {
   case_when(
+    # 0 points if there are no cereals with <7g sugar per serving available
+    healthier_cereal_varieties == 0 ~ 0,
     # 2 points if a cereal with <7g sugar per serving available
     healthier_cereal_varieties > 0 ~ 2,
     TRUE ~ as.numeric(NA)
@@ -289,10 +291,10 @@ cereal_avail <- function(healthier_cereal_varieties) {
 
 #' Compute milk cost points
 #'
-#' This function takes in the cost of lowfat and whole milk and compares them to return a NEMS-S score for the cost.
+#' This function takes in the cost of low-fat and whole milk and compares them to return a NEMS-S score for the cost.
 #'
-#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Low-fat milk" is considered skim milk or 1 percent fat, whichever is available.
-#' @param lowfat_milk_price The price of low fat milk.
+#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Lowfat milk" is considered skim milk or 1 percent fat, whichever is available.
+#' @param lowfat_milk_price The price of low-fat milk.
 #' @param whole_milk_price The price of whole milk.
 #' @return The NEMS-S points associated with milk price.
 #' @examples
@@ -301,11 +303,11 @@ cereal_avail <- function(healthier_cereal_varieties) {
 #' milk_cost(lowfat_milk_price, whole_milk_price)
 milk_cost <- function(lowfat_milk_price, whole_milk_price){
   case_when(
-    # 2 points if low fat is less expensive than whole
+    # 2 points if low-fat is less expensive than whole
     lowfat_milk_price - whole_milk_price < 0 ~ 2,
-    # 1 point if low fat and whole are the same
+    # 1 point if low-fat and whole are the same
     lowfat_milk_price == whole_milk_price ~ 1,
-    # -1 if whole milk is less expensive
+    # -1 if whole milk is less expensive than low-fat milk
     lowfat_milk_price - whole_milk_price > 0 ~ -1,
     TRUE ~ as.numeric(NA)
   )
@@ -370,8 +372,8 @@ frozen_dinners_cost <- function(healthier_frozen_dinners_price, regular_frozen_d
   case_when(
     # -1 point if healthier option is more expensive
     healthier_frozen_dinners_price - regular_frozen_dinners_price > 0 ~ -1,
-    # 2 points if there are 1 or two options
-    # need some clarification on what this code should be
+    # 2 points if healthier option is less expensive
+    healthier_frozen_dinners_price - regular_frozen_dinners_price < 0 ~ 2,
     TRUE ~ as.numeric(NA)
   )
 }
