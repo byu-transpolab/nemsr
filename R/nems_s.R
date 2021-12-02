@@ -279,7 +279,7 @@ cereal_avail <- function(healthier_cereal_varieties) {
 #'
 #' This function takes in the cost of lowfat and whole milk and compares them to return a NEMS-S score for the cost.
 #'
-#' @details This function implements the scoring method described in Measure # of the NEMS-S Protocol.
+#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Low-fat milk" is considered skim milk or 1 percent fat, whichever is available.
 #' @param lowfat_milk_price The price of low fat milk.
 #' @param whole_milk_price The price of whole milk.
 #' @return The NEMS-S points associated with milk price.
@@ -303,6 +303,7 @@ milk_cost <- function(lowfat_milk_price, whole_milk_price){
 #'
 #' This function takes in the cost of lean and regular ground beef and compares them to return a NEMS-S score for the cost.
 #'
+#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Standard ground beef" is 80 percent lean and 20 percent fat by weight. "Lean ground beef" is 90 percent lean and 10 percent fat (or less fat percentage) by weight.
 #' @param lean_beef_price The price of lean ground beef.
 #' @param regular_beef_price The price of normal fat ground beef. (the specific fat content?)
 #' @return the NEMS-S points associated with beef price
