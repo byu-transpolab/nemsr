@@ -411,8 +411,10 @@ baked_goods_cost <- function(healthier_baked_goods_price, regular_baked_goods_pr
 #' regular_soda_price <- rnorm(10,4.1,.3)
 soda_cost <- function(diet_soda_price, regular_soda_price){
   case_when(
+    # 0 points if diet soda is more expensive
+    diet_soda_price - regular_soda_price < 0 ~ 0,
     # 2 points if diet soda is less expensive
-    diet_soda_price - regular_soda_price < 0 ~ 2,
+    diet_soda_price - regular_soda_price < 0 ~ 1,
     TRUE ~ as.numeric(NA)
   )
 }
@@ -421,7 +423,7 @@ soda_cost <- function(diet_soda_price, regular_soda_price){
 #'
 #' This function takes in the cost of healthier and regular juice and compares them to return a NEMS-S score for the cost.
 #'
-#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Healthy juice" is 100 percent juice drinks, natural fruit juice with no added sugars.
+#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Healthy juice" is 100 percent juice drinks, natural fruit juice with no added sugars. "Regular juice" is fruit juice with added sugar and water.
 #' @param healthier_juice_drinks_price The cost of 100% juice drinks.
 #' @param regular_juice_drinks_price The cost of non 100% juice drinks.
 #' @return The NEMS_S points associated with juice drinks cost.
@@ -430,10 +432,34 @@ soda_cost <- function(diet_soda_price, regular_soda_price){
 #' regular_juice_drinks_price <- rnorm(10,4.1,.3)
 juice_drinks_cost <- function(healthier_juice_drinks_price, regular_juice_drinks_price){
   case_when(
-    # -1 if 100% juice drink is more expensive
-    healthier_juice_drinks_price - regular_juice_drinks_price > 0 ~ -1
+    # 0 point if 100% juice drink is more expensive
+    healthier_juice_drinks_price - regular_juice_drinks_price > 0 ~ 0,
+    # 1 point if 100% juice drink is less expensive
+    healthier_juice_drinks_price - regular_juice_drinks_price < 0 ~ 1,
+    # -1 point if 100% juice drink is more expensive and diet soda is more expensive
+    healthier_juice_drinks_price - regular_juice_drinks_price > 0 & diet_soda_price - regular_soda_price > 0 ~ -1,
+    TRUE ~ as.numeric(NA)
   )
 }
+
+#' Compute beverage cost points
+#'
+#' This function takes in the cost of diet soda, regular soda, 100% juice and regular juice drinks and compares them to return an NEMS-S score for the cost.
+#'
+#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Healthy juice" is 100 percent juice drinks, natural fruit juice with no added sugars. "Regular juice" is fruit juice with added sugar and water.
+#' @param healthier_juice_drinks_price The cost of 100% juice drinks.
+#' @param regular_juice_drinks_price The cost of non 100% juice drinks.
+#' @return The NEMS_S points associated with juice drinks cost.
+#' @examples
+#' healthier_juice_drinks_price <- rnorm(10,4.1,.5)
+#' regular_juice_drinks_price <- rnorm(10,4.1,.3)
+juice_drinks_cost <- function(healthier_juice_drinks_price, regular_juice_drinks_price){
+  case_when(
+    TRUE ~ as.numeric(NA)
+  )
+}
+
+healthier_juice_drinks_price - regular_juice_drinks_price > 0 & diet_soda_price - regular_soda_price > 0 ~ -1,
 
 #' Compute bread cost points
 #'
