@@ -279,6 +279,7 @@ cereal_avail <- function(healthier_cereal_varieties) {
 #'
 #' This function takes in the cost of lowfat and whole milk and compares them to return a NEMS-S score for the cost.
 #'
+#' @details This function implements the scoring method described in Measure # of the NEMS-S Protocol.
 #' @param lowfat_milk_price The price of low fat milk.
 #' @param whole_milk_price The price of whole milk.
 #' @return The NEMS-S points associated with milk price.
@@ -436,20 +437,21 @@ bread_cost <- function(whole_wheat_bread_price, white_bread_price){
 
 #' Compute chips cost points
 #'
-#' This function takes in the cost of baked and regular chips and compares them to return a NEMS-S score for the cost.
+#' This function takes in the cost of lowfat and regular chips and compares them to return a NEMS-S score for the cost.
 #'
-#' @param baked_chips_price The price of baked chips.
+#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Lowfat chips" contain less than or equal to 3g of fat per 1oz serving.
+#' @param lowfat_chips_price The price of lowfat chips.
 #' @param regular_chips_price The price of regular chips.
 #' @return The NEMS-S points associated with chips cost.
 #' @examples
-#' baked_chips_price <- rnorm(10,2.5,.5)
+#' lowfat_chips_price <- rnorm(10,2.5,.5)
 #' regular_chips_price <- rnorm(10,2.8,.3)
-chips_cost <- function(baked_chips_price, regular_chips_price){
+chips_cost <- function(lowfat_chips_price, regular_chips_price){
   case_when(
-    # 2 points if baked chips are less expensive than regular chips
-    baked_chips_price - regular_chips_price < 0 ~ 2,
-    # -1 points if baked chips are more expensive than regular chips
-    baked_chips_price - regular_chips_price > 0 ~ -1,
+    # 2 points if lowfat chips are less expensive than regular chips
+    lowfat_chips_price - regular_chips_price < 0 ~ 2,
+    # -1 points if lowfat chips are more expensive than regular chips
+    lowfat_chips_price - regular_chips_price > 0 ~ -1,
     TRUE ~ as.numeric(NA)
   )
 }
