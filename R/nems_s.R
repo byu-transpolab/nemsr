@@ -347,6 +347,7 @@ wieners_cost <- function(lean_wieners_price, regular_wieners_price){
 #'
 #' This function takes in the cost of healthier and regular frozen dinners and compares them to return a NEMS-S score for the cost.
 #'
+#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Healthier frozen dinners" have less than or equal to 9g of fat per serving (an 8-11 oz package), as written in Measure 6 in the NEMS-S Protocol.
 #' @param healthier_frozen_dinners_price The price of healthier option for frozen dinners. (specifics?)
 #' @param regular_frozen_dinners_price The price of regular fat frozen dinners.
 #' @return The NEMS-S points associated with frozen dinners price.
@@ -367,6 +368,7 @@ frozen_dinners_cost <- function(healthier_frozen_dinners_price, regular_frozen_d
 #'
 #' This function takes in the cost of healthier and regular baked goods and compares them to return a NEMS-S score for the cost.
 #'
+#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Low-fat baked goods" are baked goods with less than or equal to 3 grams of fat per serving.
 #' @param healthier_baked_goods_price The price of lower fat baked goods (fat content).
 #' @param regular_baked_goods_price The price of normal fat baked goods.
 #' @return The NEMS-S points associated with baked goods price.
@@ -386,6 +388,7 @@ baked_goods_cost <- function(healthier_baked_goods_price, regular_baked_goods_pr
 #'
 #' This function takes in the cost of healthier and regular soda and compares them to return a NEMS-S score for the cost.
 #'
+#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Diet soda" has 0 kcal per serving.
 #' @param diet_soda_price The price of regular soda.
 #' @param regular_soda_price The price of healthier soda.
 #' @return The NEMS_S points associated with soda price.
