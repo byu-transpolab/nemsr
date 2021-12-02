@@ -259,16 +259,16 @@ chips_avail <- function(lowfat_chips_varieties) {
 #'
 #' This function takes in the number of varieties of healthier cereal options and returns the NEMS-S points associated with availability.
 #'
-#' @details This function implements the scoring method described in Measure 11 of the NEMS-S Protocol.
-#' @param healthy_cereal_varieties The number of varieties of cereal with less than 7g of sugar per serving.
+#' @details This function implements the scoring method described in Measure 11 of the NEMS-S Protocol. "Healthier cereal" has less than 7g of sugar per serving.
+#' @param healthier_cereal_varieties The number of varieties of cereal with less than 7g of sugar per serving.
 #' @return The NEMS-S points associated with healthier cereal availability.
 #' @examples
-#' healthy_cereal_varieties <- sample(1:10, 10)
-#' cereal_avail(healthy_cereal_varieties)
-cereal_avail <- function(healthy_cereal_varieties) {
+#' healthier_cereal_varieties <- sample(1:10, 10)
+#' cereal_avail(healthier_cereal_varieties)
+cereal_avail <- function(healthier_cereal_varieties) {
   case_when(
     # 2 points if a cereal with <7g sugar per serving available
-    healthy_cereal_varieties > 0 ~ 2,
+    healthier_cereal_varieties > 0 ~ 2,
     TRUE ~ as.numeric(NA)
   )
 }
