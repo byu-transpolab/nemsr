@@ -325,6 +325,7 @@ ground_beef_cost <- function(lean_beef_price, regular_beef_price){
 #'
 #' This function takes in the cost of lean and regular fat weiners and compares them to return a NEMS-S score for the cost.
 #'
+#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Fat free hot dogs" have 0 grams of fat per serving, and "light hot dogs" have less than or equal to 7 grams of fat per serving.
 #' @param lean_wieners_price The price of hot dogs with less fat (specific fat content?).
 #' @param regular_wieners_price The price of normal fat hot dogs.
 #' @return The NEMS-S points associated with wiener price.
