@@ -175,6 +175,8 @@ frozen_dinners_avail <- function(frozen_dinner_varieties) {
 #' baked_goods_avail(lowfat_baked_goods)
 baked_goods_avail <- function(lowfat_baked_goods) {
   case_when(
+    # 0 points if there are not any low-fat baked goods
+    lowfat_baked_goods == 0 ~ 0,
     # 2 points if there are any low-fat baked goods
     lowfat_baked_goods > 0 ~ 2,
     TRUE ~ as.numeric(NA)
@@ -193,6 +195,8 @@ baked_goods_avail <- function(lowfat_baked_goods) {
 #' soda_avail(diet_soda_varieties)
 soda_avail <- function(diet_soda_varieties){
   case_when(
+    # 0 points if no diet soda is available
+    diet_soda_varieties == 0 ~ 0,
     # 1 point if diet soda is available
     diet_soda_varieties > 0 ~ 1,
     TRUE ~ as.numeric(NA)
