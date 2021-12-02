@@ -467,6 +467,7 @@ chips_cost <- function(lowfat_chips_price, regular_chips_price){
 #'
 #' This function takes in the cost of healthier and regular cereal and compares them to return a NEMS-S score for the cost.
 #'
+#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Healthier cereal" has less than 7g of sugar per serving.
 #' @param healthier_cereal_price The price of healthier cereal (<7g of sugar per serving).
 #' @param regular_cereal_price The price of regular cereal (>7g of sugar per serving).
 #' @return The NEMS-S points associated with cereal cost.
@@ -495,4 +496,5 @@ cost_score <- function(){
 }
 
 # quality (6 points)
+
 
