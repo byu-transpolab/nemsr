@@ -15,8 +15,6 @@ The foo functions ...
 
 \section{Documentation and References}{
 
-NEMS-S Protocol
-NEMS-S
-Lundsford (2016) Thesis (most information comes from Table 4.1)
+All the information for the scoring system and classification of "healthier" options come from the NEMS-S Protocol Measures and the Lundsford 2016 Thesis (most information comes from Table 4.1).
 }
 
