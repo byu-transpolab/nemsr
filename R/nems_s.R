@@ -309,7 +309,7 @@ milk_cost <- function(lowfat_milk_price, whole_milk_price){
 #'
 #' This function takes in the cost of lean and regular ground beef and compares them to return a NEMS-S score for the cost.
 #'
-#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Standard ground beef" is 80 percent lean and 20 percent fat by weight. "Lean ground beef" is 90 percent lean and 10 percent fat (or less fat percentage) by weight.
+#' @details This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Standard ground beef" is 80 percent lean and 20 percent fat by weight. "Lean ground beef" is 90 percent lean and 10 percent fat (or less fat percentage) by weight.
 #' @param lean_beef_price The price of lean ground beef.
 #' @param regular_beef_price The price of normal fat ground beef. (the specific fat content?)
 #' @return the NEMS-S points associated with beef price
@@ -331,7 +331,7 @@ ground_beef_cost <- function(lean_beef_price, regular_beef_price){
 #'
 #' This function takes in the cost of lean and regular fat weiners and compares them to return a NEMS-S score for the cost.
 #'
-#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Fat free hot dogs" have 0 grams of fat per serving, and "light hot dogs" have less than or equal to 7 grams of fat per serving.
+#' @details This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Fat free hot dogs" have 0 grams of fat per serving, and "light hot dogs" have less than or equal to 7 grams of fat per serving.
 #' @param lean_wieners_price The price of hot dogs with less fat (specific fat content?).
 #' @param regular_wieners_price The price of normal fat hot dogs.
 #' @return The NEMS-S points associated with wiener price.
@@ -353,8 +353,8 @@ wieners_cost <- function(lean_wieners_price, regular_wieners_price){
 #'
 #' This function takes in the cost of healthier and regular frozen dinners and compares them to return a NEMS-S score for the cost.
 #'
-#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Healthier frozen dinners" have less than or equal to 9g of fat per serving (an 8-11 oz package), as written in Measure 6 in the NEMS-S Protocol.
-#' @param healthier_frozen_dinners_price The price of healthier option for frozen dinners. (specifics?)
+#' @details This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Healthier frozen dinners" have less than or equal to 9g of fat per serving (an 8-11 oz package), as written in Measure 6 in the NEMS-S Protocol.
+#' @param healthier_frozen_dinners_price The price of healthier option for frozen dinners.
 #' @param regular_frozen_dinners_price The price of regular fat frozen dinners.
 #' @return The NEMS-S points associated with frozen dinners price.
 #' @examples
@@ -374,7 +374,7 @@ frozen_dinners_cost <- function(healthier_frozen_dinners_price, regular_frozen_d
 #'
 #' This function takes in the cost of healthier and regular baked goods and compares them to return a NEMS-S score for the cost.
 #'
-#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Low-fat baked goods" are baked goods with less than or equal to 3 grams of fat per serving.
+#' @details This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Low-fat baked goods" are baked goods with less than or equal to 3 grams of fat per serving.
 #' @param healthier_baked_goods_price The price of lower fat baked goods (fat content).
 #' @param regular_baked_goods_price The price of normal fat baked goods.
 #' @return The NEMS-S points associated with baked goods price.
@@ -394,7 +394,7 @@ baked_goods_cost <- function(healthier_baked_goods_price, regular_baked_goods_pr
 #'
 #' This function takes in the cost of healthier and regular soda and compares them to return a NEMS-S score for the cost.
 #'
-#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Diet soda" has 0 kcal per serving.
+#' @details This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Diet soda" has 0 kcal per serving.
 #' @param diet_soda_price The price of regular soda.
 #' @param regular_soda_price The price of healthier soda.
 #' @return The NEMS_S points associated with soda price.
@@ -415,7 +415,7 @@ soda_cost <- function(diet_soda_price, regular_soda_price){
 #'
 #' This function takes in the cost of healthier and regular juice and compares them to return a NEMS-S score for the cost.
 #'
-#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Healthy juice" is 100 percent juice drinks, natural fruit juice with no added sugars. "Regular juice" is fruit juice with added sugar and water.
+#' @details This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Healthy juice" is 100 percent juice drinks, natural fruit juice with no added sugars. "Regular juice" is fruit juice with added sugar and water.
 #' @param healthier_juice_drinks_price The cost of 100% juice drinks.
 #' @param regular_juice_drinks_price The cost of non 100% juice drinks.
 #' @return The NEMS_S points associated with juice drinks cost.
@@ -436,7 +436,7 @@ juice_drinks_cost <- function(healthier_juice_drinks_price, regular_juice_drinks
 #'
 #' This function takes in the cost of diet soda, regular soda, 100% juice and regular juice drinks and compares them to return an NEMS-S score for the cost.
 #'
-#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Healthy juice" is 100 percent juice drinks, natural fruit juice with no added sugars. "Regular juice" is fruit juice with added sugar and water.
+#' @details This function implements the scoring method described in Table 4.1 Lundsford (2016). "Healthy juice" is 100 percent juice drinks, natural fruit juice with no added sugars. "Regular juice" is fruit juice with added sugar and water.
 #' @param diet_soda_price The price of regular soda.
 #' @param regular_soda_price The price of healthier soda.
 #' @param healthier_juice_drinks_price The cost of 100% juice drinks.
@@ -461,7 +461,7 @@ juice_drinks_cost <- function(diet_soda_price, regular_soda_price, healthier_jui
 #'
 #' This function takes in the cost of whole wheat bread and white bread and compares them to return a NEMS-S score for the cost.
 #'
-#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Whole grain bread" is 100% whole wheat and whole grain bread, and it is the healthier option. "White bread" is the regular option, bread made with refined flour.
+#' @details This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Whole grain bread" is 100% whole wheat and whole grain bread, and it is the healthier option. "White bread" is the regular option, bread made with refined flour.
 #' @param whole_wheat_bread_price The cost of whole wheat bread.
 #' @param white_bread_price The cost of white bread.
 #' @return The NEMS-S points associated with bread cost.
@@ -482,7 +482,7 @@ bread_cost <- function(whole_wheat_bread_price, white_bread_price){
 #'
 #' This function takes in the cost of lowfat and regular chips and compares them to return a NEMS-S score for the cost.
 #'
-#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Lowfat chips" contain less than or equal to 3g of fat per 1oz serving.
+#' @details This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Lowfat chips" contain less than or equal to 3g of fat per 1oz serving.
 #' @param lowfat_chips_price The price of lowfat chips.
 #' @param regular_chips_price The price of regular chips.
 #' @return The NEMS-S points associated with chips cost.
@@ -503,7 +503,7 @@ chips_cost <- function(lowfat_chips_price, regular_chips_price){
 #'
 #' This function takes in the cost of healthier and regular cereal and compares them to return a NEMS-S score for the cost.
 #'
-#' @details This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Healthier cereal" has less than 7g of sugar per serving.
+#' @details This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Healthier cereal" has less than 7g of sugar per serving.
 #' @param healthier_cereal_price The price of healthier cereal (<7g of sugar per serving).
 #' @param regular_cereal_price The price of regular cereal (>7g of sugar per serving).
 #' @return The NEMS-S points associated with cereal cost.
