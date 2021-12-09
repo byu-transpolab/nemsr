@@ -13,3 +13,10 @@ foo, bar and baz.
 The foo functions ...
 }
 
+\section{Documentation and References}{
+
+NEMS-S Protocol
+NEMS-S
+Lundsford (2016) Thesis (most information comes from Table 4.1)
+}
+
