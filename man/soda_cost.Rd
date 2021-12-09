@@ -18,7 +18,7 @@ The NEMS_S points associated with soda price.
 This function takes in the cost of healthier and regular soda and compares them to return a NEMS-S score for the cost.
 }
 \details{
-This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Diet soda" has 0 kcal per serving.
+This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Diet soda" has 0 kcal per serving.
 }
 \examples{
 diet_soda_price <- rnorm(10,4.1,.5)

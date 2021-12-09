@@ -18,7 +18,7 @@ The NEMS-S points associated with wiener price.
 This function takes in the cost of lean and regular fat weiners and compares them to return a NEMS-S score for the cost.
 }
 \details{
-This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Fat free hot dogs" have 0 grams of fat per serving, and "light hot dogs" have less than or equal to 7 grams of fat per serving.
+This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Fat free hot dogs" have 0 grams of fat per serving, and "light hot dogs" have less than or equal to 7 grams of fat per serving.
 }
 \examples{
 lean_wieners_price <- rnorm(10,2.5,.3)

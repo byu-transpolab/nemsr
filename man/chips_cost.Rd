@@ -18,7 +18,7 @@ The NEMS-S points associated with chips cost.
 This function takes in the cost of lowfat and regular chips and compares them to return a NEMS-S score for the cost.
 }
 \details{
-This function implements the scoring method described in Table 4.1 of NDSU Thesis (Glanz et al., 2007). "Lowfat chips" contain less than or equal to 3g of fat per 1oz serving.
+This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Lowfat chips" contain less than or equal to 3g of fat per 1oz serving.
 }
 \examples{
 lowfat_chips_price <- rnorm(10,2.5,.5)
