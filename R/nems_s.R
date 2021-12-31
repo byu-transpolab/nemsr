@@ -311,7 +311,7 @@ milk_cost <- function(lowfat_milk_price, whole_milk_price){
 #'
 #' @details This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Standard ground beef" is 80 percent lean and 20 percent fat by weight. "Lean ground beef" is 90 percent lean and 10 percent fat (or less fat percentage) by weight.
 #' @param lean_beef_price The price of lean ground beef.
-#' @param regular_beef_price The price of normal fat ground beef. (the specific fat content?)
+#' @param regular_beef_price The price of normal fat ground beef.
 #' @return the NEMS-S points associated with beef price
 #' @examples
 #' lean_beef_price <- rnorm(10,5.8,.5)
@@ -332,7 +332,7 @@ ground_beef_cost <- function(lean_beef_price, regular_beef_price){
 #' This function takes in the cost of lean and regular fat weiners and compares them to return a NEMS-S score for the cost.
 #'
 #' @details This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Fat free hot dogs" have 0 grams of fat per serving, and "light hot dogs" have less than or equal to 7 grams of fat per serving.
-#' @param lean_wieners_price The price of hot dogs with less fat (specific fat content?).
+#' @param lean_wieners_price The price of hot dogs with less fat.
 #' @param regular_wieners_price The price of normal fat hot dogs.
 #' @return The NEMS-S points associated with wiener price.
 #' @examples
@@ -375,7 +375,7 @@ frozen_dinners_cost <- function(healthier_frozen_dinners_price, regular_frozen_d
 #' This function takes in the cost of healthier and regular baked goods and compares them to return a NEMS-S score for the cost.
 #'
 #' @details This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Low-fat baked goods" are baked goods with less than or equal to 3 grams of fat per serving.
-#' @param healthier_baked_goods_price The price of lower fat baked goods (fat content).
+#' @param healthier_baked_goods_price The price of lower fat baked goods.
 #' @param regular_baked_goods_price The price of normal fat baked goods.
 #' @return The NEMS-S points associated with baked goods price.
 #' @examples
@@ -504,8 +504,8 @@ chips_cost <- function(lowfat_chips_price, regular_chips_price){
 #' This function takes in the cost of healthier and regular cereal and compares them to return a NEMS-S score for the cost.
 #'
 #' @details This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Healthier cereal" has less than 7g of sugar per serving.
-#' @param healthier_cereal_price The price of healthier cereal (<7g of sugar per serving).
-#' @param regular_cereal_price The price of regular cereal (>7g of sugar per serving).
+#' @param healthier_cereal_price The price of healthier cereal.
+#' @param regular_cereal_price The price of regular cereal.
 #' @return The NEMS-S points associated with cereal cost.
 #' @examples
 #' healthier_cereal_price <- rnorm(10,4.1,.5)
