@@ -1,4 +1,12 @@
 get_ext <- function(file){
-  ex <- strsplit(basename(file), split="\\.")[[1]]
-  return(ex[-1])
+  # remove a path
+  splitted    <- strsplit(x=fn, split=.Platform$file.sep)[[1]]
+  # or use .Platform$file.sep in stead of '/'
+  fn          <- splitted [length(splitted)]
+  ext         <- ''
+  splitted    <- strsplit(x=fn, split='\\.')[[1]]
+  l           <-length (splitted)
+  if (l > 1 && sum(splitted[1:(l-1)] != ''))  ext <-splitted [l]
+  # the extention must be the suffix of a non-empty name
+  ext
 }
