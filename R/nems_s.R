@@ -24,7 +24,7 @@ calculate_score <- function(clean_data, detail = FALSE) {
     mutate("ground_beef_cost_score" = ground_beef_cost(as.numeric(clean_data$lean_beef_price), as.numeric(clean_data$regular_beef_price))) %>%
     mutate("wieners_cost_score" = wieners_cost(as.numeric(clean_data$lean_wieners_price), as.numeric(clean_data$regular_wieners_price))) %>%
     mutate("frozen_dinners_cost_score" = frozen_dinners_cost(as.numeric(clean_data$healthier_frozen_dinners_price_1), as.numeric(clean_data$regular_frozen_dinners_price_1))) %>%
-    mutate("baked_goods_cost_score" = baked_goods_cost(as.numeric(clean_data$healthier_baked_goods_cost))) %>%
+    #mutate("baked_goods_cost_score" = baked_goods_cost(as.numeric(clean_data$lowfat_baked_goods_cost))) %>%
     mutate("soda_cost_score" = soda_cost(as.numeric(clean_data$diet_soda_cost), as.numeric(clean_data$regular_soda_cost))) %>%
     mutate("juice_cost_score" = juice_cost(as.numeric(clean_data$healthier_juice_drinks_price), as.numeric(clean_data$regular_juice_drinks_price))) %>%
     mutate("juice_drinks_cost_score" = juice_drinks_cost(as.numeric(clean_data$diet_soda_cost), as.numeric(clean_data$regular_soda_cost), as.numeric(clean_data$healthier_juice_drinks_price), as.numeric(clean_data$regular_juice_drinks_price))) %>%
@@ -95,7 +95,7 @@ read_nemss <- function(file) {
     mutate("healthier_frozen_dinners_price_6" = FRZ_PRICE_OTH_3_1_REDFAT_1) %>%
     mutate("regular_frozen_dinners_price_6" = FRZ_PRICE_OTH_3_2_ALT_1) %>%
     mutate("lowfat_baked_goods" = if_else(BKD_H_BG1_1==1|BKD_H_BGPK_1==1|BKD_H_ENG_1==1|BKD_H_LFM_1==1, 1, 0))%>%
-    mutate("lowfat_baked_goods_cost" = if_else(BKD_H_BG1_2_1 != "", BKD_H_BG1_2_1, if_else()))
+    mutate("lowfat_baked_goods_cost" = if_else(BKD_H_BG1_2_1 != "", BKD_H_BG1_2_1, if_else(BKD_H_BGPK_2_1 != "", BKD_H_BGPK_2_1, "0"))) %>%
     mutate("diet_soda_varieties" = if_else(BVG_HS_DC_1_AVAIL==1|BVG_HS_DOTH_1_AVAIL==1, 1, 0))%>%
     mutate("diet_soda_cost" = if_else(BVG_HS_DC_2_PRICE_1 == "", BVG_HS_DOTH_2_PRICE_1, BVG_HS_DC_2_PRICE_1))%>%
     mutate("regular_soda_cost" = if_else(BVG_RS_COK_2_PRICE_1 == "", BVG_RS_OTH_2_PRICE_1, BVG_RS_COK_2_PRICE_1))%>%
@@ -130,7 +130,7 @@ read_nemss <- function(file) {
            diet_soda_cost, regular_soda_cost, healthy_juice_varieties, healthier_juice_drinks_price, healthier_juice_drinks_comments,
            regular_juice_drinks_price, regular_juice_drinks_comments, varieties_of_whole_grain_bread, whole_wheat_bread_price,
            whole_wheat_bread_size, white_bread_price, white_bread_size, lowfat_chip_varieties, lowfat_chips_price, lowfat_chips_size,
-           regular_chips_price, regular_chips_size, healthier_cereal_varieties, healthier_cereal_price, regular_cereal_price) %>%
+           regular_chips_price, regular_chips_size, healthier_cereal_varieties, healthier_cereal_price, regular_cereal_price, lowfat_baked_goods_cost) %>%
     replace_na(list(lean_beef_varieties = 0, fat_free_hot_dogs = 0, light_hot_dogs = 0, frozen_dinner_varieties = 0, lowfat_baked_goods = 0,
                     diet_soda_varieties = 0, lowfat_chip_varieties = 0, varieties_of_whole_grain_bread = 0, healthier_cereal_varieties = 0,
                     lowfat_gal = 0, whole_gal = 0, whole_wheat_bread_price = 0, white_bread_price = 0))
