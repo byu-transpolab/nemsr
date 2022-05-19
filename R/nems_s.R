@@ -46,8 +46,19 @@ calculate_score <- function(clean_data, detail = FALSE) {
 
 }
 
+#' Read a NEMS-S raw data file
+#'
+#' @param file Path to the file. Can be a `.csv` or `.sav` exported from Qualtrics survey.
+#'
+#'
 read_nemss <- function(file) {
-  SAS_data <- read_sav(file)
+
+  # TODO: Can we set this up to do an if statement for multiple file types?
+  SAS_data <- if (get_ext(file) == "csv"){
+    readr::read_csv(file)
+  } else if (get_ext(file) == "sav") {
+    haven::read_sav(file)
+  }
 
   #rename and sort data
   all_data <- SAS_data %>%
