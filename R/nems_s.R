@@ -42,7 +42,7 @@ calculate_score <- function(clean_data, detail = FALSE) {
                                    bread_avail_score, chip_avail_score, cereal_avail_score, Total_Availability_Score, milk_cost_score,
                                   ground_beef_cost_score, wieners_cost_score, frozen_dinners_cost_score, soda_cost_score, juice_cost_score,
                                   juice_drinks_cost_score, bread_cost_score, chips_cost_score, cereal_cost_score, Total_Cost_Score))}
-  else {select(scores, c(ID, Total_Availability_Score))}
+  else {select(scores, c(ID, Total_Availability_Score, Total_Cost_Score))}
 
 }
 
