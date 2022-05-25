@@ -1,123 +1,144 @@
 
-# This is my function.
-
+#' Compute Availability and Cost Scores for all variables
+#'
+#' This function uses all functions previously created and scores assigned to each variable and adds them into one total score for both availability and cost.
+#'
+#' @details This function implements the scoring method described in Measure 9 of the NEMS-S Protocol.
+#' @param clean_data The data retrieved from a cleaned version of the Qualtrics Survey.
+#' @return Scores for total Availability and Cost, as well as given the option if Detail = TRUE to see the score for each individual variable.
+#' @examples
+#' clean_data <- read_nemss(file)
+#' calculate_score(clean_data)
 calculate_score <- function(clean_data, detail = FALSE) {
   scores <- data.frame("ID" = clean_data$STORE_ID)
-  scores <- scores %>%
-    mutate("milk_avail_score" = milk_avail(as.numeric(clean_data$lowfat_gal), as.numeric(clean_data$whole_gal))) %>%
-    mutate("fruit_avail_score" = fruit_avail(as.numeric(clean_data$varieties_of_fruit))) %>%
-    mutate("vegetable_avail_score" = vegetable_avail(as.numeric(clean_data$varieties_of_vegetables))) %>%
-    mutate("ground_beef_avail_score" = ground_beef_avail(as.numeric(clean_data$lean_beef_varieties))) %>%
-    mutate("hot_dog_avail_score" = hot_dog_avail(as.numeric(clean_data$fat_free_hot_dogs), as.numeric(clean_data$light_hot_dogs))) %>%
-    mutate("frozen_dinners_avail_score" = frozen_dinners_avail(as.numeric(clean_data$frozen_dinner_varieties))) %>%
-    mutate("baked_goods_avail_score" = baked_goods_avail(as.numeric(clean_data$lowfat_baked_goods))) %>%
-    mutate("soda_avail_score" = soda_avail(as.numeric(clean_data$diet_soda_varieties))) %>%
-    mutate("juice_drinks_avail_score" = juice_drinks_avail(as.numeric(clean_data$healthy_juice_varieties))) %>%
-    mutate("bread_avail_score" = bread_avail(as.numeric(clean_data$varieties_of_whole_grain_bread))) %>%
-    mutate("chip_avail_score" = chips_avail(as.numeric(clean_data$lowfat_chip_varieties))) %>%
-    mutate("cereal_avail_score" = cereal_avail(as.numeric(clean_data$healthier_cereal_varieties))) %>%
-    mutate("Total_Availability_Score" = milk_avail_score + fruit_avail_score + vegetable_avail_score + ground_beef_avail_score +
+  scores <- scores |>
+    dplyr::mutate("milk_avail_score" = milk_avail(as.numeric(clean_data$lowfat_gal), as.numeric(clean_data$whole_gal))) |>
+    dplyr::mutate("fruit_avail_score" = fruit_avail(as.numeric(clean_data$varieties_of_fruit))) |>
+    dplyr::mutate("vegetable_avail_score" = vegetable_avail(as.numeric(clean_data$varieties_of_vegetables))) |>
+    dplyr::mutate("ground_beef_avail_score" = ground_beef_avail(as.numeric(clean_data$lean_beef_varieties))) |>
+    dplyr::mutate("hot_dog_avail_score" = hot_dog_avail(as.numeric(clean_data$fat_free_hot_dogs), as.numeric(clean_data$light_hot_dogs))) |>
+    dplyr::mutate("frozen_dinners_avail_score" = frozen_dinners_avail(as.numeric(clean_data$frozen_dinner_varieties))) |>
+    dplyr::mutate("baked_goods_avail_score" = baked_goods_avail(as.numeric(clean_data$lowfat_baked_goods))) |>
+    dplyr::mutate("soda_avail_score" = soda_avail(as.numeric(clean_data$diet_soda_varieties))) |>
+    dplyr::mutate("juice_drinks_avail_score" = juice_drinks_avail(as.numeric(clean_data$healthy_juice_varieties))) |>
+    dplyr::mutate("bread_avail_score" = bread_avail(as.numeric(clean_data$varieties_of_whole_grain_bread))) |>
+    dplyr::mutate("chip_avail_score" = chips_avail(as.numeric(clean_data$lowfat_chip_varieties))) |>
+    dplyr::mutate("cereal_avail_score" = cereal_avail(as.numeric(clean_data$healthier_cereal_varieties))) |>
+    dplyr::mutate("Total_Availability_Score" = milk_avail_score + fruit_avail_score + vegetable_avail_score + ground_beef_avail_score +
                                                         hot_dog_avail_score + frozen_dinners_avail_score + baked_goods_avail_score +
                                                         soda_avail_score + juice_drinks_avail_score + bread_avail_score + chip_avail_score +
-                                                        cereal_avail_score) %>%
-    mutate("milk_cost_score" = milk_cost(as.numeric(clean_data$lowfat_gal_price), as.numeric(clean_data$whole_gal_price))) %>%
-    mutate("ground_beef_cost_score" = ground_beef_cost(as.numeric(clean_data$lean_beef_price), as.numeric(clean_data$regular_beef_price))) %>%
-    mutate("wieners_cost_score" = wieners_cost(as.numeric(clean_data$lean_wieners_price), as.numeric(clean_data$regular_wieners_price))) %>%
-    mutate("frozen_dinners_cost_score" = frozen_dinners_cost(as.numeric(clean_data$healthier_frozen_dinners_price_1), as.numeric(clean_data$regular_frozen_dinners_price_1))) %>%
-    #mutate("baked_goods_cost_score" = baked_goods_cost(as.numeric(clean_data$lowfat_baked_goods_cost))) %>%
-    mutate("soda_cost_score" = soda_cost(as.numeric(clean_data$diet_soda_cost), as.numeric(clean_data$regular_soda_cost))) %>%
-    mutate("juice_cost_score" = juice_cost(as.numeric(clean_data$healthier_juice_drinks_price), as.numeric(clean_data$regular_juice_drinks_price))) %>%
-    mutate("juice_drinks_cost_score" = juice_drinks_cost(as.numeric(clean_data$diet_soda_cost), as.numeric(clean_data$regular_soda_cost), as.numeric(clean_data$healthier_juice_drinks_price), as.numeric(clean_data$regular_juice_drinks_price))) %>%
-    mutate("bread_cost_score" = bread_cost(as.numeric(clean_data$whole_wheat_bread_price)/as.numeric(clean_data$whole_wheat_bread_size), as.numeric(clean_data$white_bread_price)/as.numeric(clean_data$white_bread_size))) %>%
-    mutate("chips_cost_score" = chips_cost(as.numeric(clean_data$lowfat_chips_price)/as.numeric(clean_data$lowfat_chips_size), as.numeric(clean_data$regular_chips_price)/as.numeric(clean_data$regular_chips_size))) %>%
-    mutate("cereal_cost_score" = cereal_cost(as.numeric(clean_data$healthier_cereal_price), as.numeric(clean_data$regular_cereal_price))) %>%
-    replace_na(list(milk_cost_score = 0, ground_beef_cost_score = 0, wieners_cost_score = 0, frozen_dinners_cost_score = 0,
+                                                        cereal_avail_score) |>
+    dplyr::mutate("milk_cost_score" = milk_cost(as.numeric(clean_data$lowfat_gal_price), as.numeric(clean_data$whole_gal_price))) |>
+    dplyr::mutate("ground_beef_cost_score" = ground_beef_cost(as.numeric(clean_data$lean_beef_price), as.numeric(clean_data$regular_beef_price))) |>
+    dplyr::mutate("wieners_cost_score" = wieners_cost(as.numeric(clean_data$lean_wieners_price), as.numeric(clean_data$regular_wieners_price))) |>
+    dplyr::mutate("frozen_dinners_cost_score" = frozen_dinners_cost(as.numeric(clean_data$healthier_frozen_dinners_price_1), as.numeric(clean_data$regular_frozen_dinners_price_1))) |>
+    #dplyr::mutate("baked_goods_cost_score" = baked_goods_cost(as.numeric(clean_data$lowfat_baked_goods_cost))) |>
+    dplyr::mutate("soda_cost_score" = soda_cost(as.numeric(clean_data$diet_soda_cost), as.numeric(clean_data$regular_soda_cost))) |>
+    dplyr::mutate("juice_cost_score" = juice_cost(as.numeric(clean_data$healthier_juice_drinks_price), as.numeric(clean_data$regular_juice_drinks_price))) |>
+    dplyr::mutate("juice_drinks_cost_score" = juice_drinks_cost(as.numeric(clean_data$diet_soda_cost), as.numeric(clean_data$regular_soda_cost), as.numeric(clean_data$healthier_juice_drinks_price), as.numeric(clean_data$regular_juice_drinks_price))) |>
+    dplyr::mutate("bread_cost_score" = bread_cost(as.numeric(clean_data$whole_wheat_bread_price)/as.numeric(clean_data$whole_wheat_bread_size), as.numeric(clean_data$white_bread_price)/as.numeric(clean_data$white_bread_size))) |>
+    dplyr::mutate("chips_cost_score" = chips_cost(as.numeric(clean_data$lowfat_chips_price)/as.numeric(clean_data$lowfat_chips_size), as.numeric(clean_data$regular_chips_price)/as.numeric(clean_data$regular_chips_size))) |>
+    dplyr::mutate("cereal_cost_score" = cereal_cost(as.numeric(clean_data$healthier_cereal_price), as.numeric(clean_data$regular_cereal_price))) |>
+    dplyr::mutate("Latitude" = clean_data$LocationLatitude) |>
+    dplyr::mutate("Longitude" = clean_data$LocationLongitude) |>
+    tidyr::replace_na(list(milk_cost_score = 0, ground_beef_cost_score = 0, wieners_cost_score = 0, frozen_dinners_cost_score = 0,
                     soda_cost_score = 0, juice_cost_score = 0, juice_drinks_cost_score = 0, bread_cost_score = 0, chips_cost_score = 0,
-                    cereal_cost_score = 0)) %>%
-    mutate("Total_Cost_Score" = milk_cost_score + ground_beef_cost_score + wieners_cost_score + frozen_dinners_cost_score +
+                    cereal_cost_score = 0)) |>
+    dplyr::mutate("Total_Cost_Score" = milk_cost_score + ground_beef_cost_score + wieners_cost_score + frozen_dinners_cost_score +
              soda_cost_score + juice_cost_score + juice_drinks_cost_score + bread_cost_score + chips_cost_score + cereal_cost_score)
 
-  if(detail == TRUE) {select(scores, c(ID, milk_avail_score, fruit_avail_score, vegetable_avail_score, ground_beef_avail_score, hot_dog_avail_score,
+  if(detail == TRUE) {dplyr::select(scores, c(ID, milk_avail_score, fruit_avail_score, vegetable_avail_score, ground_beef_avail_score, hot_dog_avail_score,
                                   frozen_dinners_avail_score, baked_goods_avail_score, soda_avail_score, juice_drinks_avail_score,
                                    bread_avail_score, chip_avail_score, cereal_avail_score, Total_Availability_Score, milk_cost_score,
                                   ground_beef_cost_score, wieners_cost_score, frozen_dinners_cost_score, soda_cost_score, juice_cost_score,
-                                  juice_drinks_cost_score, bread_cost_score, chips_cost_score, cereal_cost_score, Total_Cost_Score))}
-  else {select(scores, c(ID, Total_Availability_Score, Total_Cost_Score))}
+                                  juice_drinks_cost_score, bread_cost_score, chips_cost_score, cereal_cost_score, Total_Cost_Score,
+                                  Latitude, Longitude))}
+  else {dplyr::select(scores, c(ID, Total_Availability_Score, Total_Cost_Score))}
 
 }
 
+#' Import and Clean Qualtrics Dataset to be used to calculate scores. The Qualtrics Survey is found at
+#'
+#' This function takes the output of the Qualtrics survey and returns it as a cleaned R dataframe.
+#'
+#' @details This function implements the scoring method described in Measure 9 of the NEMS-S Protocol.
+#' @param file The data file retrieved from the Qualtrics survey.
+#' @return A cleaned R dataframe with availability values and cost values for each variable.
+#' @examples
+#' file <- file.path(qualtricsdata)
+#' read_nemss(file)
 read_nemss <- function(file) {
   SAS_data <- read_sav(file)
 
   #rename and sort data
-  all_data <- SAS_data %>%
-    mutate("organic_milk_avail" = if_else(MILK_1_7_1 == 1, TRUE, FALSE)) %>%
-    mutate("lowfat_milk_avail" = if_else(MILK_2A_1 == 1, TRUE, FALSE)) %>%
-    mutate("dairy_milk_avail" = if_else(MILK_1_AVAIL_1 == 1, TRUE, FALSE)) %>%
-    mutate("nondairy_milk_avail" = if_else(MILK_1_6_1 == 1, TRUE, FALSE)) %>%
-    mutate("lowfat_pint" = MILK_SHELF_LF_1_SPACE_1) %>%
-    mutate("lowfat_quart" = MILK_SHELF_LF_1_SPACE_2) %>%
-    mutate("lowfat_half_gal" = MILK_SHELF_LF_1_SPACE_3) %>%
-    mutate("lowfat_gal" = if_else(MILK_SHELF_LF_1_SPACE_4 == "", "0", MILK_SHELF_LF_1_SPACE_4)) %>%
-    mutate("whole_pint" = MILK_SHELF_WHL_1_SPACE_1) %>%
-    mutate("whole_quart" = MILK_SHELF_WHL_1_SPACE_2) %>%
-    mutate("whole_half_gal" = MILK_SHELF_WHL_1_SPACE_3) %>%
-    mutate("whole_gal" = if_else(MILK_SHELF_WHL_1_SPACE_4 == "", "0", MILK_SHELF_WHL_1_SPACE_4)) %>%
-    mutate("lowfat_quart_price" = MILK_PRICE_LFQ_1_1) %>%
-    mutate("lowfat_half_gal_price" = MILK_PRICE_LQH_1_1) %>%
-    mutate("lowfat_gal_price" = MILK_PRICE_LFG_1_1) %>%
-    mutate("whole_quart_price" = MILK_PRICE_WHLQ_1_1) %>%
-    mutate("whole_half_gal_price" = MILK_PRICE_WHLH_1_1) %>%
-    mutate("whole_gal_price" = MILK_PRICE_WHLG_1_1) %>%
-    mutate("lean_beef_varieties" = BEEF_H_CNT)%>%
-    mutate("lean_beef_price" = if_else(BEEF_H_GS_3_1 == "", if_else(BEEF_H_LGB_3_1 == "", BEEF_H_GT_3_1, BEEF_H_LGB_3_1), BEEF_H_GS_3_1))%>%
-    mutate("regular_beef_price" = if_else(BEEF_R_80_2_PRICE_1 == "", BEEF_R_ALT_2_PRICE_1, BEEF_R_80_2_PRICE_1))%>%
-    mutate("varieties_of_fruit" = if_else(FRUIT_CNT == "", "0", FRUIT_CNT))%>%
-    mutate("varieties_of_vegetables" = if_else(VEG_CNT == "", "0", VEG_CNT))%>%
-    mutate("fat_free_hot_dogs" = if_else(HD_H_OM_1==1, 1, 0), "light_hot_dogs" = if_else(HD_H_OTH_1==1,1,0))%>%
-    mutate("lean_wieners_price" = if_else(HD_H_OM_2_1 == "", HD_H_OTH_2_1, HD_H_OM_2_1))%>%
-    mutate("lean_wieners_size" = if_else(HD_H_OM_3_1 == "", HD_H_OTH_3_1, HD_H_OM_3_1)) %>%
-    mutate("regular_wieners_price" = if_else(HD_R_OM_2_1 == "", HD_R_OTH_2_1, HD_R_OM_2_1)) %>%
-    mutate("regular_wieners_size" = if_else(HD_R_OM_3_1 == "", HD_R_OTH_3_1, HD_R_OM_3_1)) %>%
-    mutate("frozen_dinners_pref_avail" = if_else(FRZ_PRICE_PREF_LAS_1_REDFAT_1 != "", 1, 0) + if_else(FRZ_PRICE_PREF_RTB_1_REDFAT_1 != "", 1, 0) + if_else(FRZ_PRICE_PREF_MEA_1_REDFAT_1 != "", 1, 0) + if_else(FRZ_PRICE_PREF_LAS_2_REG_1 != "", 1, 0) + if_else(FRZ_PRICE_PREF_RTB_2_REG_1 != "", 1, 0) + if_else(FRZ_PRICE_PREF_MEA_2_REG_1 != "", 1, 0)) %>%
-    mutate("frozen_dinners_oth_avail" = if_else(FRZ_PRICE_OTH_1_1_REDFAT_2 != "", 1, 0) + if_else(FRZ_PRICE_OTH_2_1_REDFAT_2 != "", 1, 0) + if_else(FRZ_PRICE_OTH_3_1_REDFAT_2 != "", 1, 0) + if_else(FRZ_PRICE_OTH_1_2_ALT_2 != "", 1, 0) + if_else(FRZ_PRICE_OTH_2_2_ALT_2 != "", 1, 0) + if_else(FRZ_PRICE_OTH_3_2_ALT_2 != "", 1, 0)) %>%
-    mutate("frozen_dinner_varieties" = (frozen_dinners_pref_avail + frozen_dinners_oth_avail)/2) %>%
-    mutate("healthier_frozen_dinners_price_1" = FRZ_PRICE_PREF_LAS_1_REDFAT_2) %>%
-    mutate("regular_frozen_dinners_price_1" = FRZ_PRICE_PREF_LAS_2_REG_2) %>%
-    mutate("healthier_frozen_dinners_price_2" = FRZ_PRICE_PREF_RTB_1_REDFAT_2) %>%
-    mutate("regular_frozen_dinners_price_2" = FRZ_PRICE_PREF_RTB_2_REG_2) %>%
-    mutate("healthier_frozen_dinners_price_3" = FRZ_PRICE_PREF_MEA_1_REDFAT_2) %>%
-    mutate("regular_frozen_dinners_price_3" = FRZ_PRICE_PREF_MEA_2_REG_2) %>%
-    mutate("healthier_frozen_dinners_price_4" = FRZ_PRICE_OTH_1_1_REDFAT_1) %>%
-    mutate("regular_frozen_dinners_price_4" = FRZ_PRICE_OTH_1_2_ALT_1) %>%
-    mutate("healthier_frozen_dinners_price_5" = FRZ_PRICE_OTH_2_1_REDFAT_1) %>%
-    mutate("regular_frozen_dinners_price_5" = FRZ_PRICE_OTH_2_2_ALT_1) %>%
-    mutate("healthier_frozen_dinners_price_6" = FRZ_PRICE_OTH_3_1_REDFAT_1) %>%
-    mutate("regular_frozen_dinners_price_6" = FRZ_PRICE_OTH_3_2_ALT_1) %>%
-    mutate("lowfat_baked_goods" = if_else(BKD_H_BG1_1==1|BKD_H_BGPK_1==1|BKD_H_ENG_1==1|BKD_H_LFM_1==1, 1, 0))%>%
-    mutate("lowfat_baked_goods_cost" = if_else(BKD_H_BG1_2_1 != "", BKD_H_BG1_2_1, if_else(BKD_H_BGPK_2_1 != "", BKD_H_BGPK_2_1, "0"))) %>%
-    mutate("diet_soda_varieties" = if_else(BVG_HS_DC_1_AVAIL==1|BVG_HS_DOTH_1_AVAIL==1, 1, 0))%>%
-    mutate("diet_soda_cost" = if_else(BVG_HS_DC_2_PRICE_1 == "", BVG_HS_DOTH_2_PRICE_1, BVG_HS_DC_2_PRICE_1))%>%
-    mutate("regular_soda_cost" = if_else(BVG_RS_COK_2_PRICE_1 == "", BVG_RS_OTH_2_PRICE_1, BVG_RS_COK_2_PRICE_1))%>%
-    mutate("healthy_juice_varieties" = if_else(BVG_1_5_1 == 1, 1, 0))%>%
-    mutate("healthier_juice_drinks_price" = if_else(BVG_HJ_MM_2_PRICE_1 == "", if_else(BVG_HJ_TRO_2_PRICE_1 == "", BVG_HJ_OTH_2_PRICE_1, BVG_HJ_TRO_2_PRICE_1), BVG_HJ_MM_2_PRICE_1))%>%
-    mutate("healthier_juice_drinks_comments" = if_else(BVG_HJ_MM_3_COMM_1 == "", if_else(BVG_HJ_TRO_3_COMM_1 == "", BVG_HJ_OTH_3_COMM_1, BVG_HJ_TRO_3_COMM_1), BVG_HJ_MM_3_COMM_1)) %>%
-    mutate("regular_juice_drinks_price" = if_else(BVG_RJ_MM_2_PRICE_1 == "", if_else(BVG_RJ_TRO_2_PRICE_1 == "", BVG_RJ_OTH_2_PRICE_1, BVG_RJ_TRO_2_PRICE_1), BVG_RJ_MM_2_PRICE_1)) %>%
-    mutate("regular_juice_drinks_comments" = if_else(BVG_RJ_MM_3_COMM_1 == "", if_else(BVG_RJ_TRO_3_COMM_1 == "", BVG_RJ_OTH_3_COMM_1, BVG_RJ_TRO_3_COMM_1), BVG_RJ_MM_3_COMM_1)) %>%
-    mutate("varieties_of_whole_grain_bread" = BRD_H_CNT)%>%
-    mutate("whole_wheat_bread_price" = if_else(BRD_H_NO_3_PRICE_1 == "", if_else(BRD_H_SLC_3_PRICE_1 == "", BRD_H_OTH_3_PRICE_1, BRD_H_SLC_3_PRICE_1), BRD_H_NO_3_PRICE_1))%>%
-    mutate("whole_wheat_bread_size" = if_else(BRD_H_NO_2_OZ_1 == "", if_else(BRD_H_SLC_2_OZ_1 == "", BRD_H_OTH_2_OZ_1, BRD_H_SLC_2_OZ_1), BRD_H_NO_2_OZ_1)) %>%
-    mutate("white_bread_price" = if_else(BRD_R_NO_3_PRICE_1 == "", if_else(BRD_R_SLC_3_PRICE_1 == "", BRD_R_OTH_3_PRICE_1, BRD_R_SLC_3_PRICE_1), BRD_R_NO_3_PRICE_1)) %>%
-    mutate("white_bread_size" = if_else(BRD_R_NO_2_OZ_1 == "", if_else(BRD_R_SLC_2_OZ_1 == "", BRD_R_OTH_2_OZ_1, BRD_R_SLC_2_OZ_1), BRD_R_NO_2_OZ_1)) %>%
-    mutate("lowfat_chip_varieties" = CHIP_H_CNT)%>%
-    mutate("lowfat_chips_price" = if_else(CHIP_H_BL_3_PRICE_1 == "", CHIP_H_OTH_3_PRICE_1, CHIP_H_BL_3_PRICE_1)) %>%
-    mutate("lowfat_chips_size" = if_else(CHIP_H_BL_1_SIZE_1 == "", CHIP_H_OTH_1_SIZE_1, CHIP_H_BL_1_SIZE_1)) %>%
-    mutate("regular_chips_price" = if_else(CHIP_R_LP_3_PRICE_1 == "", CHIP_R_OTH_3_PRICE_1, CHIP_R_LP_3_PRICE_1)) %>%
-    mutate("regular_chips_size" = if_else(CHIP_R_LP_1_SIZE_1 == "", CHIP_R_OTH_1_SIZE_1, CHIP_R_LP_1_SIZE_1)) %>%
-    mutate("healthier_cereal_varieties" = CRL_H_CNT)%>%
-    mutate("healthier_cereal_price" = if_else(CRL_H_CHE_3_PRICE_1 == "", CRL_H_OTH_3_PRICE_1, CRL_H_CHE_3_PRICE_1))%>%
-    mutate("regular_cereal_price" = if_else(CRL_R_FCH_3_PRICE_1 == "", CRL_R_OTH_3_PRICE_1, CRL_R_FCH_3_PRICE_1)) %>%
-    select(STORE_ID, organic_milk_avail, lowfat_milk_avail, dairy_milk_avail, nondairy_milk_avail,
+  all_data <- SAS_data |>
+    dplyr::mutate("organic_milk_avail" = if_else(MILK_1_7_1 == 1, TRUE, FALSE)) |>
+    dplyr::mutate("lowfat_milk_avail" = if_else(MILK_2A_1 == 1, TRUE, FALSE)) |>
+    dplyr::mutate("dairy_milk_avail" = if_else(MILK_1_AVAIL_1 == 1, TRUE, FALSE)) |>
+    dplyr::mutate("nondairy_milk_avail" = if_else(MILK_1_6_1 == 1, TRUE, FALSE)) |>
+    dplyr::mutate("lowfat_pint" = MILK_SHELF_LF_1_SPACE_1) |>
+    dplyr::mutate("lowfat_quart" = MILK_SHELF_LF_1_SPACE_2) |>
+    dplyr::mutate("lowfat_half_gal" = MILK_SHELF_LF_1_SPACE_3) |>
+    dplyr::mutate("lowfat_gal" = if_else(MILK_SHELF_LF_1_SPACE_4 == "", "0", MILK_SHELF_LF_1_SPACE_4)) |>
+    dplyr::mutate("whole_pint" = MILK_SHELF_WHL_1_SPACE_1) |>
+    dplyr::mutate("whole_quart" = MILK_SHELF_WHL_1_SPACE_2) |>
+    dplyr::mutate("whole_half_gal" = MILK_SHELF_WHL_1_SPACE_3) |>
+    dplyr::mutate("whole_gal" = if_else(MILK_SHELF_WHL_1_SPACE_4 == "", "0", MILK_SHELF_WHL_1_SPACE_4)) |>
+    dplyr::mutate("lowfat_quart_price" = MILK_PRICE_LFQ_1_1) |>
+    dplyr::mutate("lowfat_half_gal_price" = MILK_PRICE_LQH_1_1) |>
+    dplyr::mutate("lowfat_gal_price" = MILK_PRICE_LFG_1_1) |>
+    dplyr::mutate("whole_quart_price" = MILK_PRICE_WHLQ_1_1) |>
+    dplyr::mutate("whole_half_gal_price" = MILK_PRICE_WHLH_1_1) |>
+    dplyr::mutate("whole_gal_price" = MILK_PRICE_WHLG_1_1) |>
+    dplyr::mutate("lean_beef_varieties" = BEEF_H_CNT)|>
+    dplyr::mutate("lean_beef_price" = if_else(BEEF_H_GS_3_1 == "", if_else(BEEF_H_LGB_3_1 == "", BEEF_H_GT_3_1, BEEF_H_LGB_3_1), BEEF_H_GS_3_1))|>
+    dplyr::mutate("regular_beef_price" = if_else(BEEF_R_80_2_PRICE_1 == "", BEEF_R_ALT_2_PRICE_1, BEEF_R_80_2_PRICE_1))|>
+    dplyr::mutate("varieties_of_fruit" = if_else(FRUIT_CNT == "", "0", FRUIT_CNT))|>
+    dplyr::mutate("varieties_of_vegetables" = if_else(VEG_CNT == "", "0", VEG_CNT))|>
+    dplyr::mutate("fat_free_hot_dogs" = if_else(HD_H_OM_1==1, 1, 0), "light_hot_dogs" = if_else(HD_H_OTH_1==1,1,0))|>
+    dplyr::mutate("lean_wieners_price" = if_else(HD_H_OM_2_1 == "", HD_H_OTH_2_1, HD_H_OM_2_1))|>
+    dplyr::mutate("lean_wieners_size" = if_else(HD_H_OM_3_1 == "", HD_H_OTH_3_1, HD_H_OM_3_1)) |>
+    dplyr::mutate("regular_wieners_price" = if_else(HD_R_OM_2_1 == "", HD_R_OTH_2_1, HD_R_OM_2_1)) |>
+    dplyr::mutate("regular_wieners_size" = if_else(HD_R_OM_3_1 == "", HD_R_OTH_3_1, HD_R_OM_3_1)) |>
+    dplyr::mutate("frozen_dinners_pref_avail" = if_else(FRZ_PRICE_PREF_LAS_1_REDFAT_1 != "", 1, 0) + if_else(FRZ_PRICE_PREF_RTB_1_REDFAT_1 != "", 1, 0) + if_else(FRZ_PRICE_PREF_MEA_1_REDFAT_1 != "", 1, 0) + if_else(FRZ_PRICE_PREF_LAS_2_REG_1 != "", 1, 0) + if_else(FRZ_PRICE_PREF_RTB_2_REG_1 != "", 1, 0) + if_else(FRZ_PRICE_PREF_MEA_2_REG_1 != "", 1, 0)) |>
+    dplyr::mutate("frozen_dinners_oth_avail" = if_else(FRZ_PRICE_OTH_1_1_REDFAT_2 != "", 1, 0) + if_else(FRZ_PRICE_OTH_2_1_REDFAT_2 != "", 1, 0) + if_else(FRZ_PRICE_OTH_3_1_REDFAT_2 != "", 1, 0) + if_else(FRZ_PRICE_OTH_1_2_ALT_2 != "", 1, 0) + if_else(FRZ_PRICE_OTH_2_2_ALT_2 != "", 1, 0) + if_else(FRZ_PRICE_OTH_3_2_ALT_2 != "", 1, 0)) |>
+    dplyr::mutate("frozen_dinner_varieties" = (frozen_dinners_pref_avail + frozen_dinners_oth_avail)/2) |>
+    dplyr::mutate("healthier_frozen_dinners_price_1" = FRZ_PRICE_PREF_LAS_1_REDFAT_2) |>
+    dplyr::mutate("regular_frozen_dinners_price_1" = FRZ_PRICE_PREF_LAS_2_REG_2) |>
+    dplyr::mutate("healthier_frozen_dinners_price_2" = FRZ_PRICE_PREF_RTB_1_REDFAT_2) |>
+    dplyr::mutate("regular_frozen_dinners_price_2" = FRZ_PRICE_PREF_RTB_2_REG_2) |>
+    dplyr::mutate("healthier_frozen_dinners_price_3" = FRZ_PRICE_PREF_MEA_1_REDFAT_2) |>
+    dplyr::mutate("regular_frozen_dinners_price_3" = FRZ_PRICE_PREF_MEA_2_REG_2) |>
+    dplyr::mutate("healthier_frozen_dinners_price_4" = FRZ_PRICE_OTH_1_1_REDFAT_1) |>
+    dplyr::mutate("regular_frozen_dinners_price_4" = FRZ_PRICE_OTH_1_2_ALT_1) |>
+    dplyr::mutate("healthier_frozen_dinners_price_5" = FRZ_PRICE_OTH_2_1_REDFAT_1) |>
+    dplyr::mutate("regular_frozen_dinners_price_5" = FRZ_PRICE_OTH_2_2_ALT_1) |>
+    dplyr::mutate("healthier_frozen_dinners_price_6" = FRZ_PRICE_OTH_3_1_REDFAT_1) |>
+    dplyr::mutate("regular_frozen_dinners_price_6" = FRZ_PRICE_OTH_3_2_ALT_1) |>
+    dplyr::mutate("lowfat_baked_goods" = if_else(BKD_H_BG1_1==1|BKD_H_BGPK_1==1|BKD_H_ENG_1==1|BKD_H_LFM_1==1, 1, 0))|>
+    dplyr::mutate("lowfat_baked_goods_cost" = if_else(BKD_H_BG1_2_1 != "", BKD_H_BG1_2_1, if_else(BKD_H_BGPK_2_1 != "", BKD_H_BGPK_2_1, "0"))) |>
+    dplyr::mutate("diet_soda_varieties" = if_else(BVG_HS_DC_1_AVAIL==1|BVG_HS_DOTH_1_AVAIL==1, 1, 0))|>
+    dplyr::mutate("diet_soda_cost" = if_else(BVG_HS_DC_2_PRICE_1 == "", BVG_HS_DOTH_2_PRICE_1, BVG_HS_DC_2_PRICE_1))|>
+    dplyr::mutate("regular_soda_cost" = if_else(BVG_RS_COK_2_PRICE_1 == "", BVG_RS_OTH_2_PRICE_1, BVG_RS_COK_2_PRICE_1))|>
+    dplyr::mutate("healthy_juice_varieties" = if_else(BVG_1_5_1 == 1, 1, 0))|>
+    dplyr::mutate("healthier_juice_drinks_price" = if_else(BVG_HJ_MM_2_PRICE_1 == "", if_else(BVG_HJ_TRO_2_PRICE_1 == "", BVG_HJ_OTH_2_PRICE_1, BVG_HJ_TRO_2_PRICE_1), BVG_HJ_MM_2_PRICE_1))|>
+    dplyr::mutate("healthier_juice_drinks_comments" = if_else(BVG_HJ_MM_3_COMM_1 == "", if_else(BVG_HJ_TRO_3_COMM_1 == "", BVG_HJ_OTH_3_COMM_1, BVG_HJ_TRO_3_COMM_1), BVG_HJ_MM_3_COMM_1)) |>
+    dplyr::mutate("regular_juice_drinks_price" = if_else(BVG_RJ_MM_2_PRICE_1 == "", if_else(BVG_RJ_TRO_2_PRICE_1 == "", BVG_RJ_OTH_2_PRICE_1, BVG_RJ_TRO_2_PRICE_1), BVG_RJ_MM_2_PRICE_1)) |>
+    dplyr::mutate("regular_juice_drinks_comments" = if_else(BVG_RJ_MM_3_COMM_1 == "", if_else(BVG_RJ_TRO_3_COMM_1 == "", BVG_RJ_OTH_3_COMM_1, BVG_RJ_TRO_3_COMM_1), BVG_RJ_MM_3_COMM_1)) |>
+    dplyr::mutate("varieties_of_whole_grain_bread" = BRD_H_CNT)|>
+    dplyr::mutate("whole_wheat_bread_price" = if_else(BRD_H_NO_3_PRICE_1 == "", if_else(BRD_H_SLC_3_PRICE_1 == "", BRD_H_OTH_3_PRICE_1, BRD_H_SLC_3_PRICE_1), BRD_H_NO_3_PRICE_1))|>
+    dplyr::mutate("whole_wheat_bread_size" = if_else(BRD_H_NO_2_OZ_1 == "", if_else(BRD_H_SLC_2_OZ_1 == "", BRD_H_OTH_2_OZ_1, BRD_H_SLC_2_OZ_1), BRD_H_NO_2_OZ_1)) |>
+    dplyr::mutate("white_bread_price" = if_else(BRD_R_NO_3_PRICE_1 == "", if_else(BRD_R_SLC_3_PRICE_1 == "", BRD_R_OTH_3_PRICE_1, BRD_R_SLC_3_PRICE_1), BRD_R_NO_3_PRICE_1)) |>
+    dplyr::mutate("white_bread_size" = if_else(BRD_R_NO_2_OZ_1 == "", if_else(BRD_R_SLC_2_OZ_1 == "", BRD_R_OTH_2_OZ_1, BRD_R_SLC_2_OZ_1), BRD_R_NO_2_OZ_1)) |>
+    dplyr::mutate("lowfat_chip_varieties" = CHIP_H_CNT)|>
+    dplyr::mutate("lowfat_chips_price" = if_else(CHIP_H_BL_3_PRICE_1 == "", CHIP_H_OTH_3_PRICE_1, CHIP_H_BL_3_PRICE_1)) |>
+    dplyr::mutate("lowfat_chips_size" = if_else(CHIP_H_BL_1_SIZE_1 == "", CHIP_H_OTH_1_SIZE_1, CHIP_H_BL_1_SIZE_1)) |>
+    dplyr::mutate("regular_chips_price" = if_else(CHIP_R_LP_3_PRICE_1 == "", CHIP_R_OTH_3_PRICE_1, CHIP_R_LP_3_PRICE_1)) |>
+    dplyr::mutate("regular_chips_size" = if_else(CHIP_R_LP_1_SIZE_1 == "", CHIP_R_OTH_1_SIZE_1, CHIP_R_LP_1_SIZE_1)) |>
+    dplyr::mutate("healthier_cereal_varieties" = CRL_H_CNT)|>
+    dplyr::mutate("healthier_cereal_price" = if_else(CRL_H_CHE_3_PRICE_1 == "", CRL_H_OTH_3_PRICE_1, CRL_H_CHE_3_PRICE_1))|>
+    dplyr::mutate("regular_cereal_price" = if_else(CRL_R_FCH_3_PRICE_1 == "", CRL_R_OTH_3_PRICE_1, CRL_R_FCH_3_PRICE_1)) |>
+    dplyr::select(STORE_ID, organic_milk_avail, lowfat_milk_avail, dairy_milk_avail, nondairy_milk_avail,
            lowfat_pint, lowfat_quart, lowfat_half_gal, lowfat_gal, whole_pint, whole_quart,
            whole_half_gal, whole_gal, lowfat_quart_price, lowfat_half_gal_price, lowfat_gal_price,
            whole_quart_price, whole_half_gal_price, whole_gal_price, lean_beef_varieties, lean_beef_price, regular_beef_price,
@@ -130,17 +151,18 @@ read_nemss <- function(file) {
            diet_soda_cost, regular_soda_cost, healthy_juice_varieties, healthier_juice_drinks_price, healthier_juice_drinks_comments,
            regular_juice_drinks_price, regular_juice_drinks_comments, varieties_of_whole_grain_bread, whole_wheat_bread_price,
            whole_wheat_bread_size, white_bread_price, white_bread_size, lowfat_chip_varieties, lowfat_chips_price, lowfat_chips_size,
-           regular_chips_price, regular_chips_size, healthier_cereal_varieties, healthier_cereal_price, regular_cereal_price, lowfat_baked_goods_cost) %>%
-    replace_na(list(lean_beef_varieties = 0, fat_free_hot_dogs = 0, light_hot_dogs = 0, frozen_dinner_varieties = 0, lowfat_baked_goods = 0,
+           regular_chips_price, regular_chips_size, healthier_cereal_varieties, healthier_cereal_price, regular_cereal_price, lowfat_baked_goods_cost,
+           LocationLatitude, LocationLongitude) |>
+    tidyr::replace_na(list(lean_beef_varieties = 0, fat_free_hot_dogs = 0, light_hot_dogs = 0, frozen_dinner_varieties = 0, lowfat_baked_goods = 0,
                     diet_soda_varieties = 0, lowfat_chip_varieties = 0, varieties_of_whole_grain_bread = 0, healthier_cereal_varieties = 0,
                     lowfat_gal = 0, whole_gal = 0, whole_wheat_bread_price = 0, white_bread_price = 0))
 
   #clean data
-  all_data$lowfat_chips_size <- gsubfn("(\\d+) (\\d+)", ~ as.numeric(x) + as.numeric(y),
-                                         gsubfn("(\\d+)/(\\d+)", ~ as.numeric(x)/as.numeric(y), all_data$lowfat_chips_size))
+  all_data$lowfat_chips_size <- gsubfn::gsubfn("(\\d+) (\\d+)", ~ as.numeric(x) + as.numeric(y),
+                                         gsubfn::gsubfn("(\\d+)/(\\d+)", ~ as.numeric(x)/as.numeric(y), all_data$lowfat_chips_size))
   all_data$lowfat_chips_size <- gsub("g","",all_data$lowfat_chips_size)
-  all_data$regular_chips_size <- gsubfn("(\\d+) (\\d+)", ~ as.numeric(x) + as.numeric(y),
-                                          gsubfn("(\\d+)/(\\d+)", ~ as.numeric(x)/as.numeric(y), all_data$regular_chips_size))
+  all_data$regular_chips_size <- gsubfn::gsubfn("(\\d+) (\\d+)", ~ as.numeric(x) + as.numeric(y),
+                                          gsubfn::gsubfn("(\\d+)/(\\d+)", ~ as.numeric(x)/as.numeric(y), all_data$regular_chips_size))
   all_data$regular_chips_size <- gsub("g","",all_data$regular_chips_size)
   clean_data <- as.data.frame(lapply(all_data, gsub, pattern='\\$',replacement=''))
   clean_data <- as.data.frame(lapply(clean_data, gsub, pattern = ' oz.', replacement = ''))

@@ -57,7 +57,46 @@ You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-da
 You can also embed plots, for example:
 
 ```{r pressure, echo = FALSE}
-plot(pressure)
+library(haven)
+library(tidyverse)
+library(gsubfn)
+library(sf)
+library(ggplot2)
+library(leaflet)
+
+clean_data <- read_nemss("~/Transpo Research/Nutrition Environments/SPSS Data/NEMS-S+Grocery+Store+Data+Collection+Tool+-+V2_April+1%2C+2022_14.23.sav")
+
+score <- calculate_score(clean_data, detail = TRUE)
+
+score <- score %>%
+  mutate("Longitude" = Longitude) %>%
+  mutate("Latitude" = Latitude)
+
+my_sf <- st_as_sf(score, coords = c('Longitude', 'Latitude'))
+
+my_sf <- st_set_crs(my_sf, crs = 4326)
+
+pal1 <- colorNumeric("Blues", score$Total_Cost_Score)
+
+cost_map <- leaflet(my_sf) %>%
+    addProviderTiles(providers$Esri.WorldGrayCanvas) %>%
+    addCircles(color = ~pal1(Total_Cost_Score), label = ~as.character(ID), radius = 1000)
+
+pal2 <- colorNumeric("Reds", score$Total_Availability_Score)
+
+available_map <- leaflet(my_sf) %>%
+  addProviderTiles(providers$Esri.WorldGrayCanvas) %>%
+  addCircles(color = ~pal2(Total_Availability_Score), label = ~as.character(ID), radius = 1000)
+
+score %>%
+  ggplot() +
+  geom_point(aes(x = Total_Cost_Score, y = Total_Availability_Score))
+
+
+groceries <- file.path("C:/Users/stuck/Documents/Transpo Research/Community_Resources/data/groceries.geojson")
+
+st_read(groceries)
+
 ```
 
 In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
