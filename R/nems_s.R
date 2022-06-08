@@ -72,7 +72,7 @@ read_nemss <- function(file) {
 
   #rename and sort data
   all_data <- SAS_data |>
-    dplyr::mutate("organic_milk_avail" = if_else(MILK_1_7_1 == 1, TRUE, FALSE)) |>
+    #dplyr::mutate(dplyr::across(tidyselect::any_of("MILK_1_7_1"), ~if_else(MILK_1_7_1 == 1, TRUE, FALSE)))|>
     dplyr::mutate("lowfat_milk_avail" = if_else(MILK_2A_1 == 1, TRUE, FALSE)) |>
     dplyr::mutate("dairy_milk_avail" = if_else(MILK_1_AVAIL_1 == 1, TRUE, FALSE)) |>
     dplyr::mutate("nondairy_milk_avail" = if_else(MILK_1_6_1 == 1, TRUE, FALSE)) |>
@@ -138,21 +138,21 @@ read_nemss <- function(file) {
     dplyr::mutate("healthier_cereal_varieties" = CRL_H_CNT)|>
     dplyr::mutate("healthier_cereal_price" = if_else(CRL_H_CHE_3_PRICE_1 == "", CRL_H_OTH_3_PRICE_1, CRL_H_CHE_3_PRICE_1))|>
     dplyr::mutate("regular_cereal_price" = if_else(CRL_R_FCH_3_PRICE_1 == "", CRL_R_OTH_3_PRICE_1, CRL_R_FCH_3_PRICE_1)) |>
-    dplyr::select(STORE_ID, organic_milk_avail, lowfat_milk_avail, dairy_milk_avail, nondairy_milk_avail,
-           lowfat_pint, lowfat_quart, lowfat_half_gal, lowfat_gal, whole_pint, whole_quart,
-           whole_half_gal, whole_gal, lowfat_quart_price, lowfat_half_gal_price, lowfat_gal_price,
-           whole_quart_price, whole_half_gal_price, whole_gal_price, lean_beef_varieties, lean_beef_price, regular_beef_price,
-           varieties_of_fruit, varieties_of_vegetables, fat_free_hot_dogs, light_hot_dogs, lean_wieners_price, lean_wieners_size,
-           regular_wieners_price, regular_wieners_size, frozen_dinner_varieties, regular_frozen_dinners_price_1,
-           healthier_frozen_dinners_price_1, regular_frozen_dinners_price_2, healthier_frozen_dinners_price_2,
-           regular_frozen_dinners_price_3, healthier_frozen_dinners_price_3, regular_frozen_dinners_price_4,
-           healthier_frozen_dinners_price_4, regular_frozen_dinners_price_5, healthier_frozen_dinners_price_5,
-           regular_frozen_dinners_price_6, healthier_frozen_dinners_price_6, lowfat_baked_goods, diet_soda_varieties,
-           diet_soda_cost, regular_soda_cost, healthy_juice_varieties, healthier_juice_drinks_price, healthier_juice_drinks_comments,
-           regular_juice_drinks_price, regular_juice_drinks_comments, varieties_of_whole_grain_bread, whole_wheat_bread_price,
-           whole_wheat_bread_size, white_bread_price, white_bread_size, lowfat_chip_varieties, lowfat_chips_price, lowfat_chips_size,
-           regular_chips_price, regular_chips_size, healthier_cereal_varieties, healthier_cereal_price, regular_cereal_price, lowfat_baked_goods_cost,
-           LocationLatitude, LocationLongitude) |>
+    dplyr::select(tidyselect::any_of(c("STORE_ID", "organic_milk_avail", "lowfat_milk_avail", "dairy_milk_avail", "nondairy_milk_avail",
+           "lowfat_pint", "lowfat_quart", "lowfat_half_gal", "lowfat_gal", "whole_pint", "whole_quart",
+           "whole_half_gal", "whole_gal", "lowfat_quart_price", "lowfat_half_gal_price", "lowfat_gal_price",
+           "whole_quart_price", "whole_half_gal_price", "whole_gal_price", "lean_beef_varieties", "lean_beef_price", "regular_beef_price",
+           "varieties_of_fruit", "varieties_of_vegetables", "fat_free_hot_dogs", "light_hot_dogs", "lean_wieners_price", "lean_wieners_size",
+           "regular_wieners_price", "regular_wieners_size", "frozen_dinner_varieties", "regular_frozen_dinners_price_1",
+           "healthier_frozen_dinners_price_1", "regular_frozen_dinners_price_2", "healthier_frozen_dinners_price_2",
+           "regular_frozen_dinners_price_3", "healthier_frozen_dinners_price_3", "regular_frozen_dinners_price_4",
+           "healthier_frozen_dinners_price_4", "regular_frozen_dinners_price_5", "healthier_frozen_dinners_price_5",
+           "regular_frozen_dinners_price_6", "healthier_frozen_dinners_price_6", "lowfat_baked_goods", "diet_soda_varieties",
+           "diet_soda_cost", "regular_soda_cost", "healthy_juice_varieties", "healthier_juice_drinks_price", "healthier_juice_drinks_comments",
+           "regular_juice_drinks_price", "regular_juice_drinks_comments", "varieties_of_whole_grain_bread", "whole_wheat_bread_price",
+           "whole_wheat_bread_size", "white_bread_price", "white_bread_size", "lowfat_chip_varieties", "lowfat_chips_price", "lowfat_chips_size",
+           "regular_chips_price", "regular_chips_size", "healthier_cereal_varieties", "healthier_cereal_price", "regular_cereal_price", "lowfat_baked_goods_cost",
+           "LocationLatitude", "LocationLongitude"))) |>
     tidyr::replace_na(list(lean_beef_varieties = 0, fat_free_hot_dogs = 0, light_hot_dogs = 0, frozen_dinner_varieties = 0, lowfat_baked_goods = 0,
                     diet_soda_varieties = 0, lowfat_chip_varieties = 0, varieties_of_whole_grain_bread = 0, healthier_cereal_varieties = 0,
                     lowfat_gal = 0, whole_gal = 0, whole_wheat_bread_price = 0, white_bread_price = 0))

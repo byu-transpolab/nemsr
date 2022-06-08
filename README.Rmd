@@ -90,12 +90,14 @@ available_map <- leaflet(my_sf) %>%
 
 score %>%
   ggplot() +
-  geom_point(aes(x = Total_Cost_Score, y = Total_Availability_Score))
+  geom_point(aes(x = Total_Cost_Score, y = Total_Availability_Score, colour = "blue", size = 3), show.legend = FALSE, colour = "blue") +
+  theme(panel.background = element_blank(), panel.grid = element_line(colour = "black"))+
+  labs(title = "Availability Vs. Cost", y = "NEMS Availability Score", x = "NEMS Cost Score")
 
 
 groceries <- file.path("C:/Users/stuck/Documents/Transpo Research/Community_Resources/data/groceries.geojson")
 
-st_read(groceries)
+stores <- st_read(groceries)
 
 ```
 
