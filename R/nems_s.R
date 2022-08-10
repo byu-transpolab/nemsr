@@ -72,7 +72,6 @@ read_nemss <- function(file) {
 
   #rename and sort data
   all_data <- SAS_data |>
-    #dplyr::mutate(dplyr::across(tidyselect::any_of("MILK_1_7_1"), ~if_else(MILK_1_7_1 == 1, TRUE, FALSE)))|>
     dplyr::mutate("lowfat_milk_avail" = if_else(MILK_2A_1 == 1, TRUE, FALSE)) |>
     dplyr::mutate("dairy_milk_avail" = if_else(MILK_1_AVAIL_1 == 1, TRUE, FALSE)) |>
     dplyr::mutate("nondairy_milk_avail" = if_else(MILK_1_6_1 == 1, TRUE, FALSE)) |>
