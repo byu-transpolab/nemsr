@@ -64,7 +64,17 @@ library(sf)
 library(ggplot2)
 library(leaflet)
 
+if_else(MILK_1_7_1 == 1, TRUE, FALSE)
+
 clean_data <- read_nemss("~/Transpo Research/Nutrition Environments/SPSS Data/NEMS-S+Grocery+Store+Data+Collection+Tool+-+V2_April+1%2C+2022_14.23.sav")
+
+file <- read_sav("~/Transpo Research/Nutrition Environments/SPSS Data/NEMS-S+Grocery+Store+Data+Collection+Tool+-+V2_April+1%2C+2022_14.23.sav")
+
+SAS_data <- read_sav(("~/Transpo Research/Nutrition Environments/SPSS Data/utah_county.sav"))
+
+utah <- read_nemss(("~/Transpo Research/Nutrition Environments/SPSS Data/utah_county.sav"))
+
+utah_data <- read_nemss("~/Transpo Research/nemsr/data/NEMS-S_VERSION1_UTCounty_2021.sav")
 
 score <- calculate_score(clean_data, detail = TRUE)
 
@@ -98,6 +108,8 @@ score %>%
 groceries <- file.path("C:/Users/stuck/Documents/Transpo Research/Community_Resources/data/groceries.geojson")
 
 stores <- st_read(groceries)
+
+market <- calculate_market_basket(clean_data)
 
 ```
 
