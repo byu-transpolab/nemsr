@@ -204,7 +204,7 @@ read_nemss <- function(file) {
     dplyr::mutate("whole_pint" = MILK_SHELF_WHL_1_SPACE_1) |>
     dplyr::mutate("whole_quart" = MILK_SHELF_WHL_1_SPACE_2) |>
     dplyr::mutate("whole_half_gal" = MILK_SHELF_WHL_1_SPACE_3) |>
-    dplyr::mutate("whole_gal" = dplyr::if_else(MILK_SHELF_WHL_1_SPACE_4 == "", "0", MILK_SHELF_WHL_1_SPACE_4)) |>
+    dplyr::mutate("whole_gal" = as.numeric(dplyr::if_else(MILK_SHELF_WHL_1_SPACE_4 == "", "0", MILK_SHELF_WHL_1_SPACE_4))) |>
     dplyr::mutate("lowfat_quart_price" = MILK_PRICE_LFQ_1_1) |>
     dplyr::mutate("lowfat_half_gal_price" = MILK_PRICE_LQH_1_1) |>
     dplyr::mutate("lowfat_gal_price" = MILK_PRICE_LFG_1_1) |>
@@ -259,9 +259,9 @@ read_nemss <- function(file) {
     dplyr::mutate("regular_juice_drinks_price" = dplyr::if_else(BVG_RJ_MM_2_PRICE_1 == "", dplyr::if_else(BVG_RJ_TRO_2_PRICE_1 == "", BVG_RJ_OTH_2_PRICE_1, BVG_RJ_TRO_2_PRICE_1), BVG_RJ_MM_2_PRICE_1)) |>
     dplyr::mutate("regular_juice_drinks_comments" = dplyr::if_else(BVG_RJ_MM_3_COMM_1 == "", dplyr::if_else(BVG_RJ_TRO_3_COMM_1 == "", BVG_RJ_OTH_3_COMM_1, BVG_RJ_TRO_3_COMM_1), BVG_RJ_MM_3_COMM_1)) |>
     dplyr::mutate("varieties_of_whole_grain_bread" = BRD_H_CNT)|>
-    dplyr::mutate("whole_wheat_bread_price" = dplyr::if_else(BRD_H_NO_3_PRICE_1 == "", dplyr::if_else(BRD_H_SLC_3_PRICE_1 == "", BRD_H_OTH_3_PRICE_1, BRD_H_SLC_3_PRICE_1), BRD_H_NO_3_PRICE_1))|>
+    dplyr::mutate("whole_wheat_bread_price" = as.numeric(dplyr::if_else(BRD_H_NO_3_PRICE_1 == "", dplyr::if_else(BRD_H_SLC_3_PRICE_1 == "", BRD_H_OTH_3_PRICE_1, BRD_H_SLC_3_PRICE_1), BRD_H_NO_3_PRICE_1)))|>
     dplyr::mutate("whole_wheat_bread_size" = dplyr::if_else(BRD_H_NO_2_OZ_1 == "", dplyr::if_else(BRD_H_SLC_2_OZ_1 == "", BRD_H_OTH_2_OZ_1, BRD_H_SLC_2_OZ_1), BRD_H_NO_2_OZ_1)) |>
-    dplyr::mutate("white_bread_price" = dplyr::if_else(BRD_R_NO_3_PRICE_1 == "", dplyr::if_else(BRD_R_SLC_3_PRICE_1 == "", BRD_R_OTH_3_PRICE_1, BRD_R_SLC_3_PRICE_1), BRD_R_NO_3_PRICE_1)) |>
+    dplyr::mutate("white_bread_price" = as.numeric(dplyr::if_else(BRD_R_NO_3_PRICE_1 == "", dplyr::if_else(BRD_R_SLC_3_PRICE_1 == "", BRD_R_OTH_3_PRICE_1, BRD_R_SLC_3_PRICE_1), BRD_R_NO_3_PRICE_1))) |>
     dplyr::mutate("white_bread_size" = dplyr::if_else(BRD_R_NO_2_OZ_1 == "", dplyr::if_else(BRD_R_SLC_2_OZ_1 == "", BRD_R_OTH_2_OZ_1, BRD_R_SLC_2_OZ_1), BRD_R_NO_2_OZ_1)) |>
     dplyr::mutate("lowfat_chip_varieties" = CHIP_H_CNT)|>
     dplyr::mutate("lowfat_chips_price" = dplyr::if_else(CHIP_H_BL_3_PRICE_1 == "", CHIP_H_OTH_3_PRICE_1, CHIP_H_BL_3_PRICE_1)) |>
