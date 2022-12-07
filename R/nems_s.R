@@ -41,7 +41,7 @@ calculate_market_basket <- function(clean_data) {
 
   scores <- data.frame("ID" = clean_data$STORE_ID)
   scores <- scores |>
-    dplyr::mutate("grain_replacements" = dplyr::if_else(clean_data$whole_wheat_bread_price == "", 1, 0) + dplyr::if_else(clean_data$white_bread_price == "", 1, 0)) |>
+    dplyr::mutate("grain_replacements" = dplyr::if_else(clean_data$whole_wheat_bread_price == "0", 1, 0) + dplyr::if_else(clean_data$white_bread_price == "0", 1, 0)) |>
     dplyr::mutate("grain" = dplyr::if_else(grain_replacements == 2, average_white*16*5.65*1.25 + average_wheat*16*6.7*1.25,dplyr::if_else(grain_replacements == 0, as.numeric(clean_data$whole_wheat_bread_price)/as.numeric(clean_data$whole_wheat_bread_size)*16*6.7 +
                     as.numeric(clean_data$white_bread_price)/as.numeric(clean_data$white_bread_size)*16*5.65, dplyr::if_else(clean_data$white_bread_price == "", (as.numeric(clean_data$whole_wheat_bread_price)/as.numeric(clean_data$whole_wheat_bread_size) + average_bread)*16*5.65 + as.numeric(clean_data$whole_wheat_bread_price)/as.numeric(clean_data$whole_wheat_bread_size)*16*6.7, (as.numeric(clean_data$white_bread_price)/as.numeric(clean_data$white_bread_size)-average_bread)*16*6.7 + as.numeric(clean_data$white_bread_price)/as.numeric(clean_data$white_bread_size)*16*5.65))))|>
     dplyr::mutate("dairy_replacements" = dplyr::if_else(clean_data$whole_gal_price == "", 1, 0) + dplyr::if_else(clean_data$lowfat_gal_price == "", 1, 0)) |>
