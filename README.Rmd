@@ -66,6 +66,9 @@ library(leaflet)
 
 if_else(MILK_1_7_1 == 1, TRUE, FALSE)
 
+utah <- read_nemss("C:/Users/stuck/Documents/Github/Equitable_Access/data/nems_utah.sav")
+utah_score <- calculate_market_basket(utah)
+
 clean_data <- read_nemss("~/Transpo Research/Nutrition Environments/SPSS Data/NEMS-S+Grocery+Store+Data+Collection+Tool+-+V2_April+1%2C+2022_14.23.sav")
 
 file <- read_sav("~/Transpo Research/Nutrition Environments/SPSS Data/NEMS-S+Grocery+Store+Data+Collection+Tool+-+V2_April+1%2C+2022_14.23.sav")
