@@ -1,77 +1,246 @@
-
-
-
-#' Compute Market Basket Cost
+#' Compute market basket cost at a store
 #'
-#' This function uses the basic outline of the Thrifty Food Plan Market Basket to find an overall market basket cost for each store.
+#' @details This function applies the market basket outline found in the
+#'   [Thrifty Food Plan, 2021](https://fns-prod.azureedge.us/sites/default/files/resource-files/TFP2021.pdf)
+#'   Some adjustments needed to be made because the NEMS-S survey is mostly
+#'   focused on the availability of low-calorie and low-fat options, and the
+#'   market basket is based more on the price of observed consumer purchases. For
+#'   example, the market basket includes a certain amount of poultry, but because
+#'   low-fat poultry is not really a thing in the way that lean beef is, the NEMS-S
+#'   instrument does not collect the price of poultry.
 #'
-#' @details This function using the Market Basket outline found in the Thrifty Food Plan, 2021 (https://fns-prod.azureedge.us/sites/default/files/resource-files/TFP2021.pdf)
-#' @param clean_data The data retrieved from a cleaned version of the Qualtrics Survey.
-#' @return Total Cost for Market Basket as well as number of items not available.
+#'   Additionally, if a price was not available, we replaced it with the average
+#'   price for all stores in the dataset.
+#'
+#' @param nems_data A dataframe or tibble containing one row per store, cleaned
+#'   from raw qualtrics survey data with the read_nemss function
+#' @return A tibble containing the weighted price for several types of goods
+#'   including dairy, grain, etc. An additional column is appended with the
+#'   number of replacements with mean values that had to be made in each type.
+#'   A Total column  contains the cost of filling the market basket in that store.
 #' @examples
-#' clean_data <- read_nemss(file)
-#' calculate_market_basket(clean_data)
-calculate_market_basket <- function(clean_data) {
-  prices <- data.frame("ID" = clean_data$STORE_ID)
-  prices <- prices |>
-    dplyr::mutate("bread_price" = as.numeric(clean_data$whole_wheat_bread_price)/as.numeric(clean_data$whole_wheat_bread_size) - as.numeric(clean_data$white_bread_price)/as.numeric(clean_data$white_bread_size)) |>
-    dplyr::mutate("milk_price" = as.numeric(clean_data$whole_gal_price) - as.numeric(clean_data$lowfat_gal_price))
+#' calculate_market_basket(nems_sample)
+#'
+#' @export
+calculate_market_basket <- function(nems_data) {
 
+
+  prices <- tibble::tibble("ID" = nems_data$STORE_ID) |>
+    dplyr::mutate("bread_price" = as.numeric(nems_data$whole_wheat_bread_price) /
+                        as.numeric(nems_data$whole_wheat_bread_size) -
+                    as.numeric(nems_data$white_bread_price) /
+                        as.numeric(nems_data$white_bread_size)) |>
+    dplyr::mutate("milk_price" = as.numeric(nems_data$whole_gal_price) -
+                    as.numeric(nems_data$lowfat_gal_price))
+
+  # Compute average prices for market basket goods;
+  # this is used to replace values that are missing
   average_bread <- mean(prices$bread_price, na.rm = TRUE)
-  average_wheat <- mean(as.numeric(clean_data$whole_wheat_bread_price)/as.numeric(clean_data$whole_wheat_bread_size), na.rm = TRUE)
-  average_white <- mean(as.numeric(clean_data$white_bread_price)/as.numeric(clean_data$white_bread_size), na.rm = TRUE)
+  average_wheat <- mean(as.numeric(nems_data$whole_wheat_bread_price) /
+                          as.numeric(nems_data$whole_wheat_bread_size), na.rm = TRUE)
+  average_white <- mean(as.numeric(nems_data$white_bread_price) /
+                          as.numeric(nems_data$white_bread_size), na.rm = TRUE)
   average_milk <- mean(prices$milk_price, na.rm = TRUE)
-  average_whole <- mean(as.numeric(clean_data$whole_gal_price), na.rm = TRUE)
-  average_lowfat <- mean(as.numeric(clean_data$lowfat_gal_price), na.rm = TRUE)
-  average_carrot <- mean(as.numeric(clean_data$carrot_price), na.rm = TRUE)
-  average_tomato <- mean(as.numeric(clean_data$tomato_price), na.rm = TRUE)
-  average_broccoli <- mean(as.numeric(clean_data$broccoli_price), na.rm = TRUE)
-  average_lettuce <- mean(as.numeric(clean_data$lettuce_price), na.rm = TRUE)
-  average_cucumber <- mean(as.numeric(clean_data$cucumber_price), na.rm = TRUE)
-  average_corn <- mean(as.numeric(clean_data$corn_price), na.rm = TRUE)
-  average_cauliflower <- mean(as.numeric(clean_data$cauliflower_price), na.rm = TRUE)
-  average_apple <- mean(as.numeric(clean_data$apple_price), na.rm = TRUE)
-  average_banana <- mean(as.numeric(clean_data$banana_price), na.rm = TRUE)
-  average_orange <- mean(as.numeric(clean_data$orange_price), na.rm = TRUE)
-  average_grape <- mean(as.numeric(clean_data$grape_price), na.rm = TRUE)
-  average_soda <- mean(as.numeric(clean_data$regular_soda_cost), na.rm = TRUE)
-  average_beef <- mean(as.numeric(clean_data$regular_beef_price), na.rm = TRUE)
-  average_frozen_dinner <- mean(as.numeric(clean_data$regular_frozen_dinners_price_1), na.rm = TRUE)
+  average_whole <- mean(as.numeric(nems_data$whole_gal_price), na.rm = TRUE)
+  average_lowfat <- mean(as.numeric(nems_data$lowfat_gal_price), na.rm = TRUE)
+  average_carrot <- mean(as.numeric(nems_data$carrot_price), na.rm = TRUE)
+  average_tomato <- mean(as.numeric(nems_data$tomato_price), na.rm = TRUE)
+  average_broccoli <- mean(as.numeric(nems_data$broccoli_price), na.rm = TRUE)
+  average_lettuce <- mean(as.numeric(nems_data$lettuce_price), na.rm = TRUE)
+  average_cucumber <- mean(as.numeric(nems_data$cucumber_price), na.rm = TRUE)
+  average_corn <- mean(as.numeric(nems_data$corn_price), na.rm = TRUE)
+  average_cauliflower <- mean(as.numeric(nems_data$cauliflower_price), na.rm = TRUE)
+  average_apple <- mean(as.numeric(nems_data$apple_price), na.rm = TRUE)
+  average_banana <- mean(as.numeric(nems_data$banana_price), na.rm = TRUE)
+  average_orange <- mean(as.numeric(nems_data$orange_price), na.rm = TRUE)
+  average_grape <- mean(as.numeric(nems_data$grape_price), na.rm = TRUE)
+  average_soda <- mean(as.numeric(nems_data$regular_soda_cost), na.rm = TRUE)
+  average_beef <- mean(as.numeric(nems_data$regular_beef_price), na.rm = TRUE)
+  average_frozen_dinner <- mean(as.numeric(nems_data$regular_frozen_dinners_price_1), na.rm = TRUE)
   average <- data.frame(average_bread, average_milk)
 
-  scores <- data.frame("ID" = clean_data$STORE_ID)
-  scores <- scores |>
-    dplyr::mutate("grain_replacements" = dplyr::if_else(clean_data$whole_wheat_bread_price == "0", 1, 0) + dplyr::if_else(clean_data$white_bread_price == "0", 1, 0)) |>
-    dplyr::mutate("grain" = dplyr::if_else(grain_replacements == 2, average_white*16*5.65*1.25 + average_wheat*16*6.7*1.25,dplyr::if_else(grain_replacements == 0, as.numeric(clean_data$whole_wheat_bread_price)/as.numeric(clean_data$whole_wheat_bread_size)*16*6.7 +
-                    as.numeric(clean_data$white_bread_price)/as.numeric(clean_data$white_bread_size)*16*5.65, dplyr::if_else(clean_data$white_bread_price == "", (as.numeric(clean_data$whole_wheat_bread_price)/as.numeric(clean_data$whole_wheat_bread_size) + average_bread)*16*5.65 + as.numeric(clean_data$whole_wheat_bread_price)/as.numeric(clean_data$whole_wheat_bread_size)*16*6.7, (as.numeric(clean_data$white_bread_price)/as.numeric(clean_data$white_bread_size)-average_bread)*16*6.7 + as.numeric(clean_data$white_bread_price)/as.numeric(clean_data$white_bread_size)*16*5.65))))|>
-    dplyr::mutate("dairy_replacements" = dplyr::if_else(clean_data$whole_gal_price == "", 1, 0) + dplyr::if_else(clean_data$lowfat_gal_price == "", 1, 0)) |>
-    dplyr::mutate("dairy" = dplyr::if_else(dairy_replacements == 2, average_whole/18.6*15.13 + average_lowfat/18.6*25.48, dplyr::if_else(dairy_replacements == 0, as.numeric(clean_data$whole_gal_price)/8.6*15.13 + as.numeric(clean_data$lowfat_gal_price)/8.6*25.48, dplyr::if_else(clean_data$whole_gal_price == "", (as.numeric(clean_data$lowfat_gal_price)-average_milk)/8.6*25.48 + (as.numeric(clean_data$lowfat_gal_price)-average_milk)/8.6*15.13, (as.numeric(clean_data$whole_gal_price)-average_milk)/8.6*25.48 + as.numeric(clean_data$whole_gal_price)/8.6*15.13)))) |>
-    dplyr::mutate("vegetable_replacements" = dplyr::if_else(clean_data$carrot_price == "", 1, 0) + dplyr::if_else(clean_data$tomato_price == "", 1, 0) + dplyr::if_else(clean_data$broccoli_price == "", 1, 0) + dplyr::if_else(clean_data$lettuce_price == "", 1, 0) + dplyr::if_else(clean_data$cucumber_price == "", 1, 0) + dplyr::if_else(clean_data$corn_price == "", 1, 0) + dplyr::if_else(clean_data$cauliflower_price == "", 1, 0)) |>
-    dplyr::mutate("vegetable" = dplyr::if_else(clean_data$carrot_price == "", dplyr::if_else(clean_data$tomato_price == "",average_carrot*4.14*1.25, as.numeric(clean_data$tomato_price)*4.14), as.numeric(clean_data$carrot_price)*4.14) +
-                    dplyr::if_else(clean_data$tomato_price == "", dplyr::if_else(clean_data$carrot_price == "", average_tomato*4.14*1.25, as.numeric(clean_data$carrot_price)*4.14), as.numeric(clean_data$tomato_price)*4.14) +
-                    dplyr::if_else(clean_data$broccoli_price == "", dplyr::if_else(clean_data$lettuce_price == "", dplyr::if_else(clean_data$cucumber_price == "", average_broccoli*1.23*1.25, as.numeric(clean_data$cucumber_price)*1.23), as.numeric(clean_data$lettuce_price)*1.23), as.numeric(clean_data$broccoli_price)*1.23) +
-                    dplyr::if_else(clean_data$lettuce_price == "", dplyr::if_else(clean_data$cucumber_price == "", dplyr::if_else(clean_data$broccoli_price == "", average_lettuce*1*1.25, as.numeric(clean_data$broccoli_price)*1), as.numeric(clean_data$cucumber_price)*1), as.numeric(clean_data$lettuce_price)*1) +
-                    dplyr::if_else(clean_data$cucumber_price == "", dplyr::if_else(clean_data$broccoli_price == "", dplyr::if_else(clean_data$lettuce_price == "", average_cucumber*1*1.25, as.numeric(clean_data$lettuce_price)*1), as.numeric(clean_data$broccoli_price)*1), as.numeric(clean_data$cucumber_price)*1) +
-                    dplyr::if_else(clean_data$corn_price == "", dplyr::if_else(clean_data$cauliflower_price == "", average_corn*1.25*5.64, as.numeric(clean_data$cauliflower_price)*5.64), as.numeric(clean_data$corn_price)*5.64) +
-                    dplyr::if_else(clean_data$cauliflower_price == "", dplyr::if_else(clean_data$corn_price == "", average_cauliflower*1.25*5, as.numeric(clean_data$corn_price)*5), as.numeric(clean_data$cauliflower_price)*5)
-                  ) |>
-    dplyr::mutate("fruit_replacements" = dplyr::if_else(clean_data$apple_price == "", 1, 0) + dplyr::if_else(clean_data$banana_price == "", 1, 0) + dplyr::if_else(clean_data$orange_price == "", 1, 0) + dplyr::if_else(clean_data$grape_price == "", 1, 0)) |>
-    dplyr::mutate("fruit" = dplyr::if_else(clean_data$apple_price == "", average_apple*5*1.25, as.numeric(clean_data$apple_price)*5) +
-                    dplyr::if_else(clean_data$banana_price == "", average_banana*5*1.25, as.numeric(clean_data$banana_price)*5) +
-                    dplyr::if_else(clean_data$orange_price == "", average_orange*5*1.25, as.numeric(clean_data$orange_price)*5) +
-                    dplyr::if_else(clean_data$grape_price == "", average_grape*2.76*1.25, as.numeric(clean_data$grape_price)*2.76))|>
-    dplyr::mutate("soda_replacements" = dplyr::if_else(clean_data$regular_soda_cost == "", 1, 0))|>
-    dplyr::mutate("soda" = dplyr::if_else(clean_data$regular_soda_cost == "", average_soda/144*16*.57*1.25, as.numeric(clean_data$regular_soda_cost)/144*16*.57))|>
-    dplyr::mutate("beef_replacements" = dplyr::if_else(clean_data$regular_beef_price == "", 1, 0))|>
-    dplyr::mutate("beef" = dplyr::if_else(clean_data$regular_beef_price == "", average_beef*2.26*1.25, as.numeric(clean_data$regular_beef_price)*2.26))|>
-    dplyr::mutate("frozen_dinner_replacements" = dplyr::if_else(clean_data$regular_frozen_dinners_price_1 == "" & clean_data$regular_frozen_dinners_price_2 == "" & clean_data$regular_frozen_dinners_price_3 == "" & clean_data$regular_frozen_dinners_price_4 == "" & clean_data$regular_frozen_dinners_price_5 == "" & clean_data$regular_frozen_dinners_price_6 == "", 1, 0)) |>
-    dplyr::mutate("frozen_dinner" =
-                    dplyr::if_else(clean_data$regular_frozen_dinners_price_1 != "", as.numeric(clean_data$regular_frozen_dinners_price_1)*1.51, dplyr::if_else(clean_data$regular_frozen_dinners_price_2 != "", as.numeric(clean_data$regular_frozen_dinners_price_2)*1.51,
-                    dplyr::if_else(clean_data$regular_frozen_dinners_price_3 != "", as.numeric(clean_data$regular_frozen_dinners_price_3)*1.51, dplyr::if_else(clean_data$regular_frozen_dinners_price_4 != "", as.numeric(clean_data$regular_frozen_dinners_price_4)*1.51,
-                    dplyr::if_else(clean_data$regular_frozen_dinners_price_5 != "", as.numeric(clean_data$regular_frozen_dinners_price_5)*1.51, dplyr::if_else(clean_data$regular_frozen_dinners_price_6 != "", as.numeric(clean_data$regular_frozen_dinners_price_6)*1.51, average_frozen_dinner*1.51))))))
-                    ) |>
-    dplyr::mutate("total_replacements" = grain_replacements + dairy_replacements + vegetable_replacements + fruit_replacements + soda_replacements + beef_replacements + frozen_dinner_replacements) |>
-    dplyr::mutate("total" = grain + dairy + vegetable + fruit + soda + beef + frozen_dinner)
+
+
+  # calculate the per-good prices
+  scores <- tibble::tibble("ID" = nems_data$STORE_ID) |>
+    dplyr::mutate(
+      "grain_replacements" =
+        dplyr::if_else(nems_data$whole_wheat_bread_price == "0", 1, 0) +
+        dplyr::if_else(nems_data$white_bread_price == "0", 1, 0),
+
+      "grain" = dplyr::case_when(
+        grain_replacements == 2 ~ average_white*16*5.65*1.25 + average_wheat*16*6.7*1.25,
+        grain_replacements == 0 ~
+          as.numeric(nems_data$whole_wheat_bread_price) /
+              as.numeric(nems_data$whole_wheat_bread_size)*16*6.7 +
+          as.numeric(nems_data$white_bread_price) /
+              as.numeric(nems_data$white_bread_size)*16*5.65,
+        nems_data$white_bread_price == "" ~
+          (as.numeric(nems_data$whole_wheat_bread_price) /
+            as.numeric(nems_data$whole_wheat_bread_size) + average_bread)*16*5.65 +
+          as.numeric(nems_data$whole_wheat_bread_price) /
+            as.numeric(nems_data$whole_wheat_bread_size)*16*6.7,
+        TRUE ~ (as.numeric(nems_data$white_bread_price) /
+            as.numeric(nems_data$white_bread_size) -
+          average_bread)*16*6.7 + as.numeric(nems_data$white_bread_price) /
+          as.numeric(nems_data$white_bread_size)*16*5.65),
+
+
+      "dairy_replacements" = dplyr::if_else(nems_data$whole_gal_price == "", 1, 0) +
+        dplyr::if_else(nems_data$lowfat_gal_price == "", 1, 0),
+
+      "dairy" =
+        dplyr::if_else(
+          dairy_replacements == 2,
+          average_whole/18.6*15.13 + average_lowfat/18.6*25.48,
+          dplyr::if_else(
+            dairy_replacements == 0,
+            as.numeric(nems_data$whole_gal_price)/8.6*15.13 + as.numeric(nems_data$lowfat_gal_price)/8.6*25.48,
+            dplyr::if_else(
+              nems_data$whole_gal_price == "",
+              (as.numeric(nems_data$lowfat_gal_price)-average_milk) / 8.6*25.48 +
+                (as.numeric(nems_data$lowfat_gal_price)-average_milk)/8.6*15.13,
+              (as.numeric(nems_data$whole_gal_price)-average_milk)/8.6*25.48 +
+                as.numeric(nems_data$whole_gal_price)/8.6*15.13))),
+
+
+      "vegetable_replacements" =
+        dplyr::if_else(nems_data$carrot_price == "", 1, 0) +
+        dplyr::if_else(nems_data$tomato_price == "", 1, 0) +
+        dplyr::if_else(nems_data$broccoli_price == "", 1, 0) +
+        dplyr::if_else(nems_data$lettuce_price == "", 1, 0) +
+        dplyr::if_else(nems_data$cucumber_price == "", 1, 0) +
+        dplyr::if_else(nems_data$corn_price == "", 1, 0) +
+        dplyr::if_else(nems_data$cauliflower_price == "", 1, 0),
+
+
+      "vegetable" =
+        dplyr::if_else(
+          nems_data$carrot_price == "",
+          # missing carrot prices
+          dplyr::if_else(
+            nems_data$tomato_price == "",
+            average_carrot*4.14*1.25,
+            as.numeric(nems_data$tomato_price)*4.14),
+          as.numeric(nems_data$carrot_price)*4.14) +
+        dplyr::if_else(
+          nems_data$tomato_price == "",
+          dplyr::if_else(
+            nems_data$carrot_price == "",
+            average_tomato*4.14*1.25,
+            as.numeric(nems_data$carrot_price)*4.14),
+          as.numeric(nems_data$tomato_price)*4.14) +
+        dplyr::if_else(
+          nems_data$broccoli_price == "",
+          dplyr::if_else(
+            nems_data$lettuce_price == "",
+            dplyr::if_else(
+              nems_data$cucumber_price == "",
+              average_broccoli*1.23*1.25,
+              as.numeric(nems_data$cucumber_price)*1.23),
+            as.numeric(nems_data$lettuce_price)*1.23),
+          as.numeric(nems_data$broccoli_price)*1.23) +
+        dplyr::if_else(
+          nems_data$lettuce_price == "",
+          dplyr::if_else(
+            nems_data$cucumber_price == "",
+            dplyr::if_else(
+              nems_data$broccoli_price == "",
+              average_lettuce*1*1.25,
+              as.numeric(nems_data$broccoli_price)*1),
+            as.numeric(nems_data$cucumber_price)*1),
+          as.numeric(nems_data$lettuce_price)*1) +
+        dplyr::if_else(
+          nems_data$cucumber_price == "",
+          dplyr::if_else(
+            nems_data$broccoli_price == "",
+            dplyr::if_else(
+              nems_data$lettuce_price == "",
+              average_cucumber*1*1.25,
+              as.numeric(nems_data$lettuce_price)*1),
+            as.numeric(nems_data$broccoli_price)*1),
+          as.numeric(nems_data$cucumber_price)*1) +
+        dplyr::if_else(
+          nems_data$corn_price == "",
+          dplyr::if_else(
+            nems_data$cauliflower_price == "",
+            average_corn*1.25*5.64,
+            as.numeric(nems_data$cauliflower_price)*5.64),
+          as.numeric(nems_data$corn_price)*5.64) +
+        dplyr::if_else(
+          nems_data$cauliflower_price == "",
+          dplyr::if_else(
+            nems_data$corn_price == "",
+            average_cauliflower*1.25*5,
+            as.numeric(nems_data$corn_price)*5),
+          as.numeric(nems_data$cauliflower_price)*5),
+
+
+
+      "fruit_replacements" =
+        dplyr::if_else(nems_data$apple_price == "", 1, 0) +
+        dplyr::if_else(nems_data$banana_price == "", 1, 0) +
+        dplyr::if_else(nems_data$orange_price == "", 1, 0) +
+        dplyr::if_else(nems_data$grape_price == "", 1, 0),
+
+      "fruit" = dplyr::if_else( nems_data$apple_price == "",
+                                average_apple*5*1.25,
+                                as.numeric(nems_data$apple_price)*5) +
+        dplyr::if_else(nems_data$banana_price == "",
+                       average_banana*5*1.25,
+                       as.numeric(nems_data$banana_price)*5) +
+        dplyr::if_else(nems_data$orange_price == "",
+                       average_orange*5*1.25,
+                       as.numeric(nems_data$orange_price)*5) +
+        dplyr::if_else(nems_data$grape_price == "",
+                       average_grape*2.76*1.25,
+                       as.numeric(nems_data$grape_price)*2.76),
+
+
+      "soda_replacements" = dplyr::if_else(nems_data$regular_soda_cost == "", 1, 0),
+       "soda" = dplyr::if_else(nems_data$regular_soda_cost == "",
+                               average_soda/144*16*.57*1.25,
+                               as.numeric(nems_data$regular_soda_cost)/144*16*.57),
+
+      "beef_replacements" = dplyr::if_else(nems_data$regular_beef_price == "", 1, 0),
+      "beef" = dplyr::if_else(nems_data$regular_beef_price == "",
+                              average_beef*2.26*1.25,
+                              as.numeric(nems_data$regular_beef_price)*2.26),
+
+      "frozen_dinner_replacements" =
+        dplyr::if_else(nems_data$regular_frozen_dinners_price_1 == "" &
+                         nems_data$regular_frozen_dinners_price_2 == "" &
+                         nems_data$regular_frozen_dinners_price_3 == "" &
+                         nems_data$regular_frozen_dinners_price_4 == "" &
+                         nems_data$regular_frozen_dinners_price_5 == "" &
+                         nems_data$regular_frozen_dinners_price_6 == "", 1, 0),
+       "frozen_dinner" = dplyr::if_else(
+         nems_data$regular_frozen_dinners_price_1 != "",
+         as.numeric(nems_data$regular_frozen_dinners_price_1)*1.51,
+         dplyr::if_else(
+           nems_data$regular_frozen_dinners_price_2 != "",
+           as.numeric(nems_data$regular_frozen_dinners_price_2)*1.51,
+           dplyr::if_else(
+             nems_data$regular_frozen_dinners_price_3 != "",
+             as.numeric(nems_data$regular_frozen_dinners_price_3)*1.51,
+             dplyr::if_else(
+               nems_data$regular_frozen_dinners_price_4 != "",
+               as.numeric(nems_data$regular_frozen_dinners_price_4)*1.51,
+               dplyr::if_else(
+                 nems_data$regular_frozen_dinners_price_5 != "",
+                 as.numeric(nems_data$regular_frozen_dinners_price_5)*1.51,
+                 dplyr::if_else(
+                   nems_data$regular_frozen_dinners_price_6 != "",
+                   as.numeric(nems_data$regular_frozen_dinners_price_6)*1.51,
+                   average_frozen_dinner*1.51)))))),
+
+      "total_replacements" = grain_replacements + dairy_replacements +
+        vegetable_replacements + fruit_replacements + soda_replacements +
+        beef_replacements + frozen_dinner_replacements,
+      "total" = grain + dairy + vegetable + fruit + soda + beef + frozen_dinner
+    )
+
+  scores
 }
 
 
