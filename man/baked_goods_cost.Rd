@@ -4,7 +4,7 @@
 \alias{baked_goods_cost}
 \title{Compute baked goods cost points}
 \usage{
-baked_goods_cost(healthier_baked_goods_price, regular_baked_goods_price)
+baked_goods_cost(healthier_baked_goods_price, regular_baked_goods_price = NULL)
 }
 \arguments{
 \item{healthier_baked_goods_price}{The price of lower fat baked goods.}

@@ -15,10 +15,14 @@ bread_cost(whole_wheat_bread_price, white_bread_price)
 The NEMS-S points associated with bread cost.
 }
 \description{
-This function takes in the cost of whole wheat bread and white bread and compares them to return a NEMS-S score for the cost.
+This function takes in the cost of whole wheat bread and white bread and
+compares them to return a NEMS-S score for the cost.
 }
 \details{
-This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Whole grain bread" is 100% whole wheat and whole grain bread, and it is the healthier option. "White bread" is the regular option, bread made with refined flour.
+This function implements the scoring method described in Table 4.1
+  of Lundsford (2016). "Whole grain bread" is 100 percent whole wheat and whole
+  grain bread, and it is the healthier option. "White bread" is the regular
+  option, bread made with refined flour.
 }
 \examples{
 whole_wheat_bread_price <- rnorm(10,1.5,.5)

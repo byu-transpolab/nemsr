@@ -59,11 +59,23 @@ like to do with them: a NEMS-S score and a market basket score.
 
 ### NEMS-S Score
 
-The `calculate_nems_score()` function 
+The `calculate_nems_score()` function computes the NEMS scores related
+to the cost and availability of healthier options at each grocery store.
+Additionally, a few variables relevant to the size and type of the store are
+returned in a tibble.
 
-```{r scores, eval = FALSE}
+```{r scores}
 calculate_nems_score(nemss)
 ```
+
+
+There is also a `detail` argument to this function that returns data columns
+showing the detail of the price and availability calculations.
+
+```{r scores-detail}
+calculate_nems_score(nemss, detail = TRUE)
+```
+
 
 ### Market Basket
 
@@ -71,7 +83,7 @@ The `calculate_market_basket()` function computes the cost of a common market
 basket at that store using the pricing data available weighted according to the
 [Thrifty Food Plan, 2021](https://fns-prod.azureedge.us/sites/default/files/resource-files/TFP2021.pdf)
 
-```{r pressure, echo = FALSE}
+```{r pressure}
 (basket_score <- calculate_market_basket(nemss))
 ```
 

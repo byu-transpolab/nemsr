@@ -16,7 +16,7 @@ The NEMS-S points associated with whole grain bread availability.
 This function takes in the number of varieties of whole grain bread and returns the NEMS-S points associated with availability.
 }
 \details{
-This function implements the scoring method described in Measure 9 of the NEMS-S Protocol. "Whole grain bread" is 100% whole wheat and whole grain bread, and it is the healthier option.
+This function implements the scoring method described in Measure 9 of the NEMS-S Protocol. "Whole grain bread" is 100 percent whole wheat and whole grain bread, and it is the healthier option.
 }
 \examples{
 varieties_of_whole_grain_bread <- sample(1:10, 10)

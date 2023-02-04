@@ -7,20 +7,25 @@
 juice_cost(healthier_juice_drinks_price, regular_juice_drinks_price)
 }
 \arguments{
-\item{healthier_juice_drinks_price}{The cost of 100% juice drinks.}
+\item{healthier_juice_drinks_price}{The cost of 100 percent juice drinks.}
 
-\item{regular_juice_drinks_price}{The cost of non 100% juice drinks.}
+\item{regular_juice_drinks_price}{The cost of non 100 percent juice drinks.}
 }
 \value{
 The NEMS_S points associated with juice drinks cost.
 }
 \description{
-This function takes in the cost of healthier and regular juice and compares them to return a NEMS-S score for the cost.
+This function takes in the cost of healthier and regular juice and compares
+them to return a NEMS-S score for the cost.
 }
 \details{
-This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Healthy juice" is 100 percent juice drinks, natural fruit juice with no added sugars. "Regular juice" is fruit juice with added sugar and water.
+This function implements the scoring method described in Table 4.1
+  of Lundsford (2016). "Healthy juice" is 100 percent juice drinks, natural
+  fruit juice with no added sugars. "Regular juice" is fruit juice with added
+  sugar and water.
 }
 \examples{
+
 healthier_juice_drinks_price <- rnorm(10,4.1,.5)
 regular_juice_drinks_price <- rnorm(10,4.1,.3)
 

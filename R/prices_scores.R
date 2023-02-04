@@ -214,7 +214,7 @@ juice_drinks_avail <- function(healthy_juice_varieties){
 #'
 #' This function takes in the number of varieties of whole grain bread and returns the NEMS-S points associated with availability.
 #'
-#' @details This function implements the scoring method described in Measure 9 of the NEMS-S Protocol. "Whole grain bread" is 100% whole wheat and whole grain bread, and it is the healthier option.
+#' @details This function implements the scoring method described in Measure 9 of the NEMS-S Protocol. "Whole grain bread" is 100 percent whole wheat and whole grain bread, and it is the healthier option.
 #' @param varieties_of_whole_grain_bread The number of types of whole grain bread available.
 #' @return The NEMS-S points associated with whole grain bread availability.
 #' @examples
@@ -379,7 +379,13 @@ frozen_dinners_cost <- function(healthier_frozen_dinners_price, regular_frozen_d
 #'
 #' baked_goods_cost(healthier_baked_goods_price, regular_baked_goods_price)
 #'
-baked_goods_cost <- function(healthier_baked_goods_price, regular_baked_goods_price){
+baked_goods_cost <- function(healthier_baked_goods_price, regular_baked_goods_price = NULL){
+
+  if(is.null(regular_baked_goods_price)){
+    warning("No regular baked goods price provided")
+    regular_baked_goods_price <- healthier_baked_goods_price
+  }
+
   dplyr::case_when(
     # -1 point if healthier option more expensive
     healthier_baked_goods_price - regular_baked_goods_price > 0 ~ -1,
@@ -411,13 +417,19 @@ soda_cost <- function(diet_soda_price, regular_soda_price){
 
 #' Compute juice drinks cost points
 #'
-#' This function takes in the cost of healthier and regular juice and compares them to return a NEMS-S score for the cost.
+#' This function takes in the cost of healthier and regular juice and compares
+#' them to return a NEMS-S score for the cost.
 #'
-#' @details This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Healthy juice" is 100 percent juice drinks, natural fruit juice with no added sugars. "Regular juice" is fruit juice with added sugar and water.
-#' @param healthier_juice_drinks_price The cost of 100% juice drinks.
-#' @param regular_juice_drinks_price The cost of non 100% juice drinks.
+#' @details This function implements the scoring method described in Table 4.1
+#'   of Lundsford (2016). "Healthy juice" is 100 percent juice drinks, natural
+#'   fruit juice with no added sugars. "Regular juice" is fruit juice with added
+#'   sugar and water.
+#'
+#' @param healthier_juice_drinks_price The cost of 100 percent juice drinks.
+#' @param regular_juice_drinks_price The cost of non 100 percent juice drinks.
 #' @return The NEMS_S points associated with juice drinks cost.
 #' @examples
+#'
 #' healthier_juice_drinks_price <- rnorm(10,4.1,.5)
 #' regular_juice_drinks_price <- rnorm(10,4.1,.3)
 #'
@@ -434,19 +446,29 @@ juice_cost <- function(healthier_juice_drinks_price, regular_juice_drinks_price)
 
 #' Compute beverage cost points
 #'
-#' This function takes in the cost of diet soda, regular soda, 100% juice and regular juice drinks and compares them to return an NEMS-S score for the cost.
+#' This function takes in the cost of diet soda, regular soda, 100 percent juice and
+#' regular juice drinks and compares them to return an NEMS-S score for the
+#' cost.
 #'
-#' @details This function implements the scoring method described in Table 4.1 Lundsford (2016). "Healthy juice" is 100 percent juice drinks, natural fruit juice with no added sugars. "Regular juice" is fruit juice with added sugar and water.
+#' @details This function implements the scoring method described in Table 4.1
+#'   Lundsford (2016). "Healthy juice" is 100 percent juice drinks, natural
+#'   fruit juice with no added sugars. "Regular juice" is fruit juice with added
+#'   sugar and water.
 #' @param diet_soda_price The price of regular soda.
 #' @param regular_soda_price The price of healthier soda.
-#' @param healthier_juice_drinks_price The cost of 100% juice drinks.
-#' @param regular_juice_drinks_price The cost of non 100% juice drinks.
+#' @param healthier_juice_drinks_price The cost of 100 percent juice drinks.
+#' @param regular_juice_drinks_price The cost of non 100 percent juice drinks.
 #' @return The NEMS_S points associated with soda price compared to juice price.
+#'
 #' @examples
 #' diet_soda_price <- rnorm(10,4.1,.5)
 #' regular_soda_price <- rnorm(10,4.1,.3)
 #' healthier_juice_drinks_price <- rnorm(10,4.1,.5)
 #' regular_juice_drinks_price <- rnorm(10,4.1,.3)
+#'
+#' juice_drinks_cost(diet_soda_price, regular_soda_price,
+#'  healthier_juice_drinks_price, regular_juice_drinks_price)
+#'
 juice_drinks_cost <- function(diet_soda_price, regular_soda_price, healthier_juice_drinks_price, regular_juice_drinks_price){
   dplyr::case_when(
     # 0 points if 100% juice drink is less expensive or diet soda is less expensive
@@ -459,9 +481,13 @@ juice_drinks_cost <- function(diet_soda_price, regular_soda_price, healthier_jui
 
 #' Compute bread cost points
 #'
-#' This function takes in the cost of whole wheat bread and white bread and compares them to return a NEMS-S score for the cost.
+#' This function takes in the cost of whole wheat bread and white bread and
+#' compares them to return a NEMS-S score for the cost.
 #'
-#' @details This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Whole grain bread" is 100% whole wheat and whole grain bread, and it is the healthier option. "White bread" is the regular option, bread made with refined flour.
+#' @details This function implements the scoring method described in Table 4.1
+#'   of Lundsford (2016). "Whole grain bread" is 100 percent whole wheat and whole
+#'   grain bread, and it is the healthier option. "White bread" is the regular
+#'   option, bread made with refined flour.
 #' @param whole_wheat_bread_price The cost of whole wheat bread.
 #' @param white_bread_price The cost of white bread.
 #' @return The NEMS-S points associated with bread cost.
@@ -480,15 +506,19 @@ bread_cost <- function(whole_wheat_bread_price, white_bread_price){
 
 #' Compute chips cost points
 #'
-#' This function takes in the cost of lowfat and regular chips and compares them to return a NEMS-S score for the cost.
+#' This function takes in the cost of lowfat and regular chips and compares them
+#' to return a NEMS-S score for the cost.
 #'
-#' @details This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Lowfat chips" contain less than or equal to 3g of fat per 1oz serving.
+#' @details This function implements the scoring method described in Table 4.1
+#'   of Lundsford (2016). "Lowfat chips" contain less than or equal to 3g of fat
+#'   per 1oz serving.
 #' @param lowfat_chips_price The price of lowfat chips.
 #' @param regular_chips_price The price of regular chips.
 #' @return The NEMS-S points associated with chips cost.
 #' @examples
 #' lowfat_chips_price <- rnorm(10,2.5,.5)
 #' regular_chips_price <- rnorm(10,2.8,.3)
+#' chips_cost(lowfat_chips_price, regular_chips_price)
 chips_cost <- function(lowfat_chips_price, regular_chips_price){
   dplyr::case_when(
     # 2 points if lowfat chips are less expensive than regular chips
@@ -501,15 +531,19 @@ chips_cost <- function(lowfat_chips_price, regular_chips_price){
 
 #' Compute cereal cost points
 #'
-#' This function takes in the cost of healthier and regular cereal and compares them to return a NEMS-S score for the cost.
+#' This function takes in the cost of healthier and regular cereal and compares
+#' them to return a NEMS-S score for the cost.
 #'
-#' @details This function implements the scoring method described in Table 4.1 of Lundsford (2016). "Healthier cereal" has less than 7g of sugar per serving.
+#' @details This function implements the scoring method described in Table 4.1
+#'   of Lundsford (2016). "Healthier cereal" has less than 7g of sugar per
+#'   serving.
 #' @param healthier_cereal_price The price of healthier cereal.
 #' @param regular_cereal_price The price of regular cereal.
 #' @return The NEMS-S points associated with cereal cost.
 #' @examples
 #' healthier_cereal_price <- rnorm(10,4.1,.5)
 #' regular_cereal_price <- rnorm(10,3.5,.3)
+#' cereal_cost(healthier_cereal_price, regular_cereal_price )
 cereal_cost <- function(healthier_cereal_price, regular_cereal_price){
   dplyr::case_when(
     # 2 points if healthier cereal is less expensive
