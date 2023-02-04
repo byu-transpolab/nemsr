@@ -1,3 +1,127 @@
+
+#' Compute Availability and Cost Scores for all variables
+#'
+#' This function uses all functions previously created and scores assigned to each variable and adds them into one total score for both availability and cost.
+#'
+#' @details This function implements the scoring method described in Measure 9
+#'   of the NEMS-S Protocol.
+#'
+#' @param nems_data A dataframe or tibble created by reading the raw qualtrics data
+#'   with `read_nems`
+#' @return Scores for total Availability and Cost, as well as given the option
+#'   if Detail = TRUE to see the score for each individual variable.
+#' @examples
+#' calculate_nems_score(nems_sample)
+#'
+#' @export
+#'
+calculate_nems_score <- function(nems_data, detail = FALSE) {
+  scores <- tibble::tibble("ID" = nems_data$STORE_ID) |>
+    dplyr::mutate(
+      "type" = nems_data$store_type,
+      "pharmacy" = nems_data$pharmacy,
+      "ethnic" = nems_data$ethnic,
+      "merch" = nems_data$merch,
+      "registers" = nems_data$register,
+      "selfchecko" = nems_data$self_checkout,
+      "total_registers" = as.numeric(nems_data$register) +
+        as.numeric(nems_data$self_checkout),
+      "milk_avail_score" = milk_avail(as.numeric(nems_data$lowfat_gal),
+                                      as.numeric(nems_data$whole_gal)),
+      "fruit_avail_score" = fruit_avail(as.numeric(nems_data$varieties_of_fruit)),
+      "vegetable_avail_score" = vegetable_avail(as.numeric(nems_data$varieties_of_vegetables)),
+      "ground_beef_avail_score" = ground_beef_avail(as.numeric(nems_data$lean_beef_varieties)),
+      "hot_dog_avail_score" = hot_dog_avail(as.numeric(nems_data$fat_free_hot_dogs),
+                                            as.numeric(nems_data$light_hot_dogs)),
+      "frozen_dinners_avail_score" = frozen_dinners_avail(
+        as.numeric(nems_data$frozen_dinner_varieties)),
+      "baked_goods_avail_score" = baked_goods_avail(as.numeric(nems_data$lowfat_baked_goods)),
+      "soda_avail_score" = soda_avail(as.numeric(nems_data$diet_soda_varieties)),
+      "juice_drinks_avail_score" = juice_drinks_avail(as.numeric(nems_data$healthy_juice_varieties)),
+      "bread_avail_score" = bread_avail(as.numeric(nems_data$varieties_of_whole_grain_bread)),
+      "chip_avail_score" = chips_avail(as.numeric(nems_data$lowfat_chip_varieties)),
+      "cereal_avail_score" = cereal_avail(as.numeric(nems_data$healthier_cereal_varieties)),
+
+
+      "Total_Availability_Score" = milk_avail_score + fruit_avail_score +
+        vegetable_avail_score + ground_beef_avail_score +
+        hot_dog_avail_score + frozen_dinners_avail_score + baked_goods_avail_score +
+        soda_avail_score + juice_drinks_avail_score + bread_avail_score + chip_avail_score +
+        cereal_avail_score
+    ) |>
+
+    dplyr::mutate(
+      "milk_cost_score" = milk_cost(as.numeric(nems_data$lowfat_gal_price),
+                                    as.numeric(nems_data$whole_gal_price)),
+      "ground_beef_cost_score" = ground_beef_cost(as.numeric(nems_data$lean_beef_price),
+                                                  as.numeric(nems_data$regular_beef_price)),
+      "wieners_cost_score" = wieners_cost(as.numeric(nems_data$lean_wieners_price),
+                                          as.numeric(nems_data$regular_wieners_price)),
+      "frozen_dinners_cost_score" = frozen_dinners_cost(
+         as.numeric(nems_data$healthier_frozen_dinners_price_1),
+         as.numeric(nems_data$regular_frozen_dinners_price_1)),
+
+      "baked_goods_cost_score" = baked_goods_cost(as.numeric(nems_data$lowfat_baked_goods_cost)),
+      "soda_cost_score" = soda_cost(as.numeric(nems_data$diet_soda_cost),
+                                    as.numeric(nems_data$regular_soda_cost)),
+      "juice_cost_score" = juice_cost(as.numeric(nems_data$healthier_juice_drinks_price),
+                                      as.numeric(nems_data$regular_juice_drinks_price)),
+      "juice_drinks_cost_score" = juice_drinks_cost(as.numeric(nems_data$diet_soda_cost),
+                                                    as.numeric(nems_data$regular_soda_cost),
+                                                    as.numeric(nems_data$healthier_juice_drinks_price),
+                                                    as.numeric(nems_data$regular_juice_drinks_price)),
+      "bread_cost_score" = bread_cost(as.numeric(nems_data$whole_wheat_bread_price) /
+                                        as.numeric(nems_data$whole_wheat_bread_size),
+                                      as.numeric(nems_data$white_bread_price) /
+                                        as.numeric(nems_data$white_bread_size)),
+      "chips_cost_score" = chips_cost(as.numeric(nems_data$lowfat_chips_price) /
+                                        as.numeric(nems_data$lowfat_chips_size),
+                                      as.numeric(nems_data$regular_chips_price) /
+                                        as.numeric(nems_data$regular_chips_size)),
+      "cereal_cost_score" = cereal_cost(as.numeric(nems_data$healthier_cereal_price),
+                                        as.numeric(nems_data$regular_cereal_price)),
+      "Latitude" = nems_data$LocationLatitude,
+      "Longitude" = nems_data$LocationLongitude
+    ) |>
+    tidyr::replace_na(
+      list(milk_cost_score = 0, ground_beef_cost_score = 0,
+           wieners_cost_score = 0, frozen_dinners_cost_score = 0,
+           soda_cost_score = 0, juice_cost_score = 0,
+           juice_drinks_cost_score = 0, bread_cost_score = 0,
+           chips_cost_score = 0, cereal_cost_score = 0
+      )
+    ) |>
+
+    dplyr::mutate(
+      "Total_Cost_Score" = milk_cost_score + ground_beef_cost_score +
+        wieners_cost_score + frozen_dinners_cost_score + soda_cost_score +
+        juice_cost_score + juice_drinks_cost_score + bread_cost_score +
+        chips_cost_score + cereal_cost_score
+    )
+
+  if(detail) {
+    dplyr::select(scores, c(
+      ID, type, pharmacy, ethnic, merch, registers, selfchecko, total_registers,
+      milk_avail_score, fruit_avail_score, vegetable_avail_score,
+      ground_beef_avail_score, hot_dog_avail_score, frozen_dinners_avail_score,
+      baked_goods_avail_score, soda_avail_score, juice_drinks_avail_score,
+      bread_avail_score, chip_avail_score, cereal_avail_score,
+      Total_Availability_Score, milk_cost_score, ground_beef_cost_score,
+      wieners_cost_score, frozen_dinners_cost_score, soda_cost_score, juice_cost_score,
+      juice_drinks_cost_score, bread_cost_score, chips_cost_score, cereal_cost_score,
+      Total_Cost_Score, Latitude, Longitude)
+    )
+  } else {
+    dplyr::select(scores, c(
+      ID, type, pharmacy, ethnic, merch, registers, selfchecko, total_registers,
+      Total_Availability_Score, Total_Cost_Score, Latitude, Longitude)
+    )
+  }
+
+}
+
+
+
 #' Compute market basket cost at a store
 #'
 #' @details This function applies the market basket outline found in the
@@ -267,70 +391,6 @@ average_difference <- function(clean_data){
 
   }
 
-#' Compute Availability and Cost Scores for all variables
-#'
-#' This function uses all functions previously created and scores assigned to each variable and adds them into one total score for both availability and cost.
-#'
-#' @details This function implements the scoring method described in Measure 9 of the NEMS-S Protocol.
-#' @param clean_data The data retrieved from a cleaned version of the Qualtrics Survey.
-#' @return Scores for total Availability and Cost, as well as given the option if Detail = TRUE to see the score for each individual variable.
-#' @examples
-#' clean_data <- read_nemss(file)
-#' calculate_score(clean_data)
-calculate_score <- function(clean_data, detail = FALSE) {
-  scores <- data.frame("ID" = clean_data$STORE_ID)
-  scores <- scores |>
-    dplyr::mutate("type" = clean_data$store_type) |>
-    dplyr::mutate("pharmacy" = clean_data$pharmacy) |>
-    dplyr::mutate("ethnic" = clean_data$ethnic) |>
-    dplyr::mutate("merch" = clean_data$merch) |>
-    dplyr::mutate("registers" = clean_data$register) |>
-    dplyr::mutate("selfchecko" = clean_data$self_checkout) |>
-    dplyr::mutate("total_registers" = as.numeric(clean_data$register) + as.numeric(clean_data$self_checkout)) |>
-    dplyr::mutate("milk_avail_score" = milk_avail(as.numeric(clean_data$lowfat_gal), as.numeric(clean_data$whole_gal))) |>
-    dplyr::mutate("fruit_avail_score" = fruit_avail(as.numeric(clean_data$varieties_of_fruit))) |>
-    dplyr::mutate("vegetable_avail_score" = vegetable_avail(as.numeric(clean_data$varieties_of_vegetables))) |>
-    dplyr::mutate("ground_beef_avail_score" = ground_beef_avail(as.numeric(clean_data$lean_beef_varieties))) |>
-    dplyr::mutate("hot_dog_avail_score" = hot_dog_avail(as.numeric(clean_data$fat_free_hot_dogs), as.numeric(clean_data$light_hot_dogs))) |>
-    dplyr::mutate("frozen_dinners_avail_score" = frozen_dinners_avail(as.numeric(clean_data$frozen_dinner_varieties))) |>
-    dplyr::mutate("baked_goods_avail_score" = baked_goods_avail(as.numeric(clean_data$lowfat_baked_goods))) |>
-    dplyr::mutate("soda_avail_score" = soda_avail(as.numeric(clean_data$diet_soda_varieties))) |>
-    dplyr::mutate("juice_drinks_avail_score" = juice_drinks_avail(as.numeric(clean_data$healthy_juice_varieties))) |>
-    dplyr::mutate("bread_avail_score" = bread_avail(as.numeric(clean_data$varieties_of_whole_grain_bread))) |>
-    dplyr::mutate("chip_avail_score" = chips_avail(as.numeric(clean_data$lowfat_chip_varieties))) |>
-    dplyr::mutate("cereal_avail_score" = cereal_avail(as.numeric(clean_data$healthier_cereal_varieties))) |>
-    dplyr::mutate("Total_Availability_Score" = milk_avail_score + fruit_avail_score + vegetable_avail_score + ground_beef_avail_score +
-                                                        hot_dog_avail_score + frozen_dinners_avail_score + baked_goods_avail_score +
-                                                        soda_avail_score + juice_drinks_avail_score + bread_avail_score + chip_avail_score +
-                                                        cereal_avail_score) |>
-    dplyr::mutate("milk_cost_score" = milk_cost(as.numeric(clean_data$lowfat_gal_price), as.numeric(clean_data$whole_gal_price))) |>
-    dplyr::mutate("ground_beef_cost_score" = ground_beef_cost(as.numeric(clean_data$lean_beef_price), as.numeric(clean_data$regular_beef_price))) |>
-    dplyr::mutate("wieners_cost_score" = wieners_cost(as.numeric(clean_data$lean_wieners_price), as.numeric(clean_data$regular_wieners_price))) |>
-    dplyr::mutate("frozen_dinners_cost_score" = frozen_dinners_cost(as.numeric(clean_data$healthier_frozen_dinners_price_1), as.numeric(clean_data$regular_frozen_dinners_price_1))) |>
-    #dplyr::mutate("baked_goods_cost_score" = baked_goods_cost(as.numeric(clean_data$lowfat_baked_goods_cost))) |>
-    dplyr::mutate("soda_cost_score" = soda_cost(as.numeric(clean_data$diet_soda_cost), as.numeric(clean_data$regular_soda_cost))) |>
-    dplyr::mutate("juice_cost_score" = juice_cost(as.numeric(clean_data$healthier_juice_drinks_price), as.numeric(clean_data$regular_juice_drinks_price))) |>
-    dplyr::mutate("juice_drinks_cost_score" = juice_drinks_cost(as.numeric(clean_data$diet_soda_cost), as.numeric(clean_data$regular_soda_cost), as.numeric(clean_data$healthier_juice_drinks_price), as.numeric(clean_data$regular_juice_drinks_price))) |>
-    dplyr::mutate("bread_cost_score" = bread_cost(as.numeric(clean_data$whole_wheat_bread_price)/as.numeric(clean_data$whole_wheat_bread_size), as.numeric(clean_data$white_bread_price)/as.numeric(clean_data$white_bread_size))) |>
-    dplyr::mutate("chips_cost_score" = chips_cost(as.numeric(clean_data$lowfat_chips_price)/as.numeric(clean_data$lowfat_chips_size), as.numeric(clean_data$regular_chips_price)/as.numeric(clean_data$regular_chips_size))) |>
-    dplyr::mutate("cereal_cost_score" = cereal_cost(as.numeric(clean_data$healthier_cereal_price), as.numeric(clean_data$regular_cereal_price))) |>
-    dplyr::mutate("Latitude" = clean_data$LocationLatitude) |>
-    dplyr::mutate("Longitude" = clean_data$LocationLongitude) |>
-    tidyr::replace_na(list(milk_cost_score = 0, ground_beef_cost_score = 0, wieners_cost_score = 0, frozen_dinners_cost_score = 0,
-                    soda_cost_score = 0, juice_cost_score = 0, juice_drinks_cost_score = 0, bread_cost_score = 0, chips_cost_score = 0,
-                    cereal_cost_score = 0)) |>
-    dplyr::mutate("Total_Cost_Score" = milk_cost_score + ground_beef_cost_score + wieners_cost_score + frozen_dinners_cost_score +
-             soda_cost_score + juice_cost_score + juice_drinks_cost_score + bread_cost_score + chips_cost_score + cereal_cost_score)
-
-  if(detail == TRUE) {dplyr::select(scores, c(ID, type, pharmacy, ethnic, merch, registers, selfchecko, total_registers, milk_avail_score, fruit_avail_score, vegetable_avail_score, ground_beef_avail_score, hot_dog_avail_score,
-                                  frozen_dinners_avail_score, baked_goods_avail_score, soda_avail_score, juice_drinks_avail_score,
-                                   bread_avail_score, chip_avail_score, cereal_avail_score, Total_Availability_Score, milk_cost_score,
-                                  ground_beef_cost_score, wieners_cost_score, frozen_dinners_cost_score, soda_cost_score, juice_cost_score,
-                                  juice_drinks_cost_score, bread_cost_score, chips_cost_score, cereal_cost_score, Total_Cost_Score,
-                                  Latitude, Longitude))}
-  else {dplyr::select(scores, c(ID, type, pharmacy, ethnic, merch, registers, selfchecko, total_registers, Total_Availability_Score, Total_Cost_Score, Latitude, Longitude))}
-
-}
 
 #' Import and Clean Qualtrics Dataset to be used to calculate scores. The Qualtrics Survey is found at
 #'
