@@ -13,6 +13,9 @@
 #' @examples
 #' calculate_nems_score(nems_sample)
 #'
+#' @importFrom dplyr mutate if_else
+#' @importFrom tidyr replace_na
+#'
 #' @export
 #'
 calculate_nems_score <- function(nems_data, detail = FALSE) {
@@ -136,12 +139,38 @@ calculate_nems_score <- function(nems_data, detail = FALSE) {
 #'   Additionally, if a price was not available, we replaced it with the average
 #'   price for all stores in the dataset.
 #'
+#'   One score that the NEMS-S tool on its own does not contain is a
+#'   straightforward way to compute the affordability of groceries; we therefore
+#'   created a market basket-based affordability measure that could be compared
+#'   across stores. This market basket score was created using the USDA 2021
+#'   Thrifty Food Plan. In the Food Plan it contains a Market Basket for a
+#'   reference family of four. We used amount values from the Thrifty Food Plan
+#'   and multiplied by the price of the good in the store. Because this market
+#'   basket contained more (and sometimes different) items than what we had data
+#'   on, we chose relevant items from our NEMS-S data and used those amounts to
+#'   create the market basket such as replacing chicken in the market basket
+#'   with ground beef. For example, the market basket calls for 6.7 pounds of
+#'   whole grain staples and 5.65 pounds of refined grain staples. We used those
+#'   pounds values for amounts of whole bread and white bread. For any stores
+#'   that were missing any of the ingredients for the market basket, we tried to
+#'   substitute with any other ingredient that would fit the requirements, and
+#'   if that did not work, we substituted with the average price across stores
+#'   multiplied by 1.5 as a penalty for not containing the product. The final
+#'   market basket score is the total cost of all foods in the market basket.
+#'
+#'
 #' @param nems_data A dataframe or tibble containing one row per store, cleaned
 #'   from raw qualtrics survey data with the read_nemss function
+#'
+#'
 #' @return A tibble containing the weighted price for several types of goods
 #'   including dairy, grain, etc. An additional column is appended with the
 #'   number of replacements with mean values that had to be made in each type.
-#'   A Total column  contains the cost of filling the market basket in that store.
+#'   A `total` column  contains the cost of filling the market basket in that store.
+#'
+#'
+#' @importFrom tibble tibble
+#' @importFrom dplyr if_else mutate select
 #' @examples
 #' calculate_market_basket(nems_sample)
 #'
@@ -219,7 +248,8 @@ calculate_market_basket <- function(nems_data) {
           average_whole/18.6*15.13 + average_lowfat/18.6*25.48,
           dplyr::if_else(
             dairy_replacements == 0,
-            as.numeric(nems_data$whole_gal_price)/8.6*15.13 + as.numeric(nems_data$lowfat_gal_price)/8.6*25.48,
+            as.numeric(nems_data$whole_gal_price)/8.6*15.13 +
+              as.numeric(nems_data$lowfat_gal_price)/8.6*25.48,
             dplyr::if_else(
               nems_data$whole_gal_price == "",
               (as.numeric(nems_data$lowfat_gal_price)-average_milk) / 8.6*25.48 +
@@ -407,8 +437,9 @@ average_difference <- function(clean_data){
 #' file <- system.file("extdata", "example_nems.sav", package = "nemsr")
 #' read_nemss(file)
 #'
-#' @importFrom dplyr mutate if_else
+#' @importFrom dplyr mutate if_else case_when
 #' @importFrom haven read_sav
+#' @importFrom tibble tibble
 #'
 #' @export
 read_nemss <- function(file) {
@@ -636,7 +667,6 @@ read_nemss <- function(file) {
 
 
   tibble::as_tibble(clean_data)
-
 
 }
 

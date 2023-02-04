@@ -19,7 +19,9 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/byu-transpolab/nemsr/workflows/R-CMD-check/badge.svg)](https://github.com/byu-transpolab/nemsr/actions)
 <!-- badges: end -->
 
-The goal of nemsr is to ...
+The goal of nemsr is to enable researchers to quickly calculate NEMS-S scores 
+for individual grocery stores using a Qualtrics-based NEMS-S survey developed
+at BYU.
 
 ## Installation
 
@@ -37,83 +39,42 @@ You can install the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("byu-transpolab/nemsr")
 ```
+
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+The NEMS-S data should come from a Qualtrics survey collected by a trained
+surveyor. Download the data from Qualtrics in the `.sav` format (for SPSS).
+Then you can read the data into R with the `read_nemss` function.
 
-```{r example}
+```{r read}
 library(nemsr)
+
 ## basic example code
+file <- system.file("extdata", "example_nems.sav", package = "nemsr")
+(nemss <- read_nemss(file))
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+Once the data are in your R session, there are two basic things you might
+like to do with them: a NEMS-S score and a market basket score.
 
-```{r cars}
-summary(cars)
+### NEMS-S Score
+
+The `calculate_nems_score()` function 
+
+```{r scores, eval = FALSE}
+calculate_nems_score(nemss)
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/master/examples>.
+### Market Basket
 
-You can also embed plots, for example:
+The `calculate_market_basket()` function computes the cost of a common market
+basket at that store using the pricing data available weighted according to the
+[Thrifty Food Plan, 2021](https://fns-prod.azureedge.us/sites/default/files/resource-files/TFP2021.pdf)
 
 ```{r pressure, echo = FALSE}
-library(haven)
-library(tidyverse)
-library(gsubfn)
-library(sf)
-library(ggplot2)
-library(leaflet)
-
-if_else(MILK_1_7_1 == 1, TRUE, FALSE)
-
-utah <- read_nemss("C:/Users/stuck/Documents/Github/Equitable_Access/data/nems_utah.sav")
-utah_score <- calculate_market_basket(utah)
-
-clean_data <- read_nemss("~/Transpo Research/Nutrition Environments/SPSS Data/NEMS-S+Grocery+Store+Data+Collection+Tool+-+V2_April+1%2C+2022_14.23.sav")
-
-file <- read_sav("~/Transpo Research/Nutrition Environments/SPSS Data/NEMS-S+Grocery+Store+Data+Collection+Tool+-+V2_April+1%2C+2022_14.23.sav")
-
-SAS_data <- read_sav(("~/Transpo Research/Nutrition Environments/SPSS Data/utah_county.sav"))
-
-utah <- read_nemss(("~/Transpo Research/Nutrition Environments/SPSS Data/utah_county.sav"))
-
-utah_data <- read_nemss("~/Transpo Research/nemsr/data/NEMS-S_VERSION1_UTCounty_2021.sav")
-
-score <- calculate_score(clean_data, detail = TRUE)
-
-score <- score %>%
-  mutate("Longitude" = Longitude) %>%
-  mutate("Latitude" = Latitude)
-
-my_sf <- st_as_sf(score, coords = c('Longitude', 'Latitude'))
-
-my_sf <- st_set_crs(my_sf, crs = 4326)
-
-pal1 <- colorNumeric("Blues", score$Total_Cost_Score)
-
-cost_map <- leaflet(my_sf) %>%
-    addProviderTiles(providers$Esri.WorldGrayCanvas) %>%
-    addCircles(color = ~pal1(Total_Cost_Score), label = ~as.character(ID), radius = 1000)
-
-pal2 <- colorNumeric("Reds", score$Total_Availability_Score)
-
-available_map <- leaflet(my_sf) %>%
-  addProviderTiles(providers$Esri.WorldGrayCanvas) %>%
-  addCircles(color = ~pal2(Total_Availability_Score), label = ~as.character(ID), radius = 1000)
-
-score %>%
-  ggplot() +
-  geom_point(aes(x = Total_Cost_Score, y = Total_Availability_Score, colour = "blue", size = 3), show.legend = FALSE, colour = "blue") +
-  theme(panel.background = element_blank(), panel.grid = element_line(colour = "black"))+
-  labs(title = "Availability Vs. Cost", y = "NEMS Availability Score", x = "NEMS Cost Score")
-
-
-groceries <- file.path("C:/Users/stuck/Documents/Transpo Research/Community_Resources/data/groceries.geojson")
-
-stores <- st_read(groceries)
-
-market <- calculate_market_basket(clean_data)
-
+(basket_score <- calculate_market_basket(nemss))
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+For details on this function, its methods, and return information, see `?calculate_market_basket()`
+
+

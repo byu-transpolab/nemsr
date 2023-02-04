@@ -197,7 +197,7 @@ soda_avail <- function(diet_soda_varieties){
 #' @details This function implements the scoring method described in Measure 8 of the NEMS-S Protocol. "Healthy juice" is 100 percent juice drinks, natural fruit juice with no added sugars.
 #' @param healthy_juice_varieties The number of 100 percent juice drinks available.
 #' @return The NEMS-S points associated with availability of healthy juice drinks.
-#' @examples6
+#' @examples
 #' healthy_juice_varieties <- sample(0:3, 10)
 #' juice_drinks_avail(healthy_juice_varieties)
 juice_drinks_avail <- function(healthy_juice_varieties){
