@@ -3,6 +3,5 @@
 library(haven)
 
 # Read the file, and then save the cleaned version in the package
-nems_sample <- read_sav("data-raw/example_data.sav") |>
-  clean_nemss()
+nems_sample <- read_nemss("data-raw/example_data.sav")
 usethis::use_data(nems_sample, overwrite = TRUE)
